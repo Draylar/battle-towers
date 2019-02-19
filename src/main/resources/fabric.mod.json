@@ -1,11 +1,12 @@
 {
-  "id": "modid",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "id": "battle-towers",
+  "name": "Battle Towers",
+  "description": "Battle Towers, reborn for 1.14 Fabric!",
   "version": "1.0.0",
   "side": "universal",
   "initializers": [
-    "com.github.draylar.modid.ExampleMod"
+    "com.github.draylar.battleTowers.BattleTowers",
+    "com.github.draylar.battleTowers.BattleTowersClient"
   ],
   "requires": {
     "fabric": "*"
