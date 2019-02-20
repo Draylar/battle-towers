@@ -1,8 +1,6 @@
 package com.github.draylar.battleTowers.config;
 
-import com.github.draylar.battleTowers.BattleTowers;
 import com.google.gson.Gson;
-import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 
 import java.nio.file.Files;
@@ -89,7 +87,7 @@ public class BattleTowersConfig
         // create blank config
         ConfigGson config = new ConfigGson();
 
-        config.requiredKeys = 5;
+        config.requiredKeys = 10;
         config.requiredItem = "battle-towers:boss_key";
         config.bossLootTable = new Identifier("battle-towers:boss_loot");
         config.blacksmithLootTable = new Identifier("battle-towers:blacksmith_loot");

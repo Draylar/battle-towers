@@ -1,16 +1,10 @@
 package com.github.draylar.battleTowers.world;
 
-import com.github.draylar.battleTowers.blocks.spawner.DungeonSpawnerBlockEntity;
 import com.github.draylar.battleTowers.common.Structures;
 import com.github.draylar.battleTowers.config.ConfigHolder;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BarrelBlockEntity;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.block.entity.FurnaceBlockEntity;
-import net.minecraft.entity.EntityType;
+import net.minecraft.block.entity.*;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.structure.*;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
 import net.minecraft.util.Identifier;
@@ -70,6 +64,7 @@ public class BattleTowerGenerator
 
             else if (randomChance == 5 && !hasAddedLookout && i > 5)
             {
+                System.out.println("added lookout");
                 list_1.add(new BattleTowerGenerator.Piece(structureManager_1, towerLookout, blockPos_1, rotation_1, 0));
                 hasAddedLookout = true;
             }
@@ -139,24 +134,6 @@ public class BattleTowerGenerator
                 }
             }
 
-            else if (s.contains("normal_blacksmith_spawner1"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down(), EntityType.ZOMBIE);
-            }
-
-            else if (s.contains("normal_blacksmith_spawner2"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down(), EntityType.WITHER_SKELETON);
-            }
-
-            else if (s.contains("normal_blacksmith_spawner3"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down(), EntityType.SKELETON);
-            }
-
             else if (s.contains("normal_blacksmith_barrel"))
             {
                 iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
@@ -190,23 +167,7 @@ public class BattleTowerGenerator
                 }
             }
 
-            if (s.contains("normal_library_spawner3"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down());
-            }
 
-            if (s.contains("normal_library_spawner2"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down());
-            }
-
-            if (s.contains("normal_library_spawner1"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down());
-            }
 
             if (s.contains("normal_library_chest"))
             {
@@ -230,17 +191,6 @@ public class BattleTowerGenerator
                 }
             }
 
-            if (s.contains("normal_layer_spawner1"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down());
-            }
-
-            if (s.contains("normal_layer_spawner2"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down());
-            }
 
             if (s.contains("jungle_chest1"))
             {
@@ -264,24 +214,6 @@ public class BattleTowerGenerator
                 }
             }
 
-            if (s.contains("jungle_spawner1"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down());
-            }
-
-            if (s.contains("jungle_spawner2"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down());
-            }
-
-            if (s.contains("jungle_spawner3"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down());
-            }
-
             if (s.contains("mine_barrel1"))
             {
                 iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
@@ -303,36 +235,6 @@ public class BattleTowerGenerator
                     ((BarrelBlockEntity) blockEntity).setLootTable(mineLoot, random.nextLong());
                 }
             }
-
-            if (s.contains("mine_spawner1"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down());
-            }
-
-            if (s.contains("mine_spawner2"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down());
-            }
-
-            if (s.contains("mine_spawner3"))
-            {
-                iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
-                placeSpawner(iWorld, blockPos.down());
-            }
-        }
-
-        private void placeSpawner(IWorld world, BlockPos pos)
-        {
-            if(world.getBlockEntity(pos) instanceof DungeonSpawnerBlockEntity)
-                ((DungeonSpawnerBlockEntity) world.getBlockEntity(pos)).setLogic(EntityType.ZOMBIE, 20, 200, 800, 4, 6, 16, 4, ParticleTypes.ANGRY_VILLAGER, ParticleTypes.DRAGON_BREATH);
-        }
-
-        private void placeSpawner(IWorld world, BlockPos pos, EntityType type)
-        {
-            if(world.getBlockEntity(pos) instanceof DungeonSpawnerBlockEntity)
-                ((DungeonSpawnerBlockEntity) world.getBlockEntity(pos)).setLogic(type, 20, 200, 800, 4, 6, 16, 4, ParticleTypes.ANGRY_VILLAGER, ParticleTypes.DRAGON_BREATH);
         }
 
         @Override

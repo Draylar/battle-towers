@@ -1,4 +1,4 @@
-package com.github.draylar.battleTowers.entity.tower_guard;
+package com.github.draylar.battleTowers.common.entity.tower_guard;
 
 import com.github.draylar.battleTowers.common.Entities;
 import com.github.draylar.battleTowers.config.ConfigHolder;
@@ -12,11 +12,9 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class TowerGuardEntity extends HostileEntity implements RangedAttacker
@@ -89,17 +87,16 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttacker
     @Override
     public void attack(LivingEntity livingEntity, float v)
     {
-        ProjectileEntity projectileEntity_1 = new ArrowEntity(world);
-
-        double double_1 = livingEntity.x - this.x;
-        double double_2 = livingEntity.getBoundingBox().minY + (double)(livingEntity.getHeight() / 3.0F) - projectileEntity_1.y;
-        double double_3 = livingEntity.z - this.z;
-        double double_4 = (double) MathHelper.sqrt(double_1 * double_1 + double_3 * double_3);
-
-        projectileEntity_1.setVelocity(double_1, double_2 + double_4 * 0.20000000298023224D, double_3, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
-        this.playSound(SoundEvents.ENTITY_WITHER_SHOOT, 1.0F, 1.0F / (this.getRand().nextFloat() * 0.4F + 0.8F));
-
-        this.world.spawnEntity(projectileEntity_1);
+        Vec3d vec3d_1 = this.getRotationVec(1.0F);
+        double double_3 = livingEntity.x - (this.x + vec3d_1.x * 4.0D);
+        double double_4 = livingEntity.getBoundingBox().minY + (double)(livingEntity.getHeight() / 2.0F) - (0.5D + this.y + (double)(this.getHeight() / 2.0F));
+        double double_5 = livingEntity.z - (this.z + vec3d_1.z * 4.0D);
+        FireballEntity fireballEntity_1 = new FireballEntity(world, this, double_3, double_4, double_5);
+        fireballEntity_1.explosionPower = 1;
+        fireballEntity_1.x = this.x + vec3d_1.x * 4.0D;
+        fireballEntity_1.y = this.y + (double)(this.getHeight() / 2.0F) + 0.5D;
+        fireballEntity_1.z = this.z + vec3d_1.z * 4.0D;
+        world.spawnEntity(fireballEntity_1);
     }
 
     @Override

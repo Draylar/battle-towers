@@ -1,6 +1,6 @@
 package com.github.draylar.battleTowers.common;
 
-import com.github.draylar.battleTowers.entity.tower_guard.TowerGuardEntity;
+import com.github.draylar.battleTowers.common.entity.tower_guard.TowerGuardEntity;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;

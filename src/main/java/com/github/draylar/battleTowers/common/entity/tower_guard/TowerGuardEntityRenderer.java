@@ -1,4 +1,4 @@
-package com.github.draylar.battleTowers.entity.tower_guard;
+package com.github.draylar.battleTowers.common.entity.tower_guard;
 
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;

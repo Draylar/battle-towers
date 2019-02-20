@@ -1,15 +1,12 @@
-package com.github.draylar.battleTowers.blocks.boss_lock;
+package com.github.draylar.battleTowers.common.blocks.boss_lock;
 
-import com.github.draylar.battleTowers.BattleTowers;
 import com.github.draylar.battleTowers.common.Items;
-import com.github.draylar.battleTowers.config.ConfigGson;
 import com.github.draylar.battleTowers.config.ConfigHolder;
-import com.github.draylar.battleTowers.entity.tower_guard.TowerGuardEntity;
+import com.github.draylar.battleTowers.common.entity.tower_guard.TowerGuardEntity;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.audio.PositionedSoundInstance;
-import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
@@ -21,7 +18,6 @@ import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
