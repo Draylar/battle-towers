@@ -1,8 +1,8 @@
 package com.github.draylar.battleTowers.common.entity.tower_guard;
 
-import com.github.draylar.battleTowers.common.Entities;
 import com.github.draylar.battleTowers.config.ConfigHolder;
 import net.minecraft.class_1399;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttacker;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
@@ -22,10 +22,9 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttacker
     private int currentProjectileCooldown = 0;
     private final int requiredProjectileCooldown = 100;
 
-    public TowerGuardEntity(World world)
-    {
-        super(Entities.towerGuard, world);
-        setSize(2, 6);
+
+    public TowerGuardEntity(EntityType<TowerGuardEntity> entityType_1, World world_1) {
+        super(entityType_1, world_1);
     }
 
     @Override
@@ -82,7 +81,6 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttacker
     {
         return 1000;
     }
-
 
     @Override
     public void attack(LivingEntity livingEntity, float v)

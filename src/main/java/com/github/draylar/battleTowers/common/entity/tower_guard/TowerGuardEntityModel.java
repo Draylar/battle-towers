@@ -73,16 +73,12 @@ public class TowerGuardEntityModel extends EntityModel<TowerGuardEntity>
         head.addBox("head", -6, -28, -6, 12, 12, 12, 0, 52, 0);
 
         torch3 = new Cuboid(this);
-        torch3.setRotationPoint(0.0F, 4.0F, 9.0F);
-        setRotationAngle(torch3, 0.0F, 0.0F, -0.7854F * 90);
         head.addChild(torch3);
-        torch3.addBox("torch1", 12.5f, -30, -10f, 2, 9, 2, 0, 8, 81);
+        torch3.addBox("torch1", 5, -35, 0, 2, 9, 2, 0, 8, 81);
 
         torch4 = new Cuboid(this);
-        torch4.setRotationPoint(0.0F, 4.0F, 9.0F);
-        setRotationAngle(torch4, 0.0F, 0.0F, 0.7854F * 90);
         head.addChild(torch4);
-        torch4.addBox("torch2", -14.75f, -30, -10, 2, 9, 2, 0, 0, 81);
+        torch4.addBox("torch2", -7, -35, 0, 2, 9, 2, 0, 0, 81);
     }
 
     @Override

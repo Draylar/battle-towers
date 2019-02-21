@@ -53,7 +53,7 @@ public class BattleTowerGenerator
         {
             int randomChance;
 
-            do randomChance = random_1.nextInt(5);
+            do randomChance = random_1.nextInt(6);
             while (lastRandomChance == randomChance);
 
             if(randomChance == 0) list_1.add(new BattleTowerGenerator.Piece(structureManager_1, towerLayer, blockPos_1, rotation_1, 0));
@@ -64,7 +64,6 @@ public class BattleTowerGenerator
 
             else if (randomChance == 5 && !hasAddedLookout && i > 5)
             {
-                System.out.println("added lookout");
                 list_1.add(new BattleTowerGenerator.Piece(structureManager_1, towerLookout, blockPos_1, rotation_1, 0));
                 hasAddedLookout = true;
             }

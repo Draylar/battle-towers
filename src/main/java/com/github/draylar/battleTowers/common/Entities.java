@@ -8,7 +8,9 @@ import net.minecraft.util.registry.Registry;
 
 public class Entities
 {
-    public static final EntityType<TowerGuardEntity> towerGuard = FabricEntityTypeBuilder.create(EntityCategory.CREATURE, TowerGuardEntity::new).build();
+    public static final EntityType<TowerGuardEntity> towerGuard = FabricEntityTypeBuilder.<TowerGuardEntity>create(EntityCategory.CREATURE, TowerGuardEntity::new).size(3, 6).build();
+
+    //  public static final EntityType<?> towerGuard = Registry.register(Registry.ENTITY_TYPE, "battle-towers:tower_guard", EntityType.Builder.<TowerGuardEntity>create(TowerGuardEntity::new, EntityCategory.CREATURE).build("tower_guard"));
 
     public static void registerEntities()
     {

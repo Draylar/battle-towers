@@ -30,6 +30,7 @@ public class BattleTowerFeature extends AbstractTempleFeature<DefaultFeatureConf
     @Override
     public boolean shouldStartAt(ChunkGenerator<?> chunkGenerator_1, Random random_1, int int_1, int int_2)
     {
+
         return true;
     }
 

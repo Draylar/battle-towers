@@ -1,12 +1,14 @@
 package com.github.draylar.battleTowers.common.blocks.boss_lock;
 
+import com.github.draylar.battleTowers.common.Entities;
 import com.github.draylar.battleTowers.common.Items;
-import com.github.draylar.battleTowers.config.ConfigHolder;
 import com.github.draylar.battleTowers.common.entity.tower_guard.TowerGuardEntity;
+import com.github.draylar.battleTowers.config.ConfigHolder;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.audio.PositionedSoundInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
@@ -60,20 +62,37 @@ public class BossLockBlock extends Block
 
             world_1.setBlockState(blockPos_1, Blocks.AIR.getDefaultState());
 
-            TowerGuardEntity towerGuardEntity = new TowerGuardEntity(world_1);
+            TowerGuardEntity towerGuardEntity = new TowerGuardEntity(Entities.towerGuard, world_1);
             towerGuardEntity.setPosition(blockPos_1.getX(), blockPos_1.getY(), blockPos_1.getZ());
             world_1.spawnEntity(towerGuardEntity);
 
             if(world_1.isClient)
             {
-                MinecraftClient.getInstance().getSoundLoader().play(PositionedSoundInstance.master(SoundEvents.ENTITY_WITHER_SPAWN, 1.0f));
+                playSpawnSound(blockPos_1);
             }
         }
 
         else
+        {
             if(world_1.isClient)
-                MinecraftClient.getInstance().world.playSound(blockPos_1, SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.BLOCK, 1, 1, false);
+            {
+                playDenySound(blockPos_1);
+            }
+        }
+
 
         return super.activate(blockState_1, world_1, blockPos_1, playerEntity_1, hand_1, blockHitResult_1);
+    }
+
+    @Environment(EnvType.CLIENT)
+    private void playDenySound(BlockPos pos)
+    {
+        MinecraftClient.getInstance().world.playSound(pos, SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.BLOCK, 1, 1, false);
+    }
+
+    @Environment(EnvType.CLIENT)
+    private void playSpawnSound(BlockPos pos)
+    {
+        MinecraftClient.getInstance().world.playSound(pos, SoundEvents.ENTITY_WITHER_SPAWN, SoundCategory.HOSTILE, 1, 1, false);
     }
 }
