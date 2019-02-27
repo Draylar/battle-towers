@@ -1,5 +1,6 @@
-package com.github.draylar.battleTowers.common.entity.tower_guard;
+package com.github.draylar.battleTowers.client.entity.tower_guard;
 
+import com.github.draylar.battleTowers.common.entity.tower_guard.TowerGuardEntity;
 import net.minecraft.client.model.Cuboid;
 import net.minecraft.client.render.entity.model.EntityModel;
 

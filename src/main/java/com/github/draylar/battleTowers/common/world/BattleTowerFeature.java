@@ -1,4 +1,4 @@
-package com.github.draylar.battleTowers.world;
+package com.github.draylar.battleTowers.common.world;
 
 import com.github.draylar.battleTowers.common.Structures;
 import net.minecraft.structure.StructureManager;
