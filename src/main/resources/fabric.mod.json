@@ -2,7 +2,7 @@
   "id": "battle-towers",
   "name": "Battle Towers",
   "description": "Battle Towers, reborn for 1.14 Fabric!",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "side": "universal",
   "initializers": [
     "com.github.draylar.battleTowers.BattleTowers",
