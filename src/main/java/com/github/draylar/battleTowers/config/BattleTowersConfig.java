@@ -17,7 +17,7 @@ public class BattleTowersConfig
     public void checkConfigFolder()
     {
         // ping config path is [run environment]/config/ping
-        Path configPath = Paths.get(System.getProperty("user.dir") + "\\config\\battle-towers");
+        Path configPath = Paths.get(System.getProperty("user.dir") + "/config/battle-towers");
 
         if (configPath.toFile().isDirectory()) checkConfigFile(configPath);
 
@@ -38,7 +38,7 @@ public class BattleTowersConfig
      */
     public void checkConfigFile(Path path)
     {
-        Path jsonPath = Paths.get(path + "\\battle-towers.json");
+        Path jsonPath = Paths.get(path + "/battle-towers.json");
 
         if (!jsonPath.toFile().exists())
         {
