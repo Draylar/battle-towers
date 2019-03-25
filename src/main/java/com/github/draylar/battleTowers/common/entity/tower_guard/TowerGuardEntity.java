@@ -1,14 +1,10 @@
 package com.github.draylar.battleTowers.common.entity.tower_guard;
 
 import com.github.draylar.battleTowers.config.ConfigHolder;
-import net.minecraft.class_1399;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttacker;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,7 +29,7 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttacker
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 9.0F));
-        this.targetSelector.add(1, new class_1399(this, new Class[0]));
+        this.targetSelector.add(1, new AvoidGoal(this, new Class[0]));
         this.targetSelector.add(2, new FollowTargetGoal(this, PlayerEntity.class, false));
     }
 
@@ -95,17 +91,5 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttacker
         fireballEntity_1.y = this.y + (double)(this.getHeight() / 2.0F) + 0.5D;
         fireballEntity_1.z = this.z + vec3d_1.z * 4.0D;
         world.spawnEntity(fireballEntity_1);
-    }
-
-    @Override
-    public boolean hasArmsRaised()
-    {
-        return false;
-    }
-
-    @Override
-    public void setArmsRaised(boolean b)
-    {
-
     }
 }
