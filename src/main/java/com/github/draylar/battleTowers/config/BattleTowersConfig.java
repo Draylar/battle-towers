@@ -16,7 +16,6 @@ public class BattleTowersConfig
      */
     public void checkConfigFolder()
     {
-        // ping config path is [run environment]/config/ping
         Path configPath = Paths.get(System.getProperty("user.dir") + "/config/battle-towers");
 
         if (configPath.toFile().isDirectory()) checkConfigFile(configPath);
@@ -42,7 +41,6 @@ public class BattleTowersConfig
 
         if (!jsonPath.toFile().exists())
         {
-            System.out.println("doesn,t' exist, setting blank config");
             createNewFile(jsonPath);
             setBlankConfig(jsonPath, true);
         }
@@ -58,14 +56,14 @@ public class BattleTowersConfig
             // check for null json reading
             if(ConfigHolder.configInstance.requiredItem == null)
             {
-                System.out.println("[Ping] Json is invalid! Try to fix from the error, or remove config file. Rolling with defaults!");
+                System.out.println("[Battle Towers] Json is invalid! Try to fix from the error, or remove config file. Rolling with defaults!");
                 setBlankConfig(jsonPath, false);
             }
         }
 
         catch (Exception e)
         {
-            System.out.println("[Ping] Json is invalid! Try to fix from the error, or remove config file. Rolling with defaults!");
+            System.out.println("[Battle Towers] Json is invalid! Try to fix from the error, or remove config file. Rolling with defaults!");
             e.printStackTrace();
 
             // to prevent future errors, just set filler values in current config.
