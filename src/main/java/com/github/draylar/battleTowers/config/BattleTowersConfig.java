@@ -98,7 +98,7 @@ public class BattleTowersConfig
         config.bossDamageScale = 5;
         config.floorAmount = 10;
         config.floorRandomAddition = 3;
-        config.structureRarity = 1000;
+        config.structureRarity = 500;
 
         // write to config holder
         ConfigHolder.configInstance = config;
