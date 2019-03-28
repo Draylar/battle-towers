@@ -2,6 +2,7 @@ package com.github.draylar.battleTowers.common;
 
 import com.github.draylar.battleTowers.common.world.BattleTowerFeature;
 import com.github.draylar.battleTowers.common.world.BattleTowerGenerator;
+import com.github.draylar.battleTowers.config.ConfigHolder;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -32,7 +33,7 @@ public class Structures
             if(biome.getCategory() != Biome.Category.OCEAN && biome.getCategory() != Biome.Category.RIVER && biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THE_END)
             {
                 biome.addStructureFeature(battleTowerFeature, new DefaultFeatureConfig());
-                biome.addFeature(GenerationStep.Feature.SURFACE_STRUCTURES, Biome.configureFeature(battleTowerFeature, new DefaultFeatureConfig(), Decorator.CHANCE_HEIGHTMAP, new ChanceDecoratorConfig(1000)));
+                biome.addFeature(GenerationStep.Feature.SURFACE_STRUCTURES, Biome.configureFeature(battleTowerFeature, new DefaultFeatureConfig(), Decorator.CHANCE_HEIGHTMAP, new ChanceDecoratorConfig(ConfigHolder.configInstance.structureRarity)));
             }
         }
     }
