@@ -125,12 +125,6 @@ public class BattleTowerGenerator
             {
                 iWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 3);
                 BlockEntity blockEntity = iWorld.getBlockEntity(blockPos.down());
-
-                if (blockEntity instanceof FurnaceBlockEntity)
-                {
-//                    ((FurnaceBlockEntity) blockEntity).setInvStack(0, new ItemStack(Items.WOODEN_AXE));
-//                    ((FurnaceBlockEntity) blockEntity).setInvStack(1, new ItemStack(Items.COAL));
-                }
             }
 
             else if (s.contains("normal_blacksmith_barrel"))
