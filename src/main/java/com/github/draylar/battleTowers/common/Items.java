@@ -9,7 +9,6 @@ import net.minecraft.util.registry.Registry;
 public class Items
 {
     public static BossKeyItem bossKeyItem;
-    public static BlockItem dungeonSpawnerItem;
     public static BlockItem bossLockItem;
 
     public static void registerItems()

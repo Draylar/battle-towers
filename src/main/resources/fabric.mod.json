@@ -1,18 +1,29 @@
 {
+  "schemaVersion": 1,
   "id": "battle-towers",
+  "version": "1.0.3",
+
   "name": "Battle Towers",
   "description": "Battle Towers, reborn for 1.14 Fabric!",
-  "version": "1.0.3",
-  "side": "universal",
-  "initializers": [
-    "com.github.draylar.battleTowers.BattleTowers",
-    "com.github.draylar.battleTowers.BattleTowersClient"
+  "authors": [
+    "Draylar"
   ],
-  "requires": {
-    "fabric": "*"
+
+  "license": "GPLv3",
+  "icon": "assets/battle-towers/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.draylar.battleTowers.BattleTowers"
+    ],
+    "client": [
+      "com.github.draylar.battleTowers.BattleTowersClient"
+    ]
   },
-  "mixins": {
-    "client": "modid.client.json",
-    "common": "modid.common.json"
+
+  "requires": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
   }
 }

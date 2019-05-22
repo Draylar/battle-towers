@@ -62,7 +62,7 @@ public class BossLockBlock extends Block
 
             world_1.setBlockState(blockPos_1, Blocks.AIR.getDefaultState());
 
-            TowerGuardEntity towerGuardEntity = new TowerGuardEntity(Entities.towerGuard, world_1);
+            TowerGuardEntity towerGuardEntity = new TowerGuardEntity(Entities.TOWER_GUARD, world_1);
             towerGuardEntity.setPosition(blockPos_1.getX(), blockPos_1.getY(), blockPos_1.getZ());
             world_1.spawnEntity(towerGuardEntity);
 
