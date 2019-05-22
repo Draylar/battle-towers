@@ -1,7 +1,5 @@
 package com.github.draylar.battleTowers.common.blocks.boss_lock;
 
-import com.github.draylar.battleTowers.common.Entities;
-import com.github.draylar.battleTowers.common.Items;
 import com.github.draylar.battleTowers.common.entity.tower_guard.TowerGuardEntity;
 import com.github.draylar.battleTowers.config.ConfigHolder;
 import net.fabricmc.api.EnvType;

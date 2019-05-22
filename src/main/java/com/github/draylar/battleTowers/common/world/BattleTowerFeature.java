@@ -3,7 +3,7 @@ package com.github.draylar.battleTowers.common.world;
 import com.github.draylar.battleTowers.common.Structures;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.biome.Biome;
@@ -72,7 +72,7 @@ public class BattleTowerFeature extends AbstractTempleFeature<DefaultFeatureConf
 
 
             // randomized rotation breaks a LOT of stuff so we're removing it for now
-            Rotation rotation = Rotation.ROT_0;
+            BlockRotation rotation = BlockRotation.NONE;
 
             BattleTowerGenerator.addParts(structureManager, startingPos, rotation, this.children, this.random, defaultFeatureConfig);
             this.setBoundingBoxFromChildren();

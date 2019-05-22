@@ -7,13 +7,13 @@ import net.minecraft.block.entity.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.structure.*;
 import net.minecraft.structure.processor.BlockIgnoreStructureProcessor;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.chunk.ChunkPos;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class BattleTowerGenerator
     public static final Identifier mineLoot = ConfigHolder.configInstance.mineLootTable;
 
 
-    public static void addParts(StructureManager structureManager_1, BlockPos blockPos_1, Rotation rotation_1, List<StructurePiece> list_1, Random random_1, DefaultFeatureConfig featureConfig)
+    public static void addParts(StructureManager structureManager_1, BlockPos blockPos_1, BlockRotation rotation_1, List<StructurePiece> list_1, Random random_1, DefaultFeatureConfig featureConfig)
     {
         boolean hasAddedLookout = false;
 
@@ -81,9 +81,9 @@ public class BattleTowerGenerator
     public static class Piece extends SimpleStructurePiece
     {
         private final Identifier template;
-        private final Rotation rotation;
+        private final BlockRotation rotation;
 
-        public Piece(StructureManager structureManager, Identifier identifier, BlockPos blockPos, Rotation rotation, int offset)
+        public Piece(StructureManager structureManager, Identifier identifier, BlockPos blockPos, BlockRotation rotation, int offset)
         {
             super(Structures.structurePieceType, 0);
 
@@ -98,7 +98,7 @@ public class BattleTowerGenerator
             super(Structures.structurePieceType, compoundTag_1);
 
             this.template = new Identifier(compoundTag_1.getString("Template"));
-            this.rotation = Rotation.valueOf(compoundTag_1.getString("Rot"));
+            this.rotation = BlockRotation.valueOf(compoundTag_1.getString("Rot"));
 
             this.initializePlacementData(structureManager_1);
         }
@@ -106,7 +106,7 @@ public class BattleTowerGenerator
         private void initializePlacementData(StructureManager structureManager_1)
         {
             Structure structure_1 = structureManager_1.getStructureOrBlank(this.template);
-            StructurePlacementData structurePlacementData_1 = (new StructurePlacementData()).setRotation(this.rotation).setMirrored(Mirror.NONE).setPosition(pos).addProcessor(BlockIgnoreStructureProcessor.IGNORE_STRUCTURE_BLOCKS);
+            StructurePlacementData structurePlacementData_1 = (new StructurePlacementData()).setRotation(this.rotation).setMirrored(BlockMirror.NONE.NONE).setPosition(pos).addProcessor(BlockIgnoreStructureProcessor.IGNORE_STRUCTURE_BLOCKS);
             this.setStructureData(structure_1, this.pos, structurePlacementData_1);
         }
 
