@@ -1,9 +1,8 @@
 package com.github.draylar.battleTowers.common.entity.tower_guard;
 
-import com.github.draylar.battleTowers.config.ConfigHolder;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.RangedAttacker;
+import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
@@ -13,7 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class TowerGuardEntity extends HostileEntity implements RangedAttacker
+public class TowerGuardEntity extends HostileEntity implements RangedAttackMob
 {
     private int currentProjectileCooldown = 0;
     private final int requiredProjectileCooldown = 100;
@@ -29,7 +28,7 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttacker
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 9.0F));
-        this.targetSelector.add(1, new AvoidGoal(this, new Class[0]));
+        this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
         this.targetSelector.add(2, new FollowTargetGoal(this, PlayerEntity.class, false));
     }
 

@@ -1,7 +1,7 @@
 package com.github.draylar.battleTowers.common.blocks.boss_lock;
 
+import com.github.draylar.battleTowers.BattleTowers;
 import com.github.draylar.battleTowers.common.entity.tower_guard.TowerGuardEntity;
-import com.github.draylar.battleTowers.config.ConfigHolder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 
 public class BossLockBlock extends Block
 {
-    public static final DirectionProperty FACING = HorizontalFacingBlock.field_11177;
+    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
     public BossLockBlock()
     {
@@ -42,7 +42,7 @@ public class BossLockBlock extends Block
     @Override
     protected void appendProperties(StateFactory.Builder<Block, BlockState> stateFactory$Builder_1)
     {
-        stateFactory$Builder_1.with(new Property[]{FACING});
+        stateFactory$Builder_1.add(new Property[]{FACING});
     }
 
     @Override
@@ -50,7 +50,7 @@ public class BossLockBlock extends Block
     {
         int requiredCount = ConfigHolder.configInstance.requiredKeys;
         Item requiredItem = Registry.ITEM.get(new Identifier(ConfigHolder.configInstance.requiredItem));
-        if(requiredItem == null) requiredItem = Items.bossKeyItem;
+        if(requiredItem == null) requiredItem = BattleTowers.bossKeyItem;
 
         ItemStack stack = playerEntity_1.inventory.main.get(playerEntity_1.inventory.selectedSlot);
 
@@ -60,7 +60,7 @@ public class BossLockBlock extends Block
 
             world_1.setBlockState(blockPos_1, Blocks.AIR.getDefaultState());
 
-            TowerGuardEntity towerGuardEntity = new TowerGuardEntity(Entities.TOWER_GUARD, world_1);
+            TowerGuardEntity towerGuardEntity = new TowerGuardEntity(BattleTowers.TOWER_GUARD, world_1);
             towerGuardEntity.setPosition(blockPos_1.getX(), blockPos_1.getY(), blockPos_1.getZ());
             world_1.spawnEntity(towerGuardEntity);
 
@@ -85,7 +85,7 @@ public class BossLockBlock extends Block
     @Environment(EnvType.CLIENT)
     private void playDenySound(BlockPos pos)
     {
-        MinecraftClient.getInstance().world.playSound(pos, SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.BLOCK, 1, 1, false);
+        MinecraftClient.getInstance().world.playSound(pos, SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.BLOCKS, 1, 1, false);
     }
 
     @Environment(EnvType.CLIENT)

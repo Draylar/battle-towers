@@ -1,7 +1,6 @@
 package com.github.draylar.battleTowers.common.world;
 
 import com.github.draylar.battleTowers.common.Structures;
-import com.github.draylar.battleTowers.config.ConfigHolder;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.*;
 import net.minecraft.nbt.CompoundTag;

@@ -5,6 +5,8 @@ import com.github.draylar.battleTowers.common.blocks.boss_lock.BossLockBlock;
 import com.github.draylar.battleTowers.common.entity.tower_guard.TowerGuardEntity;
 import com.github.draylar.battleTowers.common.items.BossKeyItem;
 import com.github.draylar.battleTowers.config.BattleTowersConfig;
+import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
+import me.sargunvohra.mcmods.autoconfig1.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
@@ -25,7 +27,7 @@ public class BattleTowers implements ModInitializer
 	@Override
 	public void onInitialize()
 	{
-		new BattleTowersConfig().checkConfigFolder();
+		AutoConfig.register(BattleTowersConfig.class, GsonConfigSerializer::new);
 
 		Structures.registerStructures();
 		bossLockBlock = Registry.register(Registry.BLOCK, "battle-towers:boss_lock", new BossLockBlock());
