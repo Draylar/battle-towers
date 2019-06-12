@@ -1,6 +1,8 @@
 package com.github.draylar.battleTowers.common.world;
 
+import com.github.draylar.battleTowers.BattleTowers;
 import com.github.draylar.battleTowers.common.Structures;
+import me.sargunvohra.mcmods.autoconfig1.ConfigHolder;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.*;
 import net.minecraft.nbt.CompoundTag;
@@ -29,12 +31,12 @@ public class BattleTowerGenerator
     public static final Identifier towerJungle = new Identifier("battle-towers:tower_normal/tower_normal_jungle");
     public static final Identifier towerMine = new Identifier("battle-towers:tower_normal/tower_normal_mine");
 
-    public static final Identifier baseLoot = ConfigHolder.configInstance.entranceLootTable;
-    public static final Identifier blacksmithLoot = ConfigHolder.configInstance.blacksmithLootTable;
-    public static final Identifier jungleLoot = ConfigHolder.configInstance.jungleLootTable;
-    public static final Identifier layerLoot = ConfigHolder.configInstance.layerLootTable;
-    public static final Identifier libraryLoot = ConfigHolder.configInstance.libraryLootTable;
-    public static final Identifier mineLoot = ConfigHolder.configInstance.mineLootTable;
+    public static final Identifier baseLoot = new Identifier(BattleTowers.CONFIG.entranceLootTable);
+    public static final Identifier blacksmithLoot = new Identifier(BattleTowers.CONFIG.blacksmithLootTable);
+    public static final Identifier jungleLoot = new Identifier(BattleTowers.CONFIG.jungleLootTable);
+    public static final Identifier layerLoot = new Identifier(BattleTowers.CONFIG.layerLootTable);
+    public static final Identifier libraryLoot = new Identifier(BattleTowers.CONFIG.libraryLootTable);
+    public static final Identifier mineLoot = new Identifier(BattleTowers.CONFIG.mineLootTable);
 
 
     public static void addParts(StructureManager structureManager_1, BlockPos blockPos_1, BlockRotation rotation_1, List<StructurePiece> list_1, Random random_1, DefaultFeatureConfig featureConfig)
@@ -48,7 +50,7 @@ public class BattleTowerGenerator
         int lastRandomChance = -1;
 
         // randomly add layers
-        for(int i = 0; i < ConfigHolder.configInstance.floorAmount + random_1.nextInt(ConfigHolder.configInstance.floorRandomAddition); i++)
+        for(int i = 0; i < BattleTowers.CONFIG.floorAmount + random_1.nextInt(BattleTowers.CONFIG.floorRandomAddition); i++)
         {
             int randomChance;
 

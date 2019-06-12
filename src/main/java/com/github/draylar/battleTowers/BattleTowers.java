@@ -24,6 +24,8 @@ public class BattleTowers implements ModInitializer
 	public static BlockItem bossLockItem;
 	public static final EntityType<TowerGuardEntity> TOWER_GUARD = FabricEntityTypeBuilder.<TowerGuardEntity>create(EntityCategory.CREATURE, TowerGuardEntity::new).size(EntitySize.resizeable(3, 6)).build();
 
+	public static final BattleTowersConfig CONFIG = AutoConfig.getConfigHolder(BattleTowersConfig.class).getConfig();
+
 	@Override
 	public void onInitialize()
 	{
