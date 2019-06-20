@@ -70,7 +70,6 @@ public class BattleTowerFeature extends AbstractTempleFeature<DefaultFeatureConf
 
             BlockPos startingPos = new BlockPos(x, 0, z);
 
-
             // randomized rotation breaks a LOT of stuff so we're removing it for now
             BlockRotation rotation = BlockRotation.NONE;
 

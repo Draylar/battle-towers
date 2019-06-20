@@ -48,9 +48,9 @@ public class BossLockBlock extends Block
     @Override
     public boolean activate(BlockState blockState_1, World world_1, BlockPos blockPos_1, PlayerEntity playerEntity_1, Hand hand_1, BlockHitResult blockHitResult_1)
     {
-        int requiredCount = ConfigHolder.configInstance.requiredKeys;
-        Item requiredItem = Registry.ITEM.get(new Identifier(ConfigHolder.configInstance.requiredItem));
-        if(requiredItem == null) requiredItem = BattleTowers.bossKeyItem;
+        int requiredCount = BattleTowers.CONFIG.requiredKeys;
+        Item requiredItem = Registry.ITEM.get(new Identifier(BattleTowers.CONFIG.requiredItem));
+        if(requiredItem == null) requiredItem = BattleTowers.KEY;
 
         ItemStack stack = playerEntity_1.inventory.main.get(playerEntity_1.inventory.selectedSlot);
 

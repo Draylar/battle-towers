@@ -1,5 +1,6 @@
 package com.github.draylar.battleTowers.common.entity.tower_guard;
 
+import com.github.draylar.battleTowers.BattleTowers;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -36,10 +37,10 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob
     protected void initAttributes()
     {
         super.initAttributes();
-        this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(ConfigHolder.configInstance.bossHP);
+        this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(BattleTowers.CONFIG.bossHP);
         this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         this.getAttributeInstance(EntityAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10.0D);
-        this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHolder.configInstance.bossDamageScale);
+        this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).setBaseValue(BattleTowers.CONFIG.bossDamageScale);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob
     @Override
     protected Identifier getLootTableId()
     {
-        return ConfigHolder.configInstance.bossLootTable;
+        return new Identifier(BattleTowers.CONFIG.bossLootTable);
     }
 
     @Override
