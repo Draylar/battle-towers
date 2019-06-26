@@ -1,7 +1,9 @@
-package com.github.draylar.battleTowers.common.blocks.boss_lock;
+package com.github.draylar.battleTowers.common.blocks;
 
 import com.github.draylar.battleTowers.BattleTowers;
-import com.github.draylar.battleTowers.common.entity.tower_guard.TowerGuardEntity;
+import com.github.draylar.battleTowers.common.Entities;
+import com.github.draylar.battleTowers.common.Items;
+import com.github.draylar.battleTowers.common.entity.TowerGuardEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
@@ -35,8 +37,8 @@ public class BossLockBlock extends Block
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext itemPlacementContext_1) {
-        return this.getDefaultState().with(FACING, itemPlacementContext_1.getPlayerHorizontalFacing());
+    public BlockState getPlacementState(ItemPlacementContext context) {
+        return this.getDefaultState().with(FACING, context.getPlayerLookDirection());
     }
 
     @Override
@@ -50,17 +52,17 @@ public class BossLockBlock extends Block
     {
         int requiredCount = BattleTowers.CONFIG.requiredKeys;
         Item requiredItem = Registry.ITEM.get(new Identifier(BattleTowers.CONFIG.requiredItem));
-        if(requiredItem == null) requiredItem = BattleTowers.KEY;
+        if(requiredItem == null) requiredItem = Items.KEY;
 
         ItemStack stack = playerEntity_1.inventory.main.get(playerEntity_1.inventory.selectedSlot);
 
-        if(stack.getItem().equals(requiredItem) && stack.getAmount() >= requiredCount)
+        if(stack.getItem().equals(requiredItem) && stack.getCount() >= requiredCount)
         {
-            stack.setAmount(stack.getAmount() - requiredCount);
+            stack.setCount(stack.getCount() - requiredCount);
 
             world_1.setBlockState(blockPos_1, Blocks.AIR.getDefaultState());
 
-            TowerGuardEntity towerGuardEntity = new TowerGuardEntity(BattleTowers.TOWER_GUARD, world_1);
+            TowerGuardEntity towerGuardEntity = new TowerGuardEntity(Entities.TOWER_GUARD, world_1);
             towerGuardEntity.setPosition(blockPos_1.getX(), blockPos_1.getY(), blockPos_1.getZ());
             world_1.spawnEntity(towerGuardEntity);
 

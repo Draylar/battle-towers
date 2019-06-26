@@ -1,4 +1,4 @@
-package com.github.draylar.battleTowers.common.entity.tower_guard;
+package com.github.draylar.battleTowers.common.entity;
 
 import com.github.draylar.battleTowers.BattleTowers;
 import net.minecraft.entity.EntityType;

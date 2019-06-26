@@ -1,6 +1,6 @@
-package com.github.draylar.battleTowers.client.entity.tower_guard;
+package com.github.draylar.battleTowers.client.entity.towerguard;
 
-import com.github.draylar.battleTowers.common.entity.tower_guard.TowerGuardEntity;
+import com.github.draylar.battleTowers.common.entity.TowerGuardEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;

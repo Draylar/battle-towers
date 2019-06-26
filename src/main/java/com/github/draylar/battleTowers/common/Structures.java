@@ -22,7 +22,7 @@ public class Structures
     public static StructureFeature<DefaultFeatureConfig> battleTowerFeature = registerFeature("battle_tower", new BattleTowerFeature());
     public static StructureFeature<?> battleTowerStructure = registerStructureFeature("battle_tower", battleTowerFeature);
 
-    public static void registerStructures()
+    public static void init()
     {
         // add our structure to the structure list
         Feature.STRUCTURES.put("Battle Tower", battleTowerFeature);
