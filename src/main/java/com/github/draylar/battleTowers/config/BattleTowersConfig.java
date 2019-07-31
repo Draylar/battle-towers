@@ -22,5 +22,5 @@ public class BattleTowersConfig implements ConfigData
 
     public int floorAmount = 10;
     public int floorRandomAddition = 5;
-    public int structureRarity = 100;
+    public int structureRarity = 2500;
 }

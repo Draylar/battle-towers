@@ -67,7 +67,7 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob
     }
 
     @Override
-    protected boolean cannotDespawn()
+    public boolean cannotDespawn()
     {
         return true;
     }
