@@ -40,6 +40,8 @@ public class BattleTowerGenerator
     private static final Identifier libraryLoot = new Identifier(BattleTowers.CONFIG.libraryLootTable);
     private static final Identifier mineLoot = new Identifier(BattleTowers.CONFIG.mineLootTable);
 
+
+
     static void addParts(StructureManager structureManager, BlockPos blockPos, BlockRotation rotation, List<StructurePiece> pieceList, Random random, DefaultFeatureConfig featureConfig)
     {
         boolean hasAddedLookout = false;
@@ -145,6 +147,7 @@ public class BattleTowerGenerator
 
             this.initializePlacementData(structureManager);
         }
+
 
         private void initializePlacementData(StructureManager structureManager_1)
         {
@@ -276,6 +279,8 @@ public class BattleTowerGenerator
         @Override
         public boolean generate(IWorld world, Random random, MutableIntBoundingBox mutableIntBoundingBox, ChunkPos chunkPos)
         {
+            this.placementData.addProcessor(BlockIgnoreStructureProcessor.IGNORE_AIR_AND_STRUCTURE_BLOCKS);
+
             int yLevel = 0;
 
             for(int i = 255; i > 0; i--)
@@ -365,6 +370,8 @@ public class BattleTowerGenerator
                     }
                 }
             }
+
+
 
             return success;
         }
