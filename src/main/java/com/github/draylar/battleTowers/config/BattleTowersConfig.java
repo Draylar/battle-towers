@@ -9,7 +9,7 @@ public class BattleTowersConfig implements ConfigData
     public int requiredKeys = 10;
     public String requiredItem = "battle-towers:boss_key";
 
-    public String bossLootTable = "battle-towers:boss_key";
+    public String bossLootTable = "battle-towers:boss_loot";
     public String blacksmithLootTable = "battle-towers:blacksmith_loot";
     public String entranceLootTable = "battle-towers:base_loot";
     public String jungleLootTable = "battle-towers:jungle_loot";
