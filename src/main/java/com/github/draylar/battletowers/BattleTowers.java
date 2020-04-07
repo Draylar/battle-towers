@@ -10,13 +10,10 @@ import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 
 public class BattleTowers implements ModInitializer {
-    public static BattleTowersConfig CONFIG;
+    public static BattleTowersConfig CONFIG = AutoConfig.register(BattleTowersConfig.class, GsonConfigSerializer::new).getConfig();
 
     @Override
     public void onInitialize() {
-
-        CONFIG = AutoConfig.register(BattleTowersConfig.class, GsonConfigSerializer::new).getConfig();
-
         Blocks.init();
         Items.init();
         Entities.init();
