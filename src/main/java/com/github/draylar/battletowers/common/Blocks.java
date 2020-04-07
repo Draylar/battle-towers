@@ -1,6 +1,6 @@
-package com.github.draylar.battleTowers.common;
+package com.github.draylar.battletowers.common;
 
-import com.github.draylar.battleTowers.common.blocks.BossLockBlock;
+import com.github.draylar.battletowers.common.blocks.BossLockBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

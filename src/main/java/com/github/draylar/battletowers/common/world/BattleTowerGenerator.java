@@ -1,7 +1,7 @@
-package com.github.draylar.battleTowers.common.world;
+package com.github.draylar.battletowers.common.world;
 
-import com.github.draylar.battleTowers.BattleTowers;
-import com.github.draylar.battleTowers.common.Structures;
+import com.github.draylar.battletowers.BattleTowers;
+import com.github.draylar.battletowers.common.Structures;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BarrelBlockEntity;

@@ -1,4 +1,4 @@
-package com.github.draylar.battleTowers.common;
+package com.github.draylar.battletowers.common;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;

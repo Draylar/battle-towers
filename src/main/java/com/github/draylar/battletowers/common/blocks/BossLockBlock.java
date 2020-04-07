@@ -1,9 +1,9 @@
-package com.github.draylar.battleTowers.common.blocks;
+package com.github.draylar.battletowers.common.blocks;
 
-import com.github.draylar.battleTowers.BattleTowers;
-import com.github.draylar.battleTowers.common.Entities;
-import com.github.draylar.battleTowers.common.Items;
-import com.github.draylar.battleTowers.common.entity.TowerGuardEntity;
+import com.github.draylar.battletowers.BattleTowers;
+import com.github.draylar.battletowers.common.Entities;
+import com.github.draylar.battletowers.common.Items;
+import com.github.draylar.battletowers.common.entity.TowerGuardEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;

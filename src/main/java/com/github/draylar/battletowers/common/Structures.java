@@ -1,8 +1,8 @@
-package com.github.draylar.battleTowers.common;
+package com.github.draylar.battletowers.common;
 
-import com.github.draylar.battleTowers.BattleTowers;
-import com.github.draylar.battleTowers.common.world.BattleTowerFeature;
-import com.github.draylar.battleTowers.common.world.BattleTowerGenerator;
+import com.github.draylar.battletowers.BattleTowers;
+import com.github.draylar.battletowers.common.world.BattleTowerFeature;
+import com.github.draylar.battletowers.common.world.BattleTowerGenerator;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

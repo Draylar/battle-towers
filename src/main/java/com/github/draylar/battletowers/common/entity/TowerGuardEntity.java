@@ -1,6 +1,6 @@
-package com.github.draylar.battleTowers.common.entity;
+package com.github.draylar.battletowers.common.entity;
 
-import com.github.draylar.battleTowers.BattleTowers;
+import com.github.draylar.battletowers.BattleTowers;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
