@@ -12,7 +12,10 @@ minecraft {
 }
 
 repositories {
-    maven { url = "https://maven.fabricmc.net/" }
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
     maven { url = "https://minecraft.curseforge.com/api/maven" }
     maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
 }
@@ -23,14 +26,14 @@ dependencies {
     modCompile "net.fabricmc:fabric-loader:0.8.2+build.194"
 
     //Fabric api
-    modCompile net.fabricmc.fabric-api:fabric-api:0.5.1+build.294-1.15"
+    modCompile "net.fabricmc.fabric-api:0.5.1+build.294-1.15"
 
     // cloth & autoconfig
-    modCompile "cloth-config:ClothConfig:2.13.2"
+    modCompile "me.shedaniel.cloth:config-2:2.13.2"
     //modCompile "me.sargunvohra.mcmods:auto-config:1.1.2+mc1.14.1"
 
     // jij
-    include "cloth-config:ClothConfig:2.13.2"
+    include "me.shedaniel.cloth:config-2:2.13.2"
     //include "me.sargunvohra.mcmods:auto-config:1.0.0+mc1.14"
 }
 
