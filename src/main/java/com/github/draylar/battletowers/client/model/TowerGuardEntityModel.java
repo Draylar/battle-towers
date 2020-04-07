@@ -1,11 +1,11 @@
-package com.github.draylar.battleTowers.client.entity.towerguard;
+package com.github.draylar.battletowers.client.model;
 
-import com.github.draylar.battleTowers.common.entity.TowerGuardEntity;
+import com.github.draylar.battletowers.entity.TowerGuardEntity;
 import net.minecraft.client.model.Cuboid;
 import net.minecraft.client.render.entity.model.EntityModel;
 
-public class TowerGuardEntityModel extends EntityModel<TowerGuardEntity>
-{
+public class TowerGuardEntityModel extends EntityModel<TowerGuardEntity> {
+
     private final Cuboid bone;
     private final Cuboid legs;
     private final Cuboid right_leg;
@@ -19,8 +19,7 @@ public class TowerGuardEntityModel extends EntityModel<TowerGuardEntity>
     private final Cuboid torch3;
     private final Cuboid torch4;
 
-    public TowerGuardEntityModel()
-    {
+    public TowerGuardEntityModel() {
         textureWidth = 112;
         textureHeight = 112;
 
@@ -83,11 +82,9 @@ public class TowerGuardEntityModel extends EntityModel<TowerGuardEntity>
     }
 
     @Override
-    public void render(TowerGuardEntity entity_1, float float_1, float float_2, float float_3, float float_4, float float_5, float float_6)
-    {
+    public void render(TowerGuardEntity entity, float float_1, float float_2, float float_3, float float_4, float float_5, float float_6) {
         bone.render(0.1f);
     }
-
 
     public void setRotationAngle(Cuboid cuboid, float x, float y, float z) {
         cuboid.rotationPointX = x;

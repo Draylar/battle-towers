@@ -1,8 +1,8 @@
-package com.github.draylar.battleTowers.common;
+package com.github.draylar.battletowers.registry;
 
-import com.github.draylar.battleTowers.BattleTowers;
-import com.github.draylar.battleTowers.common.world.BattleTowerFeature;
-import com.github.draylar.battleTowers.common.world.BattleTowerGenerator;
+import com.github.draylar.battletowers.BattleTowers;
+import com.github.draylar.battletowers.world.BattleTowerFeature;
+import com.github.draylar.battletowers.world.BattleTowerGenerator;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -16,22 +16,18 @@ import net.minecraft.world.gen.feature.StructureFeature;
 
 import java.util.Locale;
 
-public class Structures
-{
+public class Structures {
     public static final StructurePieceType structurePieceType = Registry.register(Registry.STRUCTURE_PIECE, "battletower_layer", BattleTowerGenerator.Piece::new);
     public static StructureFeature<DefaultFeatureConfig> battleTowerFeature = registerFeature("battle_tower", new BattleTowerFeature());
     public static StructureFeature<?> battleTowerStructure = registerStructureFeature("battle_tower", battleTowerFeature);
 
-    public static void init()
-    {
+    public static void init() {
         // add our structure to the structure list
         Feature.STRUCTURES.put("Battle Tower", battleTowerFeature);
 
         // register our structure in overworld biomes
-        for(Biome biome : Registry.BIOME)
-        {
-            if(biome.getCategory() != Biome.Category.OCEAN && biome.getCategory() != Biome.Category.RIVER && biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND)
-            {
+        for (Biome biome : Registry.BIOME) {
+            if (biome.getCategory() != Biome.Category.OCEAN && biome.getCategory() != Biome.Category.RIVER && biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {
                 biome.addStructureFeature(battleTowerFeature, new DefaultFeatureConfig());
                 biome.addFeature(GenerationStep.Feature.SURFACE_STRUCTURES, Biome.configureFeature(battleTowerFeature, new DefaultFeatureConfig(), Decorator.CHANCE_HEIGHTMAP, new ChanceDecoratorConfig(BattleTowers.CONFIG.structureRarity)));
             }
