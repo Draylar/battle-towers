@@ -1,11 +1,11 @@
-package com.github.draylar.battleTowers.config;
+package com.github.draylar.battletowers.config;
 
-import me.sargunvohra.mcmods.autoconfig1.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1.annotation.Config;
+
+import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
+import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 
 @Config(name = "battletowers")
-public class BattleTowersConfig implements ConfigData
-{
+public class BattleTowersConfig implements ConfigData {
     public int requiredKeys = 10;
     public String requiredItem = "battle-towers:boss_key";
 
