@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "battle-towers",
-  "version": "1.1.2",
+  "version": "${version}",
 
   "name": "Battle Towers",
   "description": "Battle Towers, reborn for 1.14 Fabric!",
