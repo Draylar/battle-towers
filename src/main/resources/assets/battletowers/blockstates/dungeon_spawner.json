@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "battletowers:block/dungeon_spawner" }
+    }
+}

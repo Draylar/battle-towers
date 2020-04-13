@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "battle-towers:item/boss_key"
-  }
-}

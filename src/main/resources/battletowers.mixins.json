@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.github.draylar.battletowers.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "LocateCommandMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -15,12 +15,15 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.draylar.battleTowers.BattleTowers"
+      "com.github.draylar.battletowers.BattleTowers"
     ],
     "client": [
-      "com.github.draylar.battleTowers.BattleTowersClient"
+      "com.github.draylar.battletowers.BattleTowersClient"
     ]
   },
+  "mixins": [
+    "battletowers.mixins.json"
+  ],
 
   "requires": {
     "fabricloader": ">=0.4.0",
