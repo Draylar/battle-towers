@@ -6,19 +6,25 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.boss.BossBar;
+import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Overwrite;
 
 public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
 
+    private final ServerBossBar bossBar;
     private int currentProjectileCooldown = 0;
 
     public TowerGuardEntity(EntityType<TowerGuardEntity> entityType, World world) {
         super(entityType, world);
+        this.bossBar = (ServerBossBar)(new ServerBossBar(this.getDisplayName(), BossBar.Color.PURPLE, BossBar.Style.PROGRESS)).setDarkenSky(true);
     }
 
     @Override
@@ -41,6 +47,8 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
 
     @Override
     protected void mobTick() {
+        this.bossBar.setPercent(this.getHealth() / this.getMaximumHealth());
+
         if (getTarget() != null && !world.isClient) {
             currentProjectileCooldown++;
 
@@ -76,5 +84,17 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
         FireballEntity fireballEntity = new FireballEntity(world, this, velocityX, velocityY, velocityZ);
         fireballEntity.explosionPower = 1;
         fireballEntity.updatePosition(this.getX() + vec3d.x * 4.0D, this.getY() + (double) (this.getHeight() / 2.0F) + 0.5D, this.getZ() + vec3d.z * 4.0D);
+    }
+
+    @Override
+    public void onStartedTrackingBy(ServerPlayerEntity player) {
+        super.onStartedTrackingBy(player);
+        this.bossBar.addPlayer(player);
+    }
+
+    @Override
+    public void onStoppedTrackingBy(ServerPlayerEntity player) {
+        super.onStoppedTrackingBy(player);
+        this.bossBar.removePlayer(player);
     }
 }
