@@ -20,7 +20,7 @@ public class BattleTowerFeature extends AbstractTempleFeature<DefaultFeatureConf
 
     @Override
     protected int getSeedModifier() {
-        return 14357618;
+        return 52857294;
     }
 
     @Override
