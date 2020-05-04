@@ -1,9 +1,9 @@
-package com.github.draylar.battletowers.block;
+package draylar.battletowers.block;
 
-import com.github.draylar.battletowers.BattleTowers;
-import com.github.draylar.battletowers.registry.BattleTowerEntities;
-import com.github.draylar.battletowers.registry.BattleTowerItems;
-import com.github.draylar.battletowers.entity.TowerGuardEntity;
+import draylar.battletowers.BattleTowers;
+import draylar.battletowers.registry.BattleTowerEntities;
+import draylar.battletowers.registry.BattleTowerItems;
+import draylar.battletowers.entity.TowerGuardEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
@@ -27,10 +27,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import sun.security.provider.SHA;
 
 public class BossLockBlock extends Block {
 

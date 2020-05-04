@@ -1,6 +1,6 @@
-package com.github.draylar.battletowers.world;
+package draylar.battletowers.world;
 
-import com.github.draylar.battletowers.registry.BattleTowerStructures;
+import draylar.battletowers.registry.BattleTowerStructures;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.BlockRotation;

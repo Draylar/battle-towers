@@ -1,7 +1,7 @@
-package com.github.draylar.battletowers.registry;
+package draylar.battletowers.registry;
 
-import com.github.draylar.battletowers.BattleTowers;
-import com.github.draylar.battletowers.block.BossLockBlock;
+import draylar.battletowers.BattleTowers;
+import draylar.battletowers.block.BossLockBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.registry.Registry;
 

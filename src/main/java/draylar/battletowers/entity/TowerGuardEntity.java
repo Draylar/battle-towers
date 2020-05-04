@@ -1,6 +1,6 @@
-package com.github.draylar.battletowers.entity;
+package draylar.battletowers.entity;
 
-import com.github.draylar.battletowers.BattleTowers;
+import draylar.battletowers.BattleTowers;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -15,7 +15,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.spongepowered.asm.mixin.Overwrite;
 
 public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
 

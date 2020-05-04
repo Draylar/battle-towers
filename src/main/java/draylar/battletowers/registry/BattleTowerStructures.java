@@ -1,8 +1,8 @@
-package com.github.draylar.battletowers.registry;
+package draylar.battletowers.registry;
 
-import com.github.draylar.battletowers.BattleTowers;
-import com.github.draylar.battletowers.world.BattleTowerFeature;
-import com.github.draylar.battletowers.world.BattleTowerGenerator;
+import draylar.battletowers.BattleTowers;
+import draylar.battletowers.world.BattleTowerFeature;
+import draylar.battletowers.world.BattleTowerGenerator;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;

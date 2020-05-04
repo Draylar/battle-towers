@@ -13,9 +13,10 @@ minecraft {
 }
 
 repositories {
-
     maven { url = "https://minecraft.curseforge.com/api/maven" }
     maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
+    maven { url 'http://server.bbkr.space:8081/artifactory/libs-release' }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -29,6 +30,8 @@ dependencies {
     include "me.shedaniel.cloth:config-2:${project.cloth_version}"
     modCompile "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
     include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
+
+    modImplementation 'com.github.Draylar:structure-helpers:1.15.2-SNAPSHOT'
 }
 
 processResources {

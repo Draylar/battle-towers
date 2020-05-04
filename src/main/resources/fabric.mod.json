@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "battle-towers",
+  "id": "battletowers",
   "version": "${version}",
 
   "name": "Battle Towers",
-  "description": "Battle Towers, reborn for 1.14 Fabric!",
+  "description": "Battle Towers, reborn for Fabric!",
   "authors": [
     "Draylar"
   ],
@@ -15,10 +15,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.draylar.battletowers.BattleTowers"
+      "draylar.battletowers.BattleTowers"
     ],
     "client": [
-      "com.github.draylar.battletowers.BattleTowersClient"
+      "draylar.battletowers.BattleTowersClient"
     ]
   },
   "mixins": [

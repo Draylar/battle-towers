@@ -1,6 +1,6 @@
-package com.github.draylar.battletowers.registry;
+package draylar.battletowers.registry;
 
-import com.github.draylar.battletowers.BattleTowers;
+import draylar.battletowers.BattleTowers;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;

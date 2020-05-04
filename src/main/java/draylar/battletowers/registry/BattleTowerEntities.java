@@ -1,7 +1,7 @@
-package com.github.draylar.battletowers.registry;
+package draylar.battletowers.registry;
 
-import com.github.draylar.battletowers.BattleTowers;
-import com.github.draylar.battletowers.entity.TowerGuardEntity;
+import draylar.battletowers.BattleTowers;
+import draylar.battletowers.entity.TowerGuardEntity;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;

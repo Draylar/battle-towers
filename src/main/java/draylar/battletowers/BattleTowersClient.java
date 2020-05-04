@@ -1,8 +1,8 @@
-package com.github.draylar.battletowers;
+package draylar.battletowers;
 
-import com.github.draylar.battletowers.client.renderer.TowerGuardEntityRenderer;
-import com.github.draylar.battletowers.registry.BattleTowerBlocks;
-import com.github.draylar.battletowers.registry.BattleTowerEntities;
+import draylar.battletowers.client.renderer.TowerGuardEntityRenderer;
+import draylar.battletowers.registry.BattleTowerBlocks;
+import draylar.battletowers.registry.BattleTowerEntities;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

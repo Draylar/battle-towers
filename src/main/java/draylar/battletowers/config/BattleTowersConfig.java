@@ -1,4 +1,4 @@
-package com.github.draylar.battletowers.config;
+package draylar.battletowers.config;
 
 
 import me.sargunvohra.mcmods.autoconfig1u.ConfigData;

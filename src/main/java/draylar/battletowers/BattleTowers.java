@@ -1,10 +1,10 @@
-package com.github.draylar.battletowers;
+package draylar.battletowers;
 
-import com.github.draylar.battletowers.registry.BattleTowerBlocks;
-import com.github.draylar.battletowers.registry.BattleTowerEntities;
-import com.github.draylar.battletowers.registry.BattleTowerItems;
-import com.github.draylar.battletowers.registry.BattleTowerStructures;
-import com.github.draylar.battletowers.config.BattleTowersConfig;
+import draylar.battletowers.registry.BattleTowerBlocks;
+import draylar.battletowers.registry.BattleTowerEntities;
+import draylar.battletowers.registry.BattleTowerItems;
+import draylar.battletowers.registry.BattleTowerStructures;
+import draylar.battletowers.config.BattleTowersConfig;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;

@@ -1,4 +1,4 @@
-package com.github.draylar.battletowers.mixin;
+package draylar.battletowers.mixin;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
