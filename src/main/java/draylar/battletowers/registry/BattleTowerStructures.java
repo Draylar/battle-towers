@@ -2,7 +2,8 @@ package draylar.battletowers.registry;
 
 import draylar.battletowers.BattleTowers;
 import draylar.battletowers.world.BattleTowerFeature;
-import draylar.battletowers.world.BattleTowerGenerator;
+import draylar.battletowers.world.old.BattleTowerGenerator;
+import draylar.battletowers.world.BattleTowerPiece;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -21,6 +22,7 @@ public class BattleTowerStructures {
     public static final StructurePieceType structurePieceType = Registry.register(Registry.STRUCTURE_PIECE, BattleTowers.id("battletower_layer"), BattleTowerGenerator.Piece::new);
     public static final StructureFeature<DefaultFeatureConfig> BATTLE_TOWER_FEATURE = registerFeature("battletower", new BattleTowerFeature());
     public static final StructureFeature<DefaultFeatureConfig> BATTLE_TOWER_STRUCTURE =  registerStructureFeature("battletower", BATTLE_TOWER_FEATURE);
+    public static final StructurePieceType PIECE = Registry.register(Registry.STRUCTURE_PIECE, BattleTowers.id("piece"), BattleTowerPiece::new);
 
     public static void init() {
         // add our structure to the structure list

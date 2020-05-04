@@ -1,4 +1,4 @@
-package draylar.battletowers.world;
+package draylar.battletowers.world.old;
 
 import draylar.battletowers.BattleTowers;
 import draylar.battletowers.registry.BattleTowerStructures;
@@ -24,7 +24,7 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import java.util.List;
 import java.util.Random;
 
-public class BattleTowerGenerator {
+public class BattleTowerGeneratorOld {
 
     private static final Identifier LAYER = new Identifier("battletowers:tower_normal/tower_normal_layer");
     private static final Identifier ENTRANCE = new Identifier("battletowers:tower_normal/tower_normal_entrance");
@@ -47,7 +47,7 @@ public class BattleTowerGenerator {
         boolean hasAddedLookout = false;
 
         // spawn in base of tower
-        pieceList.add(new BattleTowerGenerator.Piece(structureManager, ENTRANCE, blockPos, rotation, false));
+        pieceList.add(new BattleTowerGeneratorOld.Piece(structureManager, ENTRANCE, blockPos, rotation, false));
 
         int lastRandom = -1;
 
@@ -61,7 +61,7 @@ public class BattleTowerGenerator {
 
 
         // finish with the top
-        pieceList.add(new BattleTowerGenerator.Piece(structureManager, TOP, blockPos, rotation, false));
+        pieceList.add(new BattleTowerGeneratorOld.Piece(structureManager, TOP, blockPos, rotation, false));
     }
 
     private static boolean placeLayer(StructureManager structureManager, BlockPos blockPos, BlockRotation rotation, List<StructurePiece> pieceList, boolean hasAddedLookout, int floorLevel, int layerIndex, boolean ladderSide) {
@@ -253,7 +253,7 @@ public class BattleTowerGenerator {
                 }
             }
 
-            if (template == BattleTowerGenerator.ENTRANCE) {
+            if (template == BattleTowerGeneratorOld.ENTRANCE) {
                 yLevel = yLevel - 5;
             }
 
