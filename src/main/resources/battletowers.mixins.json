@@ -1,9 +1,9 @@
 {
   "required": true,
-  "package": "com.draylar.battletowers.mixin",
+  "package": "draylar.battletowers.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "draylar.battletowers.mixin.LocateCommandMixin"
+    "LocateCommandMixin"
   ],
   "injectors": {
     "defaultRequire": 1
