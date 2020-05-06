@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.2.7-SNAPSHOT'
+	id 'fabric-loom' version '0.4.3'
     id 'maven-publish'
 }
 
@@ -10,6 +10,7 @@ archivesBaseName = "battletowers"
 version = "2.0.1"
 
 minecraft {
+    accessWidener = file("src/main/resources/battletowers.aw")
 }
 
 repositories {
@@ -31,7 +32,7 @@ dependencies {
     modCompile "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
     include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
 
-    modImplementation 'com.github.Draylar:structure-helpers:1.15.2-SNAPSHOT'
+    modImplementation 'com.github.kvverti:structure-helpers:bed98a8e48'
 }
 
 processResources {

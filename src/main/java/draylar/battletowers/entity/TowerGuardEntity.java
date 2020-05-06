@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
@@ -35,13 +36,13 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
         this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, false));
     }
 
-    @Override
-    protected void initAttributes() {
-        super.initAttributes();
-        this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(BattleTowers.CONFIG.bossHP);
-        this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getAttributeInstance(EntityAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10.0D);
-        this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).setBaseValue(BattleTowers.CONFIG.bossDamageScale);
+    public static DefaultAttributeContainer.Builder createGuardianAttributes() {
+        return DefaultAttributeContainer.builder()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, BattleTowers.CONFIG.bossHP)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.25D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 10.0D)
+                .add(EntityAttributes.GENERIC_ARMOR, 10d)
+                .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, BattleTowers.CONFIG.bossDamageScale);
     }
 
     @Override

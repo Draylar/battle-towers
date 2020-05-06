@@ -1,5 +1,6 @@
 package draylar.battletowers.world;
 
+import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.AbstractTempleFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
@@ -10,7 +11,7 @@ public class BattleTowerFeature extends AbstractTempleFeature<DefaultFeatureConf
     }
 
     @Override
-    protected int getSeedModifier() {
+    protected int getSeedModifier(ChunkGeneratorConfig chunkGeneratorConfig) {
         return 52857294;
     }
 
