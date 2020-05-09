@@ -35,6 +35,6 @@ public class ItemTab {
     }
 
     public String getTranslationKey() {
-        return "subtab." + name;
+        return "subtab.battletowers." + name;
     }
 }

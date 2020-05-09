@@ -1,4 +1,8 @@
 {
+  "itemGroup.battletowers.group": "Battle Towers",
+  "subtab.battletowers.all": "General",
+  "subtab.battletowers.developer_items": "Developer Items",
+
   "item.battletowers.boss_key": "Boss Key",
   "block.battletowers.boss_lock": "Boss Lock",
   "entity.battletowers.tower_guard": "Tower Guard"
