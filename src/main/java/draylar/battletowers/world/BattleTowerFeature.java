@@ -27,6 +27,6 @@ public class BattleTowerFeature extends AbstractTempleFeature<DefaultFeatureConf
 
     @Override
     public int getRadius() {
-        return 8;
+        return 0;
     }
 }

@@ -38,11 +38,14 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
 
     public static DefaultAttributeContainer.Builder createGuardianAttributes() {
         return DefaultAttributeContainer.builder()
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, BattleTowers.CONFIG.bossDamageScale)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, BattleTowers.CONFIG.bossHP)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.25D)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 25D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 10.0D)
                 .add(EntityAttributes.GENERIC_ARMOR, 10d)
-                .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, BattleTowers.CONFIG.bossDamageScale);
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1)
+                .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 2);
     }
 
     @Override

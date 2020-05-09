@@ -1,5 +1,6 @@
 package draylar.battletowers.world;
 
+import draylar.battletowers.api.Tower;
 import draylar.battletowers.api.Towers;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
@@ -19,9 +20,10 @@ public class BattleTowerStructureStart extends StructureStart {
     @Override
     public void init(ChunkGenerator<?> chunkGenerator, StructureManager structureManager, int x, int z, Biome biome) {
         if(Towers.hasCustomTower(biome)) {
-            StructurePoolBasedGenerator.addPieces(Towers.getEntranceFor(biome).getEntrancePool(), 10, BattleTowerPiece::new, chunkGenerator, structureManager, new BlockPos(x * 16, 150, z * 16), children, random, true, true);
+            Tower tower = Towers.getEntranceFor(biome);
+            StructurePoolBasedGenerator.addPieces(tower.getEntrancePool(), 8, BattleTowerPiece::new, chunkGenerator, structureManager, new BlockPos(x * 16, 0, z * 16), children, random, true, true);
         } else {
-            StructurePoolBasedGenerator.addPieces(Towers.STONE.getEntrancePool(), 10, BattleTowerPiece::new, chunkGenerator, structureManager, new BlockPos(x * 16, 0, z * 16), children, random, true, true);
+            StructurePoolBasedGenerator.addPieces(Towers.STONE.getEntrancePool(), 8, BattleTowerPiece::new, chunkGenerator, structureManager, new BlockPos(x * 16, 0, z * 16), children, random, true, true);
         }
 
         setBoundingBoxFromChildren();

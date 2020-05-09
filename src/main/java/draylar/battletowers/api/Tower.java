@@ -16,14 +16,15 @@ public class Tower {
     private final Identifier entrancePool;
     private final Identifier outlinePool;
     private final Identifier topPool;
-    private ImmutableList<StructureProcessor> processors;
+    private final Identifier bottomPool;
 
-    public Tower(String id) {
+    public Tower(String id, ImmutableList<StructureProcessor> processors) {
         this.entrancePool = BattleTowers.id(id + "_entrances");
-        this.outlinePool = BattleTowers.id(id +"_outlines");
-        this.topPool = BattleTowers.id(id +"_tops");
-        this.processors = ImmutableList.of();
+        this.outlinePool = BattleTowers.id(id + "_outlines");
+        this.topPool = BattleTowers.id(id + "_tops");
+        this.bottomPool = BattleTowers.id(id + "_bottoms");
 
+        // register entrance with no terminator
         StructurePoolBasedGenerator.REGISTRY.add(
                 new StructurePool(
                         entrancePool,
@@ -35,17 +36,7 @@ public class Tower {
                 )
         );
 
-        StructurePoolBasedGenerator.REGISTRY.add(
-                new StructurePool(
-                        outlinePool,
-                        new Identifier("empty"),
-                        ImmutableList.of(
-                                Pair.of(new ExtendedSinglePoolElement(BattleTowers.id(id + "/default_outline"), false, processors), 1)
-                        ),
-                        StructurePool.Projection.RIGID
-                )
-        );
-
+        // register top pool terminator
         StructurePoolBasedGenerator.REGISTRY.add(
                 new StructurePool(
                         topPool,
@@ -56,11 +47,30 @@ public class Tower {
                         StructurePool.Projection.RIGID
                 )
         );
-    }
 
-    public Tower(String id, ImmutableList<StructureProcessor> processors) {
-        this(id);
-        this.processors = processors;
+        // register layer pool with top pool terminator
+        StructurePoolBasedGenerator.REGISTRY.add(
+                new StructurePool(
+                        outlinePool,
+                        topPool,
+                        ImmutableList.of(
+                                Pair.of(new ExtendedSinglePoolElement(BattleTowers.id(id + "/default_outline"), false, processors), 1)
+                        ),
+                        StructurePool.Projection.RIGID
+                )
+        );
+
+        // register bottom pool
+        StructurePoolBasedGenerator.REGISTRY.add(
+                new StructurePool(
+                        bottomPool,
+                        new Identifier("empty"),
+                        ImmutableList.of(
+                                Pair.of(new ExtendedSinglePoolElement(BattleTowers.id(id + "/bottom"), true, processors), 1)
+                        ),
+                        StructurePool.Projection.RIGID
+                )
+        );
     }
 
     public Identifier getEntrancePool() {
@@ -73,9 +83,5 @@ public class Tower {
 
     public Identifier getTopPool() {
         return topPool;
-    }
-
-    public List<StructureProcessor> getProcessors() {
-        return processors;
     }
 }

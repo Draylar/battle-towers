@@ -1,8 +1,12 @@
 package draylar.battletowers.registry;
 
 import draylar.battletowers.BattleTowers;
+import draylar.battletowers.entity.ChestDeployerBlockEntity;
+import draylar.battletowers.entity.LadderDeployerBlockEntity;
 import draylar.battletowers.entity.TowerGuardEntity;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -13,8 +17,22 @@ public class BattleTowerEntities {
 
     public static final EntityType<TowerGuardEntity> TOWER_GUARD = register("tower_guard", FabricEntityTypeBuilder.create(EntityCategory.CREATURE, TowerGuardEntity::new).size(EntityDimensions.changing(3, 6)).build());
 
+    public static final BlockEntityType<LadderDeployerBlockEntity> LADDER_DEPLOYER = register(
+            "ladder_deployer",
+            BlockEntityType.Builder.create(LadderDeployerBlockEntity::new, BattleTowerBlocks.LADDER_DEPLOYER).build(null)
+    );
+
+    public static final BlockEntityType<ChestDeployerBlockEntity> CHEST_DEPLOYER = register(
+            "chest_deployer",
+            BlockEntityType.Builder.create(ChestDeployerBlockEntity::new, BattleTowerBlocks.CHEST_DEPLOYER).build(null)
+    );
+
     private static <T extends LivingEntity> EntityType<T> register(String name, EntityType<T> type) {
         return Registry.register(Registry.ENTITY_TYPE, BattleTowers.id(name), type);
+    }
+
+    private static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {
+        return Registry.register(Registry.BLOCK_ENTITY_TYPE, BattleTowers.id(name), type);
     }
 
     public static void init() {

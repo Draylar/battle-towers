@@ -4,6 +4,7 @@ import draylar.battletowers.BattleTowers;
 import draylar.battletowers.world.BattleTowerFeature;
 import draylar.battletowers.world.BattleTowerPiece;
 import net.minecraft.structure.StructurePieceType;
+import net.minecraft.structure.processor.StructureProcessorType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -28,7 +29,7 @@ public class BattleTowerStructures {
 
         // register our structure in overworld biomes
         for (Biome biome : Registry.BIOME) {
-            if (biome.getCategory() != Biome.Category.OCEAN && biome.getCategory() != Biome.Category.RIVER && biome.getCategory() != Biome.Category.THEEND) {
+            if (biome.getCategory() != Biome.Category.RIVER && biome.getCategory() != Biome.Category.THEEND) {
                 biome.addStructureFeature(BATTLE_TOWER_STRUCTURE.configure(FeatureConfig.DEFAULT));
                 biome.addFeature(GenerationStep.Feature.SURFACE_STRUCTURES, BattleTowerStructures.BATTLE_TOWER_FEATURE
                         .configure(FeatureConfig.DEFAULT)
