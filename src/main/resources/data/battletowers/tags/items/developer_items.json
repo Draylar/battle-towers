@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "battletowers:chest_deployer",
+    "battletowers:ladder_deployer"
+  ]
+}

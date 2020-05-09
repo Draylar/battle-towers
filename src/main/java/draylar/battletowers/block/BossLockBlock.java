@@ -55,7 +55,7 @@ public class BossLockBlock extends Block {
         Item requiredItem = Registry.ITEM.get(new Identifier(BattleTowers.CONFIG.requiredItem));
 
         if (requiredItem == Items.AIR) {
-            requiredItem = BattleTowerItems.KEY;
+            requiredItem = BattleTowerItems.BOSS_KEY;
         }
 
         ItemStack stack = player.inventory.main.get(player.inventory.selectedSlot);
