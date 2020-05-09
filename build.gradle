@@ -10,7 +10,7 @@ archivesBaseName = "battletowers"
 version = "2.0.1"
 
 minecraft {
-    accessWidener = file("src/main/resources/battletowers.aw")
+
 }
 
 repositories {
