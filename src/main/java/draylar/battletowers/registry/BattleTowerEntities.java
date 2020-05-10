@@ -1,8 +1,10 @@
 package draylar.battletowers.registry;
 
 import draylar.battletowers.BattleTowers;
+import draylar.battletowers.block.SpawnerDeployerBlock;
 import draylar.battletowers.entity.ChestDeployerBlockEntity;
 import draylar.battletowers.entity.LadderDeployerBlockEntity;
+import draylar.battletowers.entity.SpawnerDeployerBlockEntity;
 import draylar.battletowers.entity.TowerGuardEntity;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntity;
@@ -25,6 +27,11 @@ public class BattleTowerEntities {
     public static final BlockEntityType<ChestDeployerBlockEntity> CHEST_DEPLOYER = register(
             "chest_deployer",
             BlockEntityType.Builder.create(ChestDeployerBlockEntity::new, BattleTowerBlocks.CHEST_DEPLOYER).build(null)
+    );
+
+    public static final BlockEntityType<SpawnerDeployerBlockEntity> SPAWNER_DEPLOYER = register(
+            "spawner_deployer",
+            BlockEntityType.Builder.create(SpawnerDeployerBlockEntity::new, BattleTowerBlocks.SPAWNER_DEPLOYER).build(null)
     );
 
     private static <T extends LivingEntity> EntityType<T> register(String name, EntityType<T> type) {
