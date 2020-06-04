@@ -1,5 +1,6 @@
 package draylar.battletowers.entity;
 
+import draylar.battletowers.api.Floors;
 import draylar.battletowers.registry.BattleTowerEntities;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.BlockState;
@@ -43,7 +44,7 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
         }
     }
 
-    private final List<Identifier> potentialLootTables = new ArrayList<>();
+    private Identifier floorID = new Identifier("minecraft", "empty");
 
     public ContentDeployerBlockEntity() {
         super(BattleTowerEntities.CONTENT_DEPLOYER);
@@ -52,11 +53,6 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
     @Override
     public void tick() {
         if(world != null && !world.isClient) {
-            // fill potential loot tables if they were empty
-            if(potentialLootTables.isEmpty()) {
-                potentialLootTables.add(new Identifier("minecraft", "chests/simple_dungeon"));
-            }
-
             placeChests();
             placeSpawners();
         }
@@ -89,7 +85,7 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
 
                     // get chest and set loot table
                     ChestBlockEntity chestBlockEntity = (ChestBlockEntity) world.getBlockEntity(checkPos);
-                    chestBlockEntity.setLootTable(potentialLootTables.get(world.random.nextInt(potentialLootTables.size())), world.random.nextInt(100000));
+                    chestBlockEntity.setLootTable(Floors.getLootTableFor(floorID), world.getRandom().nextInt(1000));
 
                     placedChests++;
                     break;
@@ -139,24 +135,13 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
 
     @Override
     public CompoundTag toTag(CompoundTag tag) {
-        ListTag lootList = new ListTag();
-
-        potentialLootTables.forEach(lootTableID -> {
-            lootList.add(StringTag.of(lootTableID.toString()));
-        });
-
-        tag.put("Loot", lootList);
+        tag.putString("FloorID", floorID.toString());
         return super.toTag(tag);
     }
 
     @Override
     public void fromTag(BlockState state, CompoundTag tag) {
-        ListTag lootList = tag.getList("Loot", NbtType.STRING);
-
-        lootList.forEach(s -> {
-            potentialLootTables.add(new Identifier(s.asString()));
-        });
-
+        this.floorID = new Identifier(tag.getString("FloorID"));
         super.fromTag(state, tag);
     }
 }

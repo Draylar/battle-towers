@@ -1,5 +1,6 @@
 package draylar.battletowers;
 
+import draylar.battletowers.api.Floors;
 import draylar.battletowers.api.Towers;
 import draylar.battletowers.config.BattleTowersConfig;
 import draylar.battletowers.entity.TowerGuardEntity;
@@ -29,6 +30,7 @@ public class BattleTowers implements ModInitializer {
         BattleTowerStructures.init();
         BattleTowerTags.init();
 
+        Floors.init();
         Towers.init();
 
         FabricDefaultAttributeRegistry.register(BattleTowerEntities.TOWER_GUARD, TowerGuardEntity.createGuardianAttributes());
