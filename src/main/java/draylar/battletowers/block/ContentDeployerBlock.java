@@ -1,20 +1,20 @@
 package draylar.battletowers.block;
 
-import draylar.battletowers.entity.SpawnerDeployerBlockEntity;
+import draylar.battletowers.entity.ContentDeployerBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.world.BlockView;
 
-public class SpawnerDeployerBlock extends Block implements BlockEntityProvider {
+public class ContentDeployerBlock extends Block implements BlockEntityProvider {
 
-    public SpawnerDeployerBlock() {
+    public ContentDeployerBlock() {
         super(FabricBlockSettings.of(Material.METAL));
     }
 
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
-        return new SpawnerDeployerBlockEntity();
+        return new ContentDeployerBlockEntity();
     }
 
     @Override

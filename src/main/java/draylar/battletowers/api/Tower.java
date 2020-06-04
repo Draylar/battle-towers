@@ -5,6 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import draylar.battletowers.BattleTowers;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
+import net.minecraft.structure.pool.StructurePoolElement;
 import net.minecraft.structure.processor.StructureProcessor;
 import net.minecraft.util.Identifier;
 import robosky.structurehelpers.structure.pool.ExtendedSinglePoolElement;
@@ -18,7 +19,7 @@ public class Tower {
     private final Identifier topPool;
     private final Identifier bottomPool;
 
-    public Tower(String id, ImmutableList<StructureProcessor> processors) {
+    public Tower(String id, ImmutableList<StructureProcessor> processors, List<Pair<StructurePoolElement, Integer>> floors) {
         this.entrancePool = BattleTowers.id(id + "_entrances");
         this.outlinePool = BattleTowers.id(id + "_outlines");
         this.topPool = BattleTowers.id(id + "_tops");
@@ -30,7 +31,7 @@ public class Tower {
                         entrancePool,
                         new Identifier("empty"),
                         ImmutableList.of(
-                                Pair.of(new ExtendedSinglePoolElement(BattleTowers.id(id + "/default_entrance"), false, processors), 1)
+                                Pair.of(new ExtendedSinglePoolElement(BattleTowers.id(id + "/entrance"), false, processors), 1)
                         ),
                         StructurePool.Projection.RIGID
                 )
@@ -42,7 +43,7 @@ public class Tower {
                         topPool,
                         new Identifier("empty"),
                         ImmutableList.of(
-                                Pair.of(new ExtendedSinglePoolElement(BattleTowers.id(id + "/default_top"), false, processors), 1)
+                                Pair.of(new ExtendedSinglePoolElement(BattleTowers.id(id + "/top"), false, processors), 1)
                         ),
                         StructurePool.Projection.RIGID
                 )
@@ -53,9 +54,7 @@ public class Tower {
                 new StructurePool(
                         outlinePool,
                         topPool,
-                        ImmutableList.of(
-                                Pair.of(new ExtendedSinglePoolElement(BattleTowers.id(id + "/default_outline"), false, processors), 1)
-                        ),
+                        floors,
                         StructurePool.Projection.RIGID
                 )
         );

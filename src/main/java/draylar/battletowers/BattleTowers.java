@@ -19,6 +19,8 @@ public class BattleTowers implements ModInitializer {
     public static BattleTowersConfig CONFIG = AutoConfig.register(BattleTowersConfig.class, GsonConfigSerializer::new).getConfig();
     public static final ItemGroup GROUP = new BattleTowersItemGroup(BattleTowers.id("group"));
 
+    // red = center, green = ladder
+
     @Override
     public void onInitialize() {
         BattleTowerBlocks.init();
