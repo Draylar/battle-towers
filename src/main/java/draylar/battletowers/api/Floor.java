@@ -18,4 +18,8 @@ public class Floor {
     public List<Identifier> getChestLootTables() {
         return chestLootTables;
     }
+
+    public List<MobSpawnerEntry> getSpawnerEntries() {
+        return spawnerEntries;
+    }
 }

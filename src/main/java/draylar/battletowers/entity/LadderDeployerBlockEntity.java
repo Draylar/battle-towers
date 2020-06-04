@@ -37,7 +37,7 @@ public class LadderDeployerBlockEntity extends BlockEntity implements Tickable {
                 if(direction.getAxis() != Direction.Axis.Y) {
                     BlockState state = world.getBlockState(pos.offset(direction));
 
-                    if(state.isSolidBlock(world, pos.offset(direction))) {
+                    if(state.isSideSolidFullSquare(world, pos.offset(direction), direction.getOpposite())) {
                         wallDirection = direction;
                         break;
                     }

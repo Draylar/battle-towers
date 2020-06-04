@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -122,6 +123,11 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
 
                 if(checkState.isAir() && underState.isSolidBlock(world, checkPos.down())) {
                     world.setBlockState(checkPos, Blocks.SPAWNER.getDefaultState());
+
+                    // get spawner and set spawn entry
+                    MobSpawnerBlockEntity mobSpawner = (MobSpawnerBlockEntity) world.getBlockEntity(checkPos);
+                    mobSpawner.getLogic().setSpawnEntry(Floors.getSpawnerEntryFor(floorID));
+
                     placedSpawners++;
                     break;
                 }
