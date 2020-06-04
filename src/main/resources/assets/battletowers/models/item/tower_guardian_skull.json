@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "battletowers:item/tower_guardian_skull"
+  }
+}
