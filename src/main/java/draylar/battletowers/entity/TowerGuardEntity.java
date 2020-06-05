@@ -31,7 +31,10 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0D, true));
-        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 9.0F));
+        this.goalSelector.add(2, new GoToEntityTargetGoal(this, 0.09D, 32.0F));
+        this.goalSelector.add(3, new WanderAroundGoal(this, 0.6D));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 9.0F));
+        this.goalSelector.add(5, new LookAroundGoal(this));
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, false));
     }
@@ -41,9 +44,9 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, BattleTowers.CONFIG.bossDamageScale)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, BattleTowers.CONFIG.bossHP)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 25D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 10.0D)
-                .add(EntityAttributes.GENERIC_ARMOR, 10d)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 10D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
+                .add(EntityAttributes.GENERIC_ARMOR, 1D)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1)
                 .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 2);
     }
@@ -61,11 +64,6 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
                 attack(getTarget(), 1);
             }
         } else currentProjectileCooldown = 0;
-    }
-
-    @Override
-    protected Identifier getLootTableId() {
-        return new Identifier(BattleTowers.CONFIG.bossLootTable);
     }
 
     @Override
