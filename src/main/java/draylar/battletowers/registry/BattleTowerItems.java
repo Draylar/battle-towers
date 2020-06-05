@@ -9,6 +9,7 @@ public class BattleTowerItems {
 
     public static final Item BOSS_KEY = register("boss_key", new Item(new net.minecraft.item.Item.Settings().group(BattleTowers.GROUP)));
     public static final Item TOWER_GUARDIAN_SKULL = register("tower_guardian_skull", new ArmorItem(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Item.Settings().group(BattleTowers.GROUP)));
+    public static final Item KEYBLADE = register("keyblade", new SwordItem(ToolMaterials.GOLD, 4, -2.4f, new Item.Settings().group(BattleTowers.GROUP)));
 
     private static Item register(String name, Item item) {
         return Registry.register(Registry.ITEM, BattleTowers.id(name), item);

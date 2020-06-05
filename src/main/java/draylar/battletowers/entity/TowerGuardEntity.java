@@ -10,6 +10,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.SpellcastingIllagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -31,10 +32,10 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0D, true));
+        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 32.0F));
         this.goalSelector.add(2, new GoToEntityTargetGoal(this, 0.09D, 32.0F));
         this.goalSelector.add(3, new WanderAroundGoal(this, 0.6D));
-        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 9.0F));
-        this.goalSelector.add(5, new LookAroundGoal(this));
+        this.goalSelector.add(4, new LookAroundGoal(this));
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, false));
     }
