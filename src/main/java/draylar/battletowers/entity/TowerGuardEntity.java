@@ -10,11 +10,9 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.SpellcastingIllagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -43,7 +41,7 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
     public static DefaultAttributeContainer.Builder createGuardianAttributes() {
         return DefaultAttributeContainer.builder()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, BattleTowers.CONFIG.bossDamageScale)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, BattleTowers.CONFIG.bossAttack)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, BattleTowers.CONFIG.bossHP)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 10D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
@@ -54,7 +52,7 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
 
     @Override
     protected void mobTick() {
-        this.bossBar.setPercent(this.getHealth() / this.getMaximumHealth());
+        this.bossBar.setPercent(this.getHealth() / this.getMaxHealth());
 
         if (getTarget() != null && !world.isClient) {
             currentProjectileCooldown++;
@@ -81,7 +79,7 @@ public class TowerGuardEntity extends HostileEntity implements RangedAttackMob {
     public void attack(LivingEntity livingEntity, float v) {
         Vec3d vec3d = this.getRotationVec(1.0F);
         double velocityX = livingEntity.getX() - (this.getX() + vec3d.x * 4.0D);
-        double velocityY = livingEntity.getBoundingBox().y1 + (double) (livingEntity.getHeight() / 2.0F) - (0.5D + this.getY() + (double) (this.getHeight() / 2.0F));
+        double velocityY = livingEntity.getBoundingBox().minY + (double) (livingEntity.getHeight() / 2.0F) - (0.5D + this.getY() + (double) (this.getHeight() / 2.0F));
         double velocityZ = livingEntity.getZ() - (this.getZ() + vec3d.z * 4.0D);
         FireballEntity fireballEntity = new FireballEntity(world, this, velocityX, velocityY, velocityZ);
         fireballEntity.explosionPower = 1;

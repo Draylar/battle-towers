@@ -5,5 +5,11 @@
 
   "item.battletowers.boss_key": "Boss Key",
   "block.battletowers.boss_lock": "Boss Lock",
-  "entity.battletowers.tower_guard": "Tower Guardian"
+  "entity.battletowers.tower_guard": "Tower Guardian",
+
+  "item.battletowers.key_blade": "Keyblade",
+  "item.battletowers.key_axe": "Guardian's Keyaxe",
+  "item.battletowers.key_pickaxe": "Keypick of Mysteries",
+  "item.battletowers.key_hoe": "Keyhoe",
+  "item.battletowers.key_shovel": "Keyspade"
 }

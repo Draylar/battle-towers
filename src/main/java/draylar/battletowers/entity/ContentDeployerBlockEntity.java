@@ -1,16 +1,15 @@
 package draylar.battletowers.entity;
 
-import draylar.battletowers.api.Floors;
+import draylar.battletowers.api.MobSpawnerAccessor;
+import draylar.battletowers.api.Towers;
+import draylar.battletowers.api.spawner.MobSpawnerEntryBuilder;
 import draylar.battletowers.registry.BattleTowerEntities;
-import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
@@ -22,8 +21,8 @@ import java.util.List;
 public class ContentDeployerBlockEntity extends BlockEntity implements Tickable {
 
     private final static int RADIUS = 8;
-    private final static int MAX_CHESTS = 3;
-    private final static int MAX_SPAWNERS = 3;
+    private final static int MAX_CHESTS = 2;
+    private final static int MAX_SPAWNERS = 2;
     private final static List<BlockPos> CIRCULAR_POSITIONS = new ArrayList<>();
 
     static {
@@ -86,7 +85,7 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
 
                     // get chest and set loot table
                     ChestBlockEntity chestBlockEntity = (ChestBlockEntity) world.getBlockEntity(checkPos);
-                    chestBlockEntity.setLootTable(Floors.getLootTableFor(floorID), world.getRandom().nextInt(1000));
+                    chestBlockEntity.setLootTable(Towers.getLootTableFor(floorID), world.getRandom().nextInt(1000));
 
                     placedChests++;
                     break;
@@ -126,7 +125,8 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
 
                     // get spawner and set spawn entry
                     MobSpawnerBlockEntity mobSpawner = (MobSpawnerBlockEntity) world.getBlockEntity(checkPos);
-                    mobSpawner.getLogic().setSpawnEntry(Floors.getSpawnerEntryFor(floorID));
+                    ((MobSpawnerAccessor) mobSpawner).setTowerSpawner(true);
+                    mobSpawner.getLogic().setSpawnEntry(new MobSpawnerEntryBuilder(Towers.getSpawnerEntryFor(floorID)).build());
 
                     placedSpawners++;
                     break;

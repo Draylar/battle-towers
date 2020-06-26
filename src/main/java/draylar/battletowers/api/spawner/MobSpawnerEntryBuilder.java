@@ -1,4 +1,4 @@
-package draylar.battletowers.api;
+package draylar.battletowers.api.spawner;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;

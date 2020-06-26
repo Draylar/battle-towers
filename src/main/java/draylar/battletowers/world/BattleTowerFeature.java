@@ -1,32 +1,16 @@
 package draylar.battletowers.world;
 
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
-import net.minecraft.world.gen.feature.AbstractTempleFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
 
-public class BattleTowerFeature extends AbstractTempleFeature<DefaultFeatureConfig> {
+public class BattleTowerFeature extends StructureFeature<DefaultFeatureConfig> {
 
     public BattleTowerFeature() {
-        super(DefaultFeatureConfig::deserialize);
+        super(DefaultFeatureConfig.CODEC);
     }
 
     @Override
-    protected int getSeedModifier(ChunkGeneratorConfig chunkGeneratorConfig) {
-        return 52857294;
-    }
-
-    @Override
-    public StructureStartFactory getStructureStartFactory() {
+    public StructureStartFactory<DefaultFeatureConfig> getStructureStartFactory() {
         return BattleTowerStructureStart::new;
-    }
-
-    @Override
-    public String getName() {
-        return "battletower";
-    }
-
-    @Override
-    public int getRadius() {
-        return 0;
     }
 }

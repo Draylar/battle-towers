@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "texture0": "battletowers:block/tower_spawner"
+  }
+}

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "battletowers:tower_guardian_skull"
+          "name": "battletowers:key_helmet"
         }
       ],
       "conditions": [

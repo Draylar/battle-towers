@@ -6,15 +6,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "battletowers:boss_key"
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
           "weight": 20,
           "name": "minecraft:golden_apple"
         },

@@ -3,37 +3,45 @@ package draylar.battletowers.registry;
 import draylar.battletowers.BattleTowers;
 import draylar.battletowers.world.BattleTowerFeature;
 import draylar.battletowers.world.BattleTowerPiece;
+import net.earthcomputer.libstructure.LibStructure;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.structure.processor.StructureProcessorType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.chunk.StructureConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.NopeDecoratorConfig;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.*;
 
 import java.util.Locale;
 
 public class BattleTowerStructures {
 
-    public static final StructureFeature<DefaultFeatureConfig> BATTLE_TOWER_FEATURE = registerFeature("battletower", new BattleTowerFeature());
-    public static final StructureFeature<DefaultFeatureConfig> BATTLE_TOWER_STRUCTURE =  registerStructureFeature("battletower", BATTLE_TOWER_FEATURE);
     public static final StructurePieceType PIECE = Registry.register(Registry.STRUCTURE_PIECE, BattleTowers.id("piece"), BattleTowerPiece::new);
 
     public static void init() {
-        // add our structure to the structure list
-        Feature.STRUCTURES.put("BattleTower".toLowerCase(Locale.ROOT), BATTLE_TOWER_STRUCTURE);
+        BattleTowerFeature battleTowerFeature = new BattleTowerFeature();
+        DefaultFeatureConfig battleTowerConfig = DefaultFeatureConfig.INSTANCE;
+        ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> configuredBattleTowerFeature =
+                battleTowerFeature.configure(battleTowerConfig);
+
+        LibStructure.registerSurfaceAdjustingStructure(
+                BattleTowers.id("battletower"),
+                battleTowerFeature,
+                GenerationStep.Feature.SURFACE_STRUCTURES,
+                new StructureConfig(32, 8, 185815),
+                configuredBattleTowerFeature
+        );
 
         // register our structure in overworld biomes
         for (Biome biome : Registry.BIOME) {
             if (biome.getCategory() != Biome.Category.RIVER && biome.getCategory() != Biome.Category.THEEND) {
-                biome.addStructureFeature(BATTLE_TOWER_STRUCTURE.configure(FeatureConfig.DEFAULT));
-                biome.addFeature(GenerationStep.Feature.SURFACE_STRUCTURES, BattleTowerStructures.BATTLE_TOWER_FEATURE
-                        .configure(FeatureConfig.DEFAULT)
-                        .createDecoratedFeature(Decorator.NOPE.configure(NopeDecoratorConfig.DEFAULT)));
+                biome.addStructureFeature(configuredBattleTowerFeature);
+//                biome.addFeature(GenerationStep.Feature.SURFACE_STRUCTURES, BattleTowerStructures.BATTLE_TOWER_FEATURE
+//                        .configure(FeatureConfig.DEFAULT)
+//                        .createDecoratedFeature(Decorator.NOPE.configure(NopeDecoratorConfig.DEFAULT)));
             }
         }
     }

@@ -29,6 +29,9 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+/**
+ * Defines behavior for the Boss Lock block (battletowers:boss_lock), which is used to summon the {@link BattleTowerEntities#TOWER_GUARD)}.
+ */
 public class BossLockBlock extends Block {
 
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;

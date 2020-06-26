@@ -38,21 +38,21 @@ public class TowerGuardEntityModel extends EntityModel<TowerGuardEntity> {
         // left leg, -y27 -> -y47
         leftLeg = new ModelPart(this, 26, 35);
         leftLeg.addCuboid(1, 0, -3f, 7f, 15f, 6f);
-        leftLeg.setPivot(0.0F, 27.0F, 0.0F);
+        leftLeg.setPivot(0.0F, 25f, 0.0F);
 
         leftLegLower = new ModelPart(this, 0, 35);
-        leftLegLower.addCuboid(1, 0, -3f, 7f, 15f, 6f);
-        leftLegLower.setPivot(0.0F, 15, 0.0F);
+        leftLegLower.addCuboid(.5f, 0, -3.5f, 8f, 15f, 7f);
+        leftLegLower.setPivot(0.0F, 13, 0.0F);
         leftLeg.addChild(leftLegLower);
 
         // right left, -y27 -> -y47
         rightLeg = new ModelPart(this, 0, 35);
         rightLeg.addCuboid(-8f, 0, -3f, 7, 15, 6, 0);
-        rightLeg.setPivot(0.0F, 27.0F, 0.0F);
+        rightLeg.setPivot(0.0F, 25f, 0.0F);
 
         rightLegLower = new ModelPart(this, 0, 35);
-        rightLegLower.addCuboid(-8f, 0, -3f, 7, 15, 6, 0);
-        rightLegLower.setPivot(0.0F, 15, 0.0F);
+        rightLegLower.addCuboid(-8.5f, 0, -3.5f, 8, 15, 7, 0);
+        rightLegLower.setPivot(0.0F, 13, 0.0F);
         rightLeg.addChild(rightLegLower);
 
         // right arm
@@ -114,7 +114,7 @@ public class TowerGuardEntityModel extends EntityModel<TowerGuardEntity> {
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
 //        matrices.scale(1.6f, 1.6f, 1.6f);
-        matrices.translate(0, -2.1, 0);
+        matrices.translate(0, -1.8, 0);
 
         torso.render(matrices, vertexConsumer, light, overlay);
         leftLeg.render(matrices, vertexConsumer, light, overlay);

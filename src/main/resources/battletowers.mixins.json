@@ -4,7 +4,9 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BossBarHudMixin",
-    "LocateCommandMixin"
+    "MobSpawnerBlockEntityMixin",
+    "ServerResourceManagerMixin",
+    "SpawnerBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

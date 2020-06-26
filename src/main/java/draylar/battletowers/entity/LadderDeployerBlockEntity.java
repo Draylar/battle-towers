@@ -58,7 +58,7 @@ public class LadderDeployerBlockEntity extends BlockEntity implements Tickable {
                         be.toggleLadderPlacement(true);
                     } else {
                         // place ladder
-                        world.setBlockState(downPos, Blocks.LADDER.getDefaultState().with(LadderBlock.FACING, wallDirection.getOpposite()));
+                        world.setBlockState(downPos, Blocks.LADDER.getDefaultState().with(LadderBlock.FACING, wallDirection.getOpposite()).with(LadderBlock.WATERLOGGED, targetOverrideState.getBlock().equals(Blocks.WATER)));
                     }
                 }
 

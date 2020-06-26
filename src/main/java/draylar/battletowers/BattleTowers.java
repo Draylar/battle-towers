@@ -1,7 +1,6 @@
 package draylar.battletowers;
 
-import draylar.battletowers.api.Floors;
-import draylar.battletowers.api.Towers;
+import draylar.battletowers.api.test.TowerDataLoader;
 import draylar.battletowers.config.BattleTowersConfig;
 import draylar.battletowers.entity.TowerGuardEntity;
 import draylar.battletowers.group.BattleTowersItemGroup;
@@ -10,9 +9,7 @@ import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 
 public class BattleTowers implements ModInitializer {
@@ -21,6 +18,7 @@ public class BattleTowers implements ModInitializer {
 
     public static BattleTowersConfig CONFIG = AutoConfig.register(BattleTowersConfig.class, GsonConfigSerializer::new).getConfig();
     public static final ItemGroup GROUP = new BattleTowersItemGroup(BattleTowers.id("group"));
+    public static final TowerDataLoader TOWER_DATA = new TowerDataLoader();
 
     // red = center, green = ladder
 
@@ -31,9 +29,6 @@ public class BattleTowers implements ModInitializer {
         BattleTowerEntities.init();
         BattleTowerStructures.init();
         BattleTowerTags.init();
-
-        Floors.init();
-        Towers.init();
 
         FabricDefaultAttributeRegistry.register(BattleTowerEntities.TOWER_GUARD, TowerGuardEntity.createGuardianAttributes());
     }

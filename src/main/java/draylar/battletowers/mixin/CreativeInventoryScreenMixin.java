@@ -41,7 +41,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
 
             for (int i = 0; i < tGroup.getTabs().size(); i++) {
                 int selectTab = i;
-                ItemGroupTabWidget b = new ItemGroupTabWidget(x - 24, (y + 12) + (i * 24), tGroup.getTabs().get(i), (btn) -> {
+                ItemGroupTabWidget b = new ItemGroupTabWidget(x - 36, (y + 12) + (i * 24), tGroup.getTabs().get(i), (btn) -> {
                     tGroup.setSelectedTab(selectTab);
                     MinecraftClient.getInstance().openScreen(this);
                     ((ItemGroupTabWidget) btn).isSelected = true;

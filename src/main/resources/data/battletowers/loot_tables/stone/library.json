@@ -2,15 +2,6 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "battletowers:boss_key"
-        }
-      ]
-    },
-    {
       "rolls": {
         "min": 2.0,
         "max": 10.0,

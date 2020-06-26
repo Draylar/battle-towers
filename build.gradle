@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.4.3'
+	id 'fabric-loom' version '0.4-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -7,7 +7,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 archivesBaseName = "battletowers"
-version = "2.0.1"
+version = project.mod_version + "-" + project.minecraft_version
 
 minecraft {
 
@@ -18,6 +18,11 @@ repositories {
     maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
     maven { url 'http://server.bbkr.space:8081/artifactory/libs-release' }
     maven { url 'https://jitpack.io' }
+
+    maven {
+        name = 'Earthcomputer Mods'
+        url = 'https://dl.bintray.com/earthcomputer/mods'
+    }
 }
 
 dependencies {
@@ -32,7 +37,13 @@ dependencies {
     modCompile "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
     include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
 
-    modImplementation 'com.github.kvverti:structure-helpers:bed98a8e48'
+    // structure helpers for advanced jigsaw data
+    modImplementation 'com.github.kvverti:structure-helpers:master-SNAPSHOT'
+    include 'com.github.kvverti:structure-helpers:master-SNAPSHOT'
+
+    // structure assistance
+    modImplementation 'net.earthcomputer:libstructure:1.3' // Or the latest version
+    include 'net.earthcomputer:libstructure:1.3'
 }
 
 processResources {
