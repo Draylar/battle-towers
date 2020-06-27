@@ -11,5 +11,10 @@
   "item.battletowers.key_axe": "Guardian's Keyaxe",
   "item.battletowers.key_pickaxe": "Keypick of Mysteries",
   "item.battletowers.key_hoe": "Keyhoe",
-  "item.battletowers.key_shovel": "Keyspade"
+  "item.battletowers.key_shovel": "Keyspade",
+
+  "item.battletowers.key_helmet": "Keyhelmet",
+  "item.battletowers.key_chestplate": "Keyplate",
+  "item.battletowers.key_leggings": "Keylegs",
+  "item.battletowers.key_boots": "Keyboots"
 }

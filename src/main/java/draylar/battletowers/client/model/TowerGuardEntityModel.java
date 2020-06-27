@@ -1,12 +1,12 @@
 package draylar.battletowers.client.model;
 
-import draylar.battletowers.entity.TowerGuardEntity;
+import draylar.battletowers.entity.TowerGuardianEntity;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 
-public class TowerGuardEntityModel extends EntityModel<TowerGuardEntity> {
+public class TowerGuardEntityModel extends EntityModel<TowerGuardianEntity> {
 
     private final ModelPart torso;
     private final ModelPart leftLeg;
@@ -94,7 +94,7 @@ public class TowerGuardEntityModel extends EntityModel<TowerGuardEntity> {
     }
 
     @Override
-    public void setAngles(TowerGuardEntity entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch) {
+    public void setAngles(TowerGuardianEntity entity, float limbAngle, float limbDistance, float customAngle, float headYaw, float headPitch) {
         head.yaw = headYaw * 0.017453292F;
         head.pitch = headPitch * 0.017453292F;
 

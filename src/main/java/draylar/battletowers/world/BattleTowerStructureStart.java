@@ -1,8 +1,10 @@
 package draylar.battletowers.world;
 
+import com.google.common.collect.ImmutableList;
 import draylar.battletowers.BattleTowers;
 import draylar.battletowers.api.Towers;
 import draylar.battletowers.api.tower.Tower;
+import net.minecraft.structure.PoolStructurePiece;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
@@ -18,6 +20,7 @@ import robosky.structurehelpers.structure.ExtendedStructures;
 import robosky.structurehelpers.structure.pool.ElementRange;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class BattleTowerStructureStart extends StructureStart {
 
@@ -30,50 +33,25 @@ public class BattleTowerStructureStart extends StructureStart {
         Tower tower = Towers.getEntranceFor(biome);
 
         if (tower != null) {
-//            StructurePoolBasedGenerator.addPieces(
-//                    new Identifier("battletowers", tower.getName() + "_entrances"),
-//                    8,
-//                    BattleTowerPiece::new,
-//                    chunkGenerator,
-//                    structureManager,
-//                    new BlockPos(x * 16, 0, z * 16),
-//                    children,
-//                    random,
-//                    true,
-//                    true
-//            );
-
-            ExtendedStructurePoolBasedGeneratorData data = (ExtendedStructurePoolBasedGeneratorData) children;
-            data.putElementMinMax(new Identifier("minecraft:empty"), ElementRange.of(new Identifier("minecraft:empty"), 0, 1));
-
-            StructurePoolBasedGenerator.addPieces(
+            List<PoolStructurePiece> pieces = ExtendedStructures.addPieces(
+                    ImmutableList.of(
+                            ElementRange.of(BattleTowers.id("stone/lookout"), 0, 1),
+                            ElementRange.of(BattleTowers.id("stone/original"), 0, 1)
+                    ),
+                    0,
+                    0,
                     new Identifier("battletowers", tower.getName() + "_entrances"),
                     8,
                     BattleTowerPiece::new,
                     chunkGenerator,
                     structureManager,
                     new BlockPos(x * 16, 0, z * 16),
-                    data,
                     random,
                     true,
                     true
             );
 
-//            ExtendedStructures.addPieces(
-//                    Arrays.asList(ElementRange.of(BattleTowers.id("stone/lookout"), 0, 1)),
-//                    0,
-//                    0,
-//                    new Identifier("battletowers", tower.getName() + "_entrances"),
-//                    8,
-//                    BattleTowerPiece::new,
-//                    chunkGenerator,
-//                    structureManager,
-//                    new BlockPos(x * 16, 0, z * 16),
-//                    random,
-//                    true,
-//                    true
-//            );
-
+            this.children.addAll(pieces);
             setBoundingBoxFromChildren();
         }
     }

@@ -10,7 +10,7 @@ import net.minecraft.util.Formatting;
 public class KeyAxeItem extends AxeItem {
 
     public KeyAxeItem(Settings settings) {
-        super(ToolMaterials.GOLD, 9, -2.4f, settings);
+        super(ToolMaterials.GOLD, 9, -3.0f, settings);
     }
 
     @Override

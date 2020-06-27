@@ -19,7 +19,8 @@
     "biomeCategories": [
       "forest",
       "plains",
-      "swamp"
+      "swamp",
+      "savanna"
     ]
   },
   "entrances": [

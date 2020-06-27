@@ -10,7 +10,7 @@ import net.minecraft.util.Formatting;
 public class KeyShovelItem extends ShovelItem {
 
     public KeyShovelItem(Settings settings) {
-        super(ToolMaterials.GOLD, 3, -2.4f, settings);
+        super(ToolMaterials.GOLD, 4, -3.0f, settings);
     }
 
     @Override

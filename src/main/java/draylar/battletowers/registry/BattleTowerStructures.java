@@ -27,7 +27,7 @@ public class BattleTowerStructures {
         ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> configuredBattleTowerFeature =
                 battleTowerFeature.configure(battleTowerConfig);
 
-        LibStructure.registerSurfaceAdjustingStructure(
+        LibStructure.registerStructure(
                 BattleTowers.id("battletower"),
                 battleTowerFeature,
                 GenerationStep.Feature.SURFACE_STRUCTURES,
@@ -39,9 +39,6 @@ public class BattleTowerStructures {
         for (Biome biome : Registry.BIOME) {
             if (biome.getCategory() != Biome.Category.RIVER && biome.getCategory() != Biome.Category.THEEND) {
                 biome.addStructureFeature(configuredBattleTowerFeature);
-//                biome.addFeature(GenerationStep.Feature.SURFACE_STRUCTURES, BattleTowerStructures.BATTLE_TOWER_FEATURE
-//                        .configure(FeatureConfig.DEFAULT)
-//                        .createDecoratedFeature(Decorator.NOPE.configure(NopeDecoratorConfig.DEFAULT)));
             }
         }
     }

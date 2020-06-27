@@ -1,0 +1,240 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "random_chance_with_looting",
+          "chance": 0.7,
+          "looting_multiplier": 0.1
+        },
+        {
+          "condition": "killed_by_player"
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "battletowers:key_blade"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "battletowers:key_pickaxe"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "battletowers:key_axe"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "battletowers:key_hoe"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "battletowers:key_shovel"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "random_chance_with_looting",
+          "chance": 0.7,
+          "looting_multiplier": 0.1
+        },
+        {
+          "condition": "killed_by_player"
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "battletowers:key_helmet"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "battletowers:key_leggings"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "battletowers:key_chestplate"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "battletowers:key_boots"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1,
+        "max": 3
+      },
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:diamond",
+          "quality": 10,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 10
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:gold_ingot",
+          "quality": 5,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 3,
+                "max": 16
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:iron_ingot",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 3,
+                "max": 16
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:emerald",
+          "quality": 15,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 10
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:coal",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 3,
+                "max": 16
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:enchanted_book",
+          "functions": [
+            {
+              "function": "enchant_with_levels",
+              "levels": {
+                "min": 20,
+                "max": 30
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:fishing_rod",
+          "functions": [
+            {
+              "function": "enchant_with_levels",
+              "levels": {
+                "min": 20,
+                "max": 30
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:golden_horse_armor"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:diamond_horse_armor"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:iron_horse_armor"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:saddle"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 0,
+        "max": 1
+      },
+      "entries": [
+        {
+          "type": "item",
+          "weight": 10,
+          "name": "minecraft:golden_apple",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 5
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "minecraft:enchanted_golden_apple"
+        }
+      ]
+    }
+  ]
+}

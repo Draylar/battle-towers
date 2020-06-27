@@ -1,8 +1,9 @@
-package draylar.battletowers.api.test;
+package draylar.battletowers.api.tower;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.gson.*;
+import draylar.battletowers.BattleTowers;
 import draylar.battletowers.api.Towers;
 import draylar.battletowers.api.tower.IdentifierTypeAdapter;
 import draylar.battletowers.api.tower.Tower;
@@ -38,7 +39,8 @@ public class TowerDataLoader extends JsonDataLoader {
                 tower.setName(id.getPath());
                 loadedTowers.put(id, tower);
 
-                if(defaultTower == null) {
+                // hacky way to store stone as the default tower
+                if(defaultTower == null && id.equals(BattleTowers.id("stone"))) {
                     defaultTower = tower;
                 }
             } catch (IllegalArgumentException | JsonParseException exception) {

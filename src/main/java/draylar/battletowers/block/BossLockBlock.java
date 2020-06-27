@@ -1,7 +1,7 @@
 package draylar.battletowers.block;
 
 import draylar.battletowers.BattleTowers;
-import draylar.battletowers.entity.TowerGuardEntity;
+import draylar.battletowers.entity.TowerGuardianEntity;
 import draylar.battletowers.registry.BattleTowerEntities;
 import draylar.battletowers.registry.BattleTowerItems;
 import net.fabricmc.api.EnvType;
@@ -68,10 +68,10 @@ public class BossLockBlock extends Block {
                 stack.setCount(stack.getCount() - requiredKeys);
                 world.setBlockState(pos, Blocks.AIR.getDefaultState());
 
-                TowerGuardEntity towerGuardEntity = new TowerGuardEntity(BattleTowerEntities.TOWER_GUARD, world);
-                towerGuardEntity.updateTrackedPosition(pos.getX(), pos.getY(), pos.getZ());
-                towerGuardEntity.updatePosition(pos.getX(), pos.getY(), pos.getZ());
-                world.spawnEntity(towerGuardEntity);
+                TowerGuardianEntity towerGuardianEntity = new TowerGuardianEntity(BattleTowerEntities.TOWER_GUARD, world);
+                towerGuardianEntity.updateTrackedPosition(pos.getX(), pos.getY(), pos.getZ());
+                towerGuardianEntity.updatePosition(pos.getX(), pos.getY(), pos.getZ());
+                world.spawnEntity(towerGuardianEntity);
 
             } else {
                 playSpawnSound(pos);

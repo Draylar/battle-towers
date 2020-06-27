@@ -10,7 +10,7 @@ import net.minecraft.util.Formatting;
 public class KeyPickaxeItem extends PickaxeItem {
 
     public KeyPickaxeItem(Settings settings) {
-        super(ToolMaterials.GOLD, 3, -2.4f, settings);
+        super(ToolMaterials.GOLD, 5, -2.8f, settings);
     }
 
     @Override

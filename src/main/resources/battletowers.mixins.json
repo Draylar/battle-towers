@@ -4,6 +4,9 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BossBarHudMixin",
+    "DamageTrackerAccessor",
+    "EndermanEntityMixin",
+    "LivingEntityMixin",
     "MobSpawnerBlockEntityMixin",
     "ServerResourceManagerMixin",
     "SpawnerBlockMixin"

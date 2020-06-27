@@ -1,8 +1,8 @@
 package draylar.battletowers;
 
-import draylar.battletowers.api.test.TowerDataLoader;
+import draylar.battletowers.api.tower.TowerDataLoader;
 import draylar.battletowers.config.BattleTowersConfig;
-import draylar.battletowers.entity.TowerGuardEntity;
+import draylar.battletowers.entity.TowerGuardianEntity;
 import draylar.battletowers.group.BattleTowersItemGroup;
 import draylar.battletowers.registry.*;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
@@ -30,7 +30,7 @@ public class BattleTowers implements ModInitializer {
         BattleTowerStructures.init();
         BattleTowerTags.init();
 
-        FabricDefaultAttributeRegistry.register(BattleTowerEntities.TOWER_GUARD, TowerGuardEntity.createGuardianAttributes());
+        FabricDefaultAttributeRegistry.register(BattleTowerEntities.TOWER_GUARD, TowerGuardianEntity.createGuardianAttributes());
     }
 
     public static Identifier id(String name) {

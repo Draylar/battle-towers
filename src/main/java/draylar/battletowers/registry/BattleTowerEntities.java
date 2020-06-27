@@ -3,7 +3,7 @@ package draylar.battletowers.registry;
 import draylar.battletowers.BattleTowers;
 import draylar.battletowers.entity.ContentDeployerBlockEntity;
 import draylar.battletowers.entity.LadderDeployerBlockEntity;
-import draylar.battletowers.entity.TowerGuardEntity;
+import draylar.battletowers.entity.TowerGuardianEntity;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -15,7 +15,7 @@ import net.minecraft.util.registry.Registry;
 
 public class BattleTowerEntities {
 
-    public static final EntityType<TowerGuardEntity> TOWER_GUARD = register("tower_guard", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TowerGuardEntity::new).size(EntityDimensions.fixed(3, 6)).size(EntityDimensions.changing(2, 5)).trackable(64, 4).build());
+    public static final EntityType<TowerGuardianEntity> TOWER_GUARD = register("tower_guard", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TowerGuardianEntity::new).size(EntityDimensions.fixed(3, 6)).size(EntityDimensions.changing(2, 5)).trackable(64, 4).build());
 
     public static final BlockEntityType<LadderDeployerBlockEntity> LADDER_DEPLOYER = register(
             "ladder_deployer",

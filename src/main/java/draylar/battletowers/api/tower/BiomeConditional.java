@@ -6,6 +6,13 @@ import net.minecraft.world.biome.Biome;
 
 import java.util.List;
 
+/**
+ * Stores a collection of conditions related to whether a Battle Tower can spawn in a biome.
+ *
+ * <p>A Battle Tower can spawn based on biome IDs, biome categories ({@link Biome.Category}, or a collection of both.
+ * Note that biome IDs take priority over categories.
+ * If a biome ID is valid but not attached to a registered biome, only {@link net.minecraft.world.biome.Biomes.OCEAN} will accept the conditional.
+ */
 public class BiomeConditional {
 
     private final List<Identifier> biomeIDs;
