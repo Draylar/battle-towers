@@ -19,4 +19,10 @@ public class BattleTowersConfig implements ConfigData {
 
     @Comment(value = "Starting attack stat (generic.attack_damage) of spawned Tower Guardian entities.")
     public int bossAttack = 5;
+
+    @Comment(value = "Maximum distance, in chunks, between Battle Tower spawn attempts.")
+    public int towerSpacing = 32;
+
+    @Comment(value = "Minimum distance, in chunks, between Battle Tower spawn attempts.")
+    public int towerSeparation = 24;
 }

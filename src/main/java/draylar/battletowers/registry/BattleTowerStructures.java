@@ -23,15 +23,14 @@ public class BattleTowerStructures {
 
     public static void init() {
         BattleTowerFeature battleTowerFeature = new BattleTowerFeature();
-        DefaultFeatureConfig battleTowerConfig = DefaultFeatureConfig.INSTANCE;
-        ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> configuredBattleTowerFeature =
-                battleTowerFeature.configure(battleTowerConfig);
+        DefaultFeatureConfig config = DefaultFeatureConfig.INSTANCE;
+        ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> configuredBattleTowerFeature = battleTowerFeature.configure(config);
 
         LibStructure.registerStructure(
                 BattleTowers.id("battletower"),
                 battleTowerFeature,
                 GenerationStep.Feature.SURFACE_STRUCTURES,
-                new StructureConfig(32, 8, 185815),
+                new StructureConfig(BattleTowers.CONFIG.towerSpacing, BattleTowers.CONFIG.towerSeparation, 185815),
                 configuredBattleTowerFeature
         );
 
@@ -41,13 +40,5 @@ public class BattleTowerStructures {
                 biome.addStructureFeature(configuredBattleTowerFeature);
             }
         }
-    }
-
-    private static <Config extends FeatureConfig, F extends Feature<Config>> F registerFeature(String name, F feature) {
-        return Registry.register(Registry.FEATURE, BattleTowers.id(name), feature);
-    }
-
-    private static <Config extends FeatureConfig> StructureFeature<Config> registerStructureFeature(String name, StructureFeature<Config> structureFeature) {
-        return Registry.register(Registry.STRUCTURE_FEATURE, BattleTowers.id(name), structureFeature);
     }
 }

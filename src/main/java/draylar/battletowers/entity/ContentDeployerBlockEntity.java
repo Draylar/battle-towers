@@ -50,6 +50,10 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
         super(BattleTowerEntities.CONTENT_DEPLOYER);
     }
 
+    public void setFloorID(Identifier floorID) {
+        this.floorID = floorID;
+    }
+
     @Override
     public void tick() {
         if(world != null && !world.isClient) {
