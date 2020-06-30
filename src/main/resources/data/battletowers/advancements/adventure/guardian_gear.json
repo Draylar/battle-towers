@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "battletowers:key_chestplate"
+    },
+    "title": "Guardian Gear",
+    "description": "Obtain a full set of Key gear from the Tower Guardian.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "battletowers:adventure/guardian_slayer",
+  "criteria": {
+    "gear": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "battletowers:key_helmet"
+          },
+          {
+            "item": "battletowers:key_chestplate"
+          },
+          {
+            "item": "battletowers:key_leggings"
+          },
+          {
+            "item": "battletowers:key_boots"
+          }
+        ]
+      }
+    }
+  }
+}

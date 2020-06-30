@@ -1,0 +1,33 @@
+{
+    "parent": "minecraft:adventure/root",
+    "display": {
+        "title": {
+            "translate": "advancements.adventure.guardian_slayer.title",
+            "color": "red"
+        },
+        "description": {
+            "translate": "advancements.adventure.guardian_slayer.description"
+        },
+        "icon": {
+            "item": "battletowers:boss_key"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false,
+        "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    },
+    "criteria": {
+        "c1": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "entity": {
+                    "type": "battletowers:tower_guard"
+                }
+            }
+        }
+    },
+    "rewards": {
+        "experience": 30
+    }
+}

@@ -15,7 +15,7 @@ public class BattleTowersConfig implements ConfigData {
     public String requiredItem = "battletowers:boss_key";
 
     @Comment(value = "Starting health (generic.max_health) of spawned Tower Guardian entities.")
-    public int bossHP = 150;
+    public int bossHP = 250;
 
     @Comment(value = "Starting attack stat (generic.attack_damage) of spawned Tower Guardian entities.")
     public int bossAttack = 5;

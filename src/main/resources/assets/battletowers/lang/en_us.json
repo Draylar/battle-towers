@@ -16,5 +16,8 @@
   "item.battletowers.key_helmet": "Keyhelmet",
   "item.battletowers.key_chestplate": "Keyplate",
   "item.battletowers.key_leggings": "Keylegs",
-  "item.battletowers.key_boots": "Keyboots"
+  "item.battletowers.key_boots": "Keyboots",
+
+  "advancements.adventure.guardian_slayer.title": "Guardian Slayer",
+  "advancements.adventure.guardian_slayer.description": "Slay a Tower Guardian at the top of a Battle Tower."
 }

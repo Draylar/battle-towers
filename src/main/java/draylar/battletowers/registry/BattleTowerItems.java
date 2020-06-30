@@ -10,10 +10,10 @@ public class BattleTowerItems {
 
     public static final Item BOSS_KEY = register("boss_key", new Item(new net.minecraft.item.Item.Settings().group(BattleTowers.GROUP)));
 
-    public static final Item KEY_HELMET = register("key_helmet", new ArmorItem(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Item.Settings().group(BattleTowers.GROUP)));
-    public static final Item KEY_CHESTPLATE = register("key_chestplate", new ArmorItem(ArmorMaterials.IRON, EquipmentSlot.CHEST, new Item.Settings().group(BattleTowers.GROUP)));
-    public static final Item KEY_LEGGINGS = register("key_leggings", new ArmorItem(ArmorMaterials.IRON, EquipmentSlot.LEGS, new Item.Settings().group(BattleTowers.GROUP)));
-    public static final Item KEY_BOOTS = register("key_boots", new ArmorItem(ArmorMaterials.IRON, EquipmentSlot.FEET, new Item.Settings().group(BattleTowers.GROUP)));
+    public static final Item KEY_HELMET = register("key_helmet", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Item.Settings().group(BattleTowers.GROUP)));
+    public static final Item KEY_CHESTPLATE = register("key_chestplate", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.CHEST, new Item.Settings().group(BattleTowers.GROUP)));
+    public static final Item KEY_LEGGINGS = register("key_leggings", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.LEGS, new Item.Settings().group(BattleTowers.GROUP)));
+    public static final Item KEY_BOOTS = register("key_boots", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.FEET, new Item.Settings().group(BattleTowers.GROUP)));
 
     public static final SwordItem KEY_BLADE = register("key_blade", new KeyBladeItem(new Item.Settings().group(BattleTowers.GROUP)));
     public static final AxeItem KEY_AXE = register("key_axe", new KeyAxeItem(new Item.Settings().group(BattleTowers.GROUP)));

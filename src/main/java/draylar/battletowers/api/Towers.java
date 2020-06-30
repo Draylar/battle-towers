@@ -6,6 +6,7 @@ import draylar.battletowers.BattleTowers;
 import draylar.battletowers.api.tower.BiomeConditional;
 import draylar.battletowers.api.tower.Floor;
 import draylar.battletowers.api.tower.Tower;
+import draylar.battletowers.world.BattleTowerPoolElement;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.pool.StructurePool;
@@ -66,7 +67,7 @@ public class Towers {
             });
 
             tower.getLayers().forEach(elementTemplate -> {
-                layerElements.add(Pair.of(new ExtendedSinglePoolElement(elementTemplate.getId(), false, PROCESSORS), 1));
+                layerElements.add(Pair.of(new BattleTowerPoolElement(elementTemplate.getId(), false, PROCESSORS), 1));
                 CONTENT_PROVIDERS.put(elementTemplate.getId(), new Floor(elementTemplate.getLootTables(), elementTemplate.getEntities()));
             });
 
@@ -143,6 +144,11 @@ public class Towers {
         if(CONTENT_PROVIDERS.containsKey(floorID)) {
             List<Identifier> spawnerEntries = CONTENT_PROVIDERS.get(floorID).getSpawnerEntries();
 
+            if(spawnerEntries == null) {
+                spawnerEntries = new ArrayList<>();
+                spawnerEntries.add(BattleTowers.id("zombie"));
+            }
+
             if(!spawnerEntries.isEmpty()) {
                 return spawnerEntries.get(RAND.nextInt(spawnerEntries.size()));
             } else {
@@ -159,6 +165,11 @@ public class Towers {
     public static Identifier getLootTableFor(Identifier floorID) {
         if(CONTENT_PROVIDERS.containsKey(floorID)) {
             List<Identifier> lootTables = CONTENT_PROVIDERS.get(floorID).getChestLootTables();
+
+            if(lootTables == null) {
+                lootTables = new ArrayList<>();
+                lootTables.add(BattleTowers.id("default"));
+            }
 
             if(!lootTables.isEmpty()) {
                 return lootTables.get(RAND.nextInt(lootTables.size()));
