@@ -62,7 +62,7 @@ public class Towers {
             List<Pair<StructurePoolElement, Integer>> bottomElements = new ArrayList<>();
 
             tower.getEntrances().forEach(elementTemplate -> {
-                entranceElements.add(Pair.of(new ExtendedSinglePoolElement(elementTemplate.getId(), false, PROCESSORS), 1));
+                entranceElements.add(Pair.of(new BattleTowerPoolElement(elementTemplate.getId(), false, PROCESSORS), 1));
                 CONTENT_PROVIDERS.put(elementTemplate.getId(), new Floor(elementTemplate.getLootTables(), elementTemplate.getEntities()));
             });
 
@@ -72,12 +72,12 @@ public class Towers {
             });
 
             tower.getRoofs().forEach(elementTemplate -> {
-                roofElements.add(Pair.of(new ExtendedSinglePoolElement(elementTemplate.getId(), false, PROCESSORS), 1));
+                roofElements.add(Pair.of(new BattleTowerPoolElement(elementTemplate.getId(), false, PROCESSORS), 1));
                 CONTENT_PROVIDERS.put(elementTemplate.getId(), new Floor(elementTemplate.getLootTables(), elementTemplate.getEntities()));
             });
 
             tower.getBottoms().forEach(elementTemplate -> {
-                bottomElements.add(Pair.of(new ExtendedSinglePoolElement(elementTemplate.getId(), false, PROCESSORS), 1));
+                bottomElements.add(Pair.of(new BattleTowerPoolElement(elementTemplate.getId(), false, PROCESSORS), 1));
                 CONTENT_PROVIDERS.put(elementTemplate.getId(), new Floor(elementTemplate.getLootTables(), elementTemplate.getEntities()));
             });
 
@@ -146,7 +146,7 @@ public class Towers {
 
             if(spawnerEntries == null) {
                 spawnerEntries = new ArrayList<>();
-                spawnerEntries.add(BattleTowers.id("zombie"));
+                spawnerEntries.add(new Identifier("minecraft:zombie"));
             }
 
             if(!spawnerEntries.isEmpty()) {

@@ -31,6 +31,10 @@ dependencies {
     modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
     modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+    // spawner fixes
+    modCompile 'com.github.Draylar:angerable-patch:1.0.0'
+    include 'com.github.Draylar:angerable-patch:1.0.0'
+
     // cloth & autoconfig
     modCompile "me.shedaniel.cloth:config-2:${project.cloth_version}"
     include "me.shedaniel.cloth:config-2:${project.cloth_version}"
