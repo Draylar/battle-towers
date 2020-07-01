@@ -1,0 +1,70 @@
+{
+  "processors": {
+    "minecraft:packed_ice": [
+      {
+        "id": "minecraft:packed_ice",
+        "weight": 1
+      },
+      {
+        "id": "minecraft:blue_ice",
+        "weight": 1
+      },
+      {
+        "id": "minecraft:ice",
+        "weight": 1
+      }
+    ]
+  },
+  "biomeConditional": {
+    "biomeCategories": [
+      "icy"
+    ]
+  },
+  "entrances": [
+    {
+      "id": "battletowers:frosted/entrance"
+    }
+  ],
+  "layers": [
+    {
+      "id": "battletowers:frosted/default",
+      "lootTables": [
+        "battletowers:default"
+      ],
+      "entities": [
+        "minecraft:stray",
+        "minecraft:polar_bear"
+      ]
+    },
+    {
+      "id": "battletowers:frosted/default_spike_1",
+      "lootTables": [
+        "battletowers:default"
+      ],
+      "entities": [
+        "minecraft:stray",
+        "minecraft:polar_bear"
+      ]
+    },
+    {
+      "id": "battletowers:frosted/hole",
+      "lootTables": [
+        "battletowers:default"
+      ],
+      "entities": [
+        "minecraft:stray",
+        "minecraft:polar_bear"
+      ]
+    }
+  ],
+  "roofs": [
+    {
+      "id": "battletowers:frosted/top"
+    }
+  ],
+  "bottoms": [
+    {
+      "id": "battletowers:frosted/bottom"
+    }
+  ]
+}

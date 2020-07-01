@@ -36,6 +36,7 @@ public class BattleTowerStructureStart extends StructureStart {
             List<PoolStructurePiece> pieces = ExtendedStructures.addPieces(
                     ImmutableList.of(
                             ElementRange.of(BattleTowers.id("stone/lookout"), 0, 1),
+                            ElementRange.of(BattleTowers.id("frosted/hole"), 0, 1),
                             ElementRange.of(BattleTowers.id("stone/original"), 0, 1)
                     ),
                     0,

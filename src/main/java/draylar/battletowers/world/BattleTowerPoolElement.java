@@ -52,23 +52,25 @@ public class BattleTowerPoolElement extends ExtendedSinglePoolElement {
 
         // some rooms want to double generate for some reason e_e
         if(!world.getBlockState(deployerPos.down()).getBlock().equals(BattleTowerBlocks.CONTENT_DEPLOYER)) {
-            world.setBlockState(deployerPos, BattleTowerBlocks.CONTENT_DEPLOYER.getDefaultState(), 3);
-            ContentDeployerBlockEntity contentDeployer = (ContentDeployerBlockEntity) world.getBlockEntity(deployerPos);
-            contentDeployer.setFloorID(new Identifier(location));
 
-            if(location.contains("entrance")) {
+            // don't place content deployers in entrances
+            if(!location.contains("entrance")) {
+                world.setBlockState(deployerPos, BattleTowerBlocks.CONTENT_DEPLOYER.getDefaultState(), 3);
+                ContentDeployerBlockEntity contentDeployer = (ContentDeployerBlockEntity) world.getBlockEntity(deployerPos);
+                contentDeployer.setFloorID(new Identifier(location));
 
-            } else if (location.contains("top")) {
-                contentDeployer.setPlaceLadders(true);
-                contentDeployer.setPlaceBossLock(true);
-            } else if (location.contains("bottom")) {
+                if (location.contains("top")) {
+                    contentDeployer.setPlaceLadders(true);
+                    contentDeployer.setPlaceBossLock(true);
+                } else if (location.contains("bottom")) {
 
-            } else if (location.contains("lookout")) {
-                contentDeployer.setPlaceLadders(true);
-            } else {
-                contentDeployer.setPlaceChests(true);
-                contentDeployer.setPlaceLadders(true);
-                contentDeployer.setPlaceSpawners(true);
+                } else if (location.contains("lookout")) {
+                    contentDeployer.setPlaceLadders(true);
+                } else {
+                    contentDeployer.setPlaceChests(true);
+                    contentDeployer.setPlaceLadders(true);
+                    contentDeployer.setPlaceSpawners(true);
+                }
             }
         }
 
