@@ -1,0 +1,52 @@
+{
+  "processors": {
+    "minecraft:sandstone": [
+      {
+        "id": "minecraft:sandstone",
+        "weight": 1
+      },
+      {
+        "id": "minecraft:cut_sandstone",
+        "weight": 1
+      },
+      {
+        "id": "minecraft:smooth_sandstone",
+        "weight": 1
+      }
+    ]
+  },
+  "biomeConditional": {
+    "biomeCategories": [
+      "desert"
+    ]
+  },
+  "entrances": [
+    {
+      "id": "battletowers:sandy/entrance"
+    }
+  ],
+  "layers": [
+    {
+      "id": "battletowers:sandy/default",
+      "lootTables": [
+        "battletowers:default"
+      ],
+      "entities": [
+        "minecraft:husk"
+      ]
+    }
+  ],
+  "roofs": [
+    {
+      "id": "battletowers:sandy/top"
+    },
+    {
+      "id": "battletowers:sandy/sandcastle_top"
+    }
+  ],
+  "bottoms": [
+    {
+      "id": "battletowers:frosted/bottom"
+    }
+  ]
+}

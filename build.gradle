@@ -14,10 +14,10 @@ minecraft {
 }
 
 repositories {
+    maven { url 'https://jitpack.io' }
     maven { url = "https://minecraft.curseforge.com/api/maven" }
     maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
     maven { url 'http://server.bbkr.space:8081/artifactory/libs-release' }
-    maven { url 'https://jitpack.io' }
 
     maven {
         name = 'Earthcomputer Mods'
@@ -49,10 +49,8 @@ dependencies {
     modImplementation 'net.earthcomputer:libstructure:1.3' // Or the latest version
     include 'net.earthcomputer:libstructure:1.3'
 
-    // data breaker
-//    modRuntime ("com.github.SuperCoder7979:databreaker:67716e92f689cf19afc88ab3d7fb0d0c061958ad") {
-//        exclude module : "fabric-loader"
-//    }
+    // building assistance
+    modCompile 'com.github.Draylar:staff-of-building:1.1.0-1.16'
 }
 
 processResources {
