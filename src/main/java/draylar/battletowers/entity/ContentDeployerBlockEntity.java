@@ -1,8 +1,9 @@
 package draylar.battletowers.entity;
 
-import draylar.battletowers.api.MobSpawnerAccessor;
+import draylar.battletowers.api.spawner.MobSpawnerAccessor;
 import draylar.battletowers.api.Towers;
 import draylar.battletowers.api.spawner.MobSpawnerEntryBuilder;
+import draylar.battletowers.api.tower.Floor;
 import draylar.battletowers.registry.BattleTowerBlocks;
 import draylar.battletowers.registry.BattleTowerEntities;
 import net.minecraft.block.BlockState;
@@ -15,6 +16,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,29 +60,17 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
         super(BattleTowerEntities.CONTENT_DEPLOYER);
     }
 
-    public void setPlaceChests(boolean placeChests) {
-        this.placeChests = placeChests;
-    }
-
-    public void setPlaceLadders(boolean placeLadders) {
-        this.placeLadders = placeLadders;
-    }
-
-    public void setPlaceSpawners(boolean placeSpawners) {
-        this.placeSpawners = placeSpawners;
-    }
-
-    public void setPlaceBossLock(boolean placeBossLock) {
-        this.placeBossLock = placeBossLock;
-    }
-
-    public void setFloorID(Identifier floorID) {
-        this.floorID = floorID;
+    public void apply(Floor floor) {
+        this.floorID = floor.getId();
+        this.placeLadders = floor.placeLadders();
+        this.placeChests = floor.placeChests();
+        this.placeSpawners = floor.placeSpawners();
+        this.placeBossLock = floor.placeBossLock();
     }
 
     @Override
     public void tick() {
-        if(world != null && !world.isClient) {
+         if(world != null && !world.isClient) {
             if(placeChests) {
                 placeChests();
             }

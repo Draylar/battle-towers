@@ -1,4 +1,4 @@
-package draylar.battletowers.api.tower;
+package draylar.battletowers.api.spawning;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

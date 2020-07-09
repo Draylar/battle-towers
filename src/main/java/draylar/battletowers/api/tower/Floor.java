@@ -1,26 +1,93 @@
 package draylar.battletowers.api.tower;
 
 import net.minecraft.util.Identifier;
-import net.minecraft.world.MobSpawnerEntry;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Floor {
 
-    private final List<Identifier> chestLootTables;
-    private final List<Identifier> spawnerEntries;
+    private final Identifier id = new Identifier("empty");
+    private Boolean placeLadders;
+    private Boolean placeChests;
+    private Boolean placeSpawners;
+    private Boolean placeBossLock;
+    private List<Identifier> lootTables = new ArrayList<>();
+    private List<Identifier> entities = new ArrayList<>();
+    private final int minSpawns = 0;
+    private final int maxSpawns = 0;
 
-    public Floor(List<Identifier> chestLootTables, List<Identifier> spawnerEntries) {
-        this.chestLootTables = chestLootTables;
-        this.spawnerEntries = spawnerEntries;
+    // this constructor only exists to stop inlining of the above fields
+    public Floor(boolean placeLadders, boolean placeChests, boolean placeSpawners, boolean placeBossLock, List<Identifier> lootTables, List<Identifier> entities) {
+        this.placeLadders = placeLadders;
+        this.placeChests = placeChests;
+        this.placeSpawners = placeSpawners;
+        this.placeBossLock = placeBossLock;
+        this.lootTables = lootTables;
+        this.entities = entities;
     }
 
-    public List<Identifier> getChestLootTables() {
-        return chestLootTables;
+    public Identifier getId() {
+        return id;
     }
 
-    public List<Identifier> getSpawnerEntries() {
-        return spawnerEntries;
+    public List<Identifier> getLootTables() {
+        return lootTables;
+    }
+
+    public List<Identifier> getEntities() {
+        return entities;
+    }
+
+    public Boolean placeLadders() {
+        return placeLadders;
+    }
+
+    public Boolean placeChests() {
+        return placeChests;
+    }
+
+    public Boolean placeSpawners() {
+        return placeSpawners;
+    }
+
+    public Boolean placeBossLock() {
+        return placeBossLock;
+    }
+
+    public void setLootTables(List<Identifier> lootTables) {
+        this.lootTables = lootTables;
+    }
+
+    public void setEntities(List<Identifier> entities) {
+        this.entities = entities;
+    }
+
+    public void setPlaceLadders(boolean placeLadders) {
+        this.placeLadders = placeLadders;
+    }
+
+    public void setPlaceChests(boolean placeChests) {
+        this.placeChests = placeChests;
+    }
+
+    public void setPlaceSpawners(boolean placeSpawners) {
+        this.placeSpawners = placeSpawners;
+    }
+
+    public void setPlaceBossLock(boolean placeBossLock) {
+        this.placeBossLock = placeBossLock;
+    }
+
+    public int getMinSpawns() {
+        return minSpawns;
+    }
+
+    public int getMaxSpawns() {
+        return maxSpawns;
+    }
+
+    public boolean placeContentDeployer() {
+        return placeChests || placeLadders || !placeSpawners || placeBossLock;
     }
 }

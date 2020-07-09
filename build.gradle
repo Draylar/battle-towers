@@ -51,6 +51,8 @@ dependencies {
 
     // building assistance
     modCompile 'com.github.Draylar:staff-of-building:1.1.0-1.16'
+
+    modImplementation 'com.github.Draylar:structure-limit-nuker:master-SNAPSHOT'
 }
 
 processResources {

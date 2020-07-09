@@ -1,11 +1,10 @@
-package draylar.battletowers.api.tower;
+package draylar.battletowers.api.data;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.gson.*;
 import draylar.battletowers.BattleTowers;
 import draylar.battletowers.api.Towers;
-import draylar.battletowers.api.tower.IdentifierTypeAdapter;
 import draylar.battletowers.api.tower.Tower;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;

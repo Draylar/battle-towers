@@ -3,11 +3,13 @@
   "subtab.battletowers.all": "General",
   "subtab.battletowers.developer_items": "Developer Items",
 
+  "item.battletowers.tower_guardian_spawn_egg": "Tower Guardian Spawn Egg",
+
   "item.battletowers.boss_key": "Boss Key",
   "block.battletowers.boss_lock": "Boss Lock",
   "entity.battletowers.tower_guard": "Tower Guardian",
 
-  "item.battletowers.key_blade": "Keyblade",
+  "item.battletowers.key_sword": "Keyblade",
   "item.battletowers.key_axe": "Guardian's Keyaxe",
   "item.battletowers.key_pickaxe": "Keypick of Mysteries",
   "item.battletowers.key_hoe": "Keyhoe",

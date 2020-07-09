@@ -1,25 +1,16 @@
 {
   "processors": {
-    "minecraft:packed_ice": [
-      {
-        "id": "minecraft:packed_ice",
-        "weight": 1
-      },
-      {
-        "id": "minecraft:blue_ice",
-        "weight": 1
-      }
-    ]
+
   },
   "biomeConditional": {
     "biomeCategories": [
-      "icy"
+      "mushroom"
     ]
   },
   "entrances": {
     "floors": [
       {
-        "id": "battletowers:frosted/entrance"
+        "id": "battletowers:mushroom/entrance"
       }
     ]
   },
@@ -29,13 +20,7 @@
     "placeSpawners": true,
     "floors": [
       {
-        "id": "battletowers:frosted/default"
-      },
-      {
-        "id": "battletowers:frosted/default_spike_1"
-      },
-      {
-        "id": "battletowers:frosted/hole"
+        "id": "battletowers:mushroom/default"
       }
     ]
   },
@@ -44,7 +29,7 @@
     "placeLadders": true,
     "floors": [
       {
-        "id": "battletowers:frosted/top"
+        "id": "battletowers:mushroom/top"
       }
     ]
   },

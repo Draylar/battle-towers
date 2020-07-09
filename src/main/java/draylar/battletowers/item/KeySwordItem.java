@@ -7,9 +7,9 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
-public class KeyBladeItem extends SwordItem {
+public class KeySwordItem extends SwordItem {
 
-    public KeyBladeItem(Settings settings) {
+    public KeySwordItem(Settings settings) {
         super(ToolMaterials.GOLD, 8, -2.4f, settings);
     }
 

@@ -1,10 +1,10 @@
 {
   "display": {
     "icon": {
-      "item": "battletowers:key_chestplate"
+      "item": "battletowers:key_sword"
     },
-    "title": "Guardian Gear",
-    "description": "Obtain a full set of Key gear from the Tower Guardian.",
+    "title": "Tower Tools",
+    "description": "Obtain a full set of Key tools from the Tower Guardian.",
     "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
@@ -17,16 +17,19 @@
       "conditions": {
         "items": [
           {
-            "item": "battletowers:key_helmet"
+            "item": "battletowers:key_sword"
           },
           {
-            "item": "battletowers:key_chestplate"
+            "item": "battletowers:key_pickaxe"
           },
           {
-            "item": "battletowers:key_leggings"
+            "item": "battletowers:key_hoe"
           },
           {
-            "item": "battletowers:key_boots"
+            "item": "battletowers:key_axe"
+          },
+          {
+            "item": "battletowers:key_shovel"
           }
         ]
       }

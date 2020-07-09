@@ -23,105 +23,88 @@
       "savanna"
     ]
   },
-  "entrances": [
-    {
-      "id": "battletowers:stone/entrance"
-    }
-  ],
-  "layers": [
-    {
-      "id": "battletowers:stone/default",
-      "lootTables": [
-        "battletowers:default"
-      ],
-      "entities": [
-        "minecraft:zombie",
-        "minecraft:spider",
-        "minecraft:skeleton"
-      ]
-    },
-    {
-      "id": "battletowers:stone/blacksmith",
-      "lootTables": [
-        "battletowers:stone/blacksmith"
-      ],
-      "entities": [
-        "minecraft:zombie",
-        "minecraft:skeleton",
-        "minecraft:wither_skeleton"
-      ]
-    },
-    {
-      "id": "battletowers:stone/lake",
-      "lootTables": [
-        "battletowers:stone/lake"
-      ],
-      "entities": [
-        "minecraft:guardian",
-        "minecraft:drowned",
-        "minecraft:skeleton",
-        "minecraft:pufferfish"
-      ]
-    },
-    {
-      "id": "battletowers:stone/library",
-      "lootTables": [
-        "battletowers:stone/library"
-      ],
-      "entities": [
-        "minecraft:witch",
-        "minecraft:skeleton",
-        "minecraft:zombie",
-        "minecraft:spider"
-      ]
-    },
-    {
-      "id": "battletowers:stone/lookout"
-    },
-    {
-      "id": "battletowers:stone/mineshaft",
-      "lootTables": [
-        "battletowers:stone/mineshaft"
-      ],
-      "entities": [
-        "minecraft:cave_spider",
-        "minecraft:spider",
-        "minecraft:zombie",
-        "minecraft:skeleton"
-      ]
-    },
-    {
-      "id": "battletowers:stone/original",
-      "lootTables": [
-        "battletowers:default"
-      ],
-      "entities": [
-        "minecraft:zombie",
-        "minecraft:spider",
-        "minecraft:skeleton"
-      ]
-    },
-    {
-      "id": "battletowers:stone/plains",
-      "lootTables": [
-        "battletowers:default"
-      ],
-      "entities": [
-        "minecraft:enderman",
-        "minecraft:skeleton",
-        "minecraft:zombie",
-        "minecraft:spider"
-      ]
-    }
-  ],
-  "roofs": [
-    {
-      "id": "battletowers:stone/top"
-    }
-  ],
-  "bottoms": [
-    {
-      "id": "battletowers:stone/bottom"
-    }
-  ]
+  "entrances": {
+    "floors": [
+      {
+        "id": "battletowers:stone/entrance"
+      }
+    ]
+  },
+  "layers": {
+    "placeLadders": true,
+    "placeChests": true,
+    "placeSpawners": true,
+    "floors": [
+      {
+        "id": "battletowers:stone/blacksmith",
+        "lootTables": [
+          "battletowers:stone/blacksmith"
+        ]
+      },
+      {
+        "id": "battletowers:stone/default"
+      },
+      {
+        "id": "battletowers:stone/lake",
+        "lootTables": [
+          "battletowers:stone/lake"
+        ],
+        "entities": [
+          "minecraft:guardian",
+          "minecraft:drowned"
+        ]
+      },
+      {
+        "id": "battletowers:stone/library",
+        "lootTables": [
+          "battletowers:stone/library"
+        ],
+        "entities": [
+          "minecraft:witch",
+          "minecraft:spider",
+          "minecraft:cave_spider"
+        ]
+      },
+      {
+        "id": "battletowers:stone/lookout",
+        "placeChests": false,
+        "placeSpawners": false,
+        "maxSpawns": 1
+      },
+      {
+        "id": "battletowers:stone/mineshaft",
+        "lootTables": [
+          "battletowers:stone/mineshaft"
+        ],
+        "entities": [
+          "minecraft:cave_spider",
+          "minecraft:spider",
+          "minecraft:zombie",
+          "minecraft:skeleton"
+        ]
+      },
+      {
+        "id": "battletowers:stone/original"
+      },
+      {
+        "id": "battletowers:stone/plains"
+      }
+    ]
+  },
+  "roofs": {
+    "placeBossLock": true,
+    "placeLadders": true,
+    "floors": [
+      {
+        "id": "battletowers:stone/top"
+      }
+    ]
+  },
+  "bottoms": {
+    "floors": [
+      {
+        "id": "battletowers:stone/bottom"
+      }
+    ]
+  }
 }

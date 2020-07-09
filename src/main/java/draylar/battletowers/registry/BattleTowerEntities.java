@@ -1,10 +1,8 @@
 package draylar.battletowers.registry;
 
 import draylar.battletowers.BattleTowers;
-import draylar.battletowers.entity.ContentDeployerBlockEntity;
-import draylar.battletowers.entity.LadderDeployerBlockEntity;
-import draylar.battletowers.entity.TowerGuardianEntity;
-import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
+import draylar.battletowers.entity.*;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityDimensions;
@@ -15,7 +13,9 @@ import net.minecraft.util.registry.Registry;
 
 public class BattleTowerEntities {
 
-    public static final EntityType<TowerGuardianEntity> TOWER_GUARD = register("tower_guard", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TowerGuardianEntity::new).size(EntityDimensions.fixed(3, 6)).size(EntityDimensions.changing(2, 5)).trackable(64, 4).build());
+    public static final EntityType<TowerGuardianEntity> TOWER_GUARD = register("tower_guard", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TowerGuardianEntity::new).dimensions(EntityDimensions.fixed(3, 5)).trackable(64, 4).build());
+    public static final EntityType<ThemedZombieEntity> MUSHROOM_ZOMBIE = register("mushroom_zombie", FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ThemedZombieEntity::new).dimensions(EntityDimensions.fixed(1, 2)).trackable(64, 4).build());
+    public static final EntityType<ThemedCreeperEntity> MUSHROOM_CREEPER = register("mushroom_creeper", FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ThemedCreeperEntity::new).dimensions(EntityDimensions.fixed(1, 2)).trackable(64, 4).build());
 
     public static final BlockEntityType<LadderDeployerBlockEntity> LADDER_DEPLOYER = register(
             "ladder_deployer",

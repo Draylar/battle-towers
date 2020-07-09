@@ -1,6 +1,6 @@
 package draylar.battletowers.mixin;
 
-import draylar.battletowers.api.MobSpawnerAccessor;
+import draylar.battletowers.api.spawner.MobSpawnerAccessor;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.nbt.CompoundTag;

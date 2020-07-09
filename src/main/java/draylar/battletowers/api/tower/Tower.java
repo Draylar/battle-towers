@@ -1,8 +1,12 @@
 package draylar.battletowers.api.tower;
 
+import draylar.battletowers.api.data.PoolTemplate;
+import draylar.battletowers.api.spawning.BiomeConditional;
+import draylar.battletowers.api.data.WeightedIdentifier;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
+import robosky.structurehelpers.structure.pool.ElementRange;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +22,14 @@ public class Tower {
     private transient String name;
     private final Map<Identifier, List<WeightedIdentifier>> processors;
     private final BiomeConditional biomeConditional;
-    private final List<ElementTemplate> entrances;
-    private final List<ElementTemplate> layers;
-    private final List<ElementTemplate> roofs;
-    private final List<ElementTemplate> bottoms;
+    private final FloorCollection entrances;
+    private final FloorCollection layers;
+    private final FloorCollection roofs;
+    private final FloorCollection bottoms;
+    private transient List<ElementRange> limits = new ArrayList<>();
 
-    public Tower(Map<Identifier, List<WeightedIdentifier>> processors, BiomeConditional biomeConditional, List<ElementTemplate> entrances, List<ElementTemplate> layers, List<ElementTemplate> roofs, List<ElementTemplate> bottoms) {
+    // this constructor only exists to stop inlining of the above fields
+    public Tower(Map<Identifier, List<WeightedIdentifier>> processors, BiomeConditional biomeConditional, FloorCollection entrances, FloorCollection layers, FloorCollection roofs, FloorCollection bottoms) {
         this.processors = processors;
         this.biomeConditional = biomeConditional;
         this.entrances = entrances;
@@ -36,19 +42,19 @@ public class Tower {
         return processors;
     }
 
-    public List<ElementTemplate> getEntrances() {
+    public FloorCollection getEntrances() {
         return entrances;
     }
 
-    public List<ElementTemplate> getLayers() {
+    public FloorCollection getLayers() {
         return layers;
     }
 
-    public List<ElementTemplate> getRoofs() {
+    public FloorCollection getRoofs() {
         return roofs;
     }
 
-    public List<ElementTemplate> getBottoms() {
+    public FloorCollection getBottoms() {
         return bottoms;
     }
 
@@ -58,6 +64,18 @@ public class Tower {
 
     public String getName() {
         return name;
+    }
+
+    public List<ElementRange> getLimits() {
+        if(limits == null) {
+            limits = new ArrayList<>();
+        }
+
+        return limits;
+    }
+
+    public void addLimit(ElementRange range) {
+        limits.add(range);
     }
 
     public BiomeConditional getBiomeConditional() {

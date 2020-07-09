@@ -1,25 +1,16 @@
 {
   "processors": {
-    "minecraft:packed_ice": [
-      {
-        "id": "minecraft:packed_ice",
-        "weight": 1
-      },
-      {
-        "id": "minecraft:blue_ice",
-        "weight": 1
-      }
-    ]
+
   },
   "biomeConditional": {
     "biomeCategories": [
-      "icy"
+      "jungle"
     ]
   },
   "entrances": {
     "floors": [
       {
-        "id": "battletowers:frosted/entrance"
+        "id": "battletowers:jungle/entrance"
       }
     ]
   },
@@ -29,13 +20,16 @@
     "placeSpawners": true,
     "floors": [
       {
-        "id": "battletowers:frosted/default"
+        "id": "battletowers:jungle/branch"
       },
       {
-        "id": "battletowers:frosted/default_spike_1"
+        "id": "battletowers:jungle/default"
       },
       {
-        "id": "battletowers:frosted/hole"
+        "id": "battletowers:jungle/lookout"
+      },
+      {
+        "id": "battletowers:jungle/stairs_wrap"
       }
     ]
   },
@@ -44,7 +38,7 @@
     "placeLadders": true,
     "floors": [
       {
-        "id": "battletowers:frosted/top"
+        "id": "battletowers:jungle/top"
       }
     ]
   },

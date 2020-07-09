@@ -1,4 +1,4 @@
-package draylar.battletowers.api.tower;
+package draylar.battletowers.api.data;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;

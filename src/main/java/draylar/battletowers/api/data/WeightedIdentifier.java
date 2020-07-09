@@ -1,4 +1,4 @@
-package draylar.battletowers.api.tower;
+package draylar.battletowers.api.data;
 
 import net.minecraft.util.Identifier;
 
