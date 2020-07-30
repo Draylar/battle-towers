@@ -1,6 +1,6 @@
 package draylar.battletowers.block;
 
-import draylar.battletowers.entity.ContentDeployerBlockEntity;
+import draylar.battletowers.entity.block.ContentDeployerBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;

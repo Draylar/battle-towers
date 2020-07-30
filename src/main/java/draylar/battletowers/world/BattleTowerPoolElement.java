@@ -3,7 +3,7 @@ package draylar.battletowers.world;
 import com.google.common.collect.ImmutableList;
 import draylar.battletowers.api.Towers;
 import draylar.battletowers.api.tower.Floor;
-import draylar.battletowers.entity.ContentDeployerBlockEntity;
+import draylar.battletowers.entity.block.ContentDeployerBlockEntity;
 import draylar.battletowers.registry.BattleTowerBlocks;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.processor.StructureProcessor;
@@ -49,6 +49,35 @@ public class BattleTowerPoolElement extends ExtendedSinglePoolElement {
                     }
                 }
             }
+
+//            // special-case mushroom lanterns
+//            if(this.location().toString().equals("battletowers:mushroom/top")) {
+//                // spawn 12 lanterns
+//                for(int i = 0; i < 12; i++) {
+//                    int x = rand.nextInt(24) - 48;
+//                    int z = rand.nextInt(24) - 48;
+//
+//                    BlockPos testPos = deployerPos.add(x, 0, z);
+//                    // test up to 10 blocks down for placement
+//                    for(int y = 0; y < 10; y++) {
+//                        BlockPos potentialPlacementPosition = testPos.down(y);
+////
+////                        // check if position is valid
+////                        if(world.getBlockState(potentialPlacementPosition).isAir() && !world.getBlockState(potentialPlacementPosition.up()).isAir()) {
+//                            // place chains
+//                            int chainLength = rand.nextInt(24);
+//                            for(int chainIndex = 0; chainIndex < chainLength; chainIndex++) {
+//                                BlockPos placementPosition = potentialPlacementPosition.down(chainLength);
+//                                world.setBlockState(placementPosition, Blocks.CHAIN.getDefaultState(), 3);
+//                            }
+//
+//                            world.setBlockState(potentialPlacementPosition.down(chainLength), Blocks.SHROOMLIGHT.getDefaultState(), 3);
+//
+//                            break;
+////                        }
+//                    }
+//                }
+//            }
         }
 
         return generate;

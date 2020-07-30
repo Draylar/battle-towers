@@ -1,4 +1,4 @@
-package draylar.battletowers.entity;
+package draylar.battletowers.entity.block;
 
 import draylar.battletowers.world.TowerSpawnerLogic;
 import net.minecraft.block.BlockState;
@@ -10,7 +10,6 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.MobSpawnerEntry;
-import net.minecraft.world.MobSpawnerLogic;
 import net.minecraft.world.World;
 
 public class TowerSpawnerBlockEntity extends BlockEntity implements Tickable {

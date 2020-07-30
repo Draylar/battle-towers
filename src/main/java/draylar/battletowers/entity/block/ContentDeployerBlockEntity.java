@@ -1,4 +1,4 @@
-package draylar.battletowers.entity;
+package draylar.battletowers.entity.block;
 
 import draylar.battletowers.api.spawner.MobSpawnerAccessor;
 import draylar.battletowers.api.Towers;

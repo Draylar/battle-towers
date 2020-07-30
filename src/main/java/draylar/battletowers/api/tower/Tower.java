@@ -26,16 +26,18 @@ public class Tower {
     private final FloorCollection layers;
     private final FloorCollection roofs;
     private final FloorCollection bottoms;
+    private final List<PoolTemplate> extraPools;
     private transient List<ElementRange> limits = new ArrayList<>();
 
     // this constructor only exists to stop inlining of the above fields
-    public Tower(Map<Identifier, List<WeightedIdentifier>> processors, BiomeConditional biomeConditional, FloorCollection entrances, FloorCollection layers, FloorCollection roofs, FloorCollection bottoms) {
+    public Tower(Map<Identifier, List<WeightedIdentifier>> processors, BiomeConditional biomeConditional, FloorCollection entrances, FloorCollection layers, FloorCollection roofs, FloorCollection bottoms, List<PoolTemplate> extraPools) {
         this.processors = processors;
         this.biomeConditional = biomeConditional;
         this.entrances = entrances;
         this.layers = layers;
         this.roofs = roofs;
         this.bottoms = bottoms;
+        this.extraPools = extraPools;
     }
 
     public Map<Identifier, List<WeightedIdentifier>> getProcessors() {
@@ -75,10 +77,18 @@ public class Tower {
     }
 
     public void addLimit(ElementRange range) {
+        if(limits == null) {
+            limits = new ArrayList<>();
+        }
+
         limits.add(range);
     }
 
     public BiomeConditional getBiomeConditional() {
         return biomeConditional;
+    }
+
+    public List<PoolTemplate> getExtraPools() {
+        return extraPools;
     }
 }

@@ -10,6 +10,7 @@ import draylar.battletowers.api.tower.Tower;
 import draylar.battletowers.world.BattleTowerPoolElement;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.structure.pool.SinglePoolElement;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.structure.pool.StructurePoolElement;
@@ -41,10 +42,26 @@ public class Towers {
             // build processors
             ImmutableList<StructureProcessor> processors = collectProcessors(tower);
 
-            initializeFloorCollection(tower, tower.getEntrances(),  processors, BattleTowers.id(tower.getName() + "_entrances"), new Identifier("empty"));
-            initializeFloorCollection(tower, tower.getLayers(),  processors, BattleTowers.id(tower.getName() + "_outlines"), BattleTowers.id(tower.getName() + "_tops"));
-            initializeFloorCollection(tower, tower.getRoofs(),  processors, BattleTowers.id(tower.getName() + "_tops"), new Identifier("empty"));
-            initializeFloorCollection(tower, tower.getBottoms(),  processors, BattleTowers.id(tower.getName() + "_bottoms"), new Identifier("empty"));
+            initializeFloorCollection(tower, tower.getEntrances(), processors, BattleTowers.id(tower.getName() + "_entrances"), new Identifier("empty"));
+            initializeFloorCollection(tower, tower.getLayers(), processors, BattleTowers.id(tower.getName() + "_outlines"), BattleTowers.id(tower.getName() + "_tops"));
+            initializeFloorCollection(tower, tower.getRoofs(), processors, BattleTowers.id(tower.getName() + "_tops"), new Identifier("empty"));
+            initializeFloorCollection(tower, tower.getBottoms(), processors, BattleTowers.id(tower.getName() + "_bottoms"), new Identifier("empty"));
+
+            // register extra pools
+            if (tower.getExtraPools() != null) {
+                tower.getExtraPools().forEach(extraPool -> {
+                    List<Pair<StructurePoolElement, Integer>> elements = new ArrayList<>();
+                    extraPool.getElements().forEach((identifier, integer) -> {
+                        elements.add(Pair.of(new SinglePoolElement(identifier.toString(), processors), integer));
+                    });
+
+                    registerPool(
+                            extraPool.getId(),
+                            extraPool.getTerminator() == null ? new Identifier("empty") : extraPool.getTerminator(),
+                            elements
+                    );
+                });
+            }
         });
     }
 

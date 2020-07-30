@@ -1,4 +1,4 @@
-package draylar.battletowers.entity;
+package draylar.battletowers.entity.themed;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.ZombieEntity;

@@ -20,3 +20,14 @@ building around its base. Some Sandy Towers will appear as a sandcastle,
 while others will take a form more similar to the Stone Tower. Sandy Towers also
 draw similarities to Desert Temples due to their use of Red Sandstone.
 
+### Armor Variants
+
+Blazing Key Armor
+
+Frosted Key Armor
+
+### To Do
+- Fix Drowned Spawners
+- Add other Tower variants
+- Special Tower Guardian skin based on biome
+- Add map that points towards Battle Towers
