@@ -6,6 +6,7 @@ import draylar.battletowers.mixin.DamageTrackerAccessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -47,7 +48,7 @@ public class TowerGuardianEntity extends HostileEntity {
     }
 
     public static DefaultAttributeContainer.Builder createGuardianAttributes() {
-        return DefaultAttributeContainer.builder()
+        return LivingEntity.createLivingAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, BattleTowers.CONFIG.bossAttack)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, BattleTowers.CONFIG.bossHP)
