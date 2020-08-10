@@ -6,6 +6,7 @@
     "BossBarHudMixin",
     "DamageTrackerAccessor",
     "EndermanEntityMixin",
+    "ExtendedSinglePoolElementMixin",
     "LivingEntityMixin",
     "MobSpawnerBlockEntityMixin",
     "ServerResourceManagerMixin",

@@ -56,6 +56,8 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
     private boolean placeSpawners = false;
     private boolean placeBossLock = false;
 
+    private int delay = 0;
+
     public ContentDeployerBlockEntity() {
         super(BattleTowerEntities.CONTENT_DEPLOYER);
     }
@@ -71,25 +73,30 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
     @Override
     public void tick() {
          if(world != null && !world.isClient) {
-            if(placeChests) {
-                placeChests();
-            }
+             // wait 1 second before placing to try to fix issue where content doesn't appear
+             if(delay <= 20) {
+                 delay++;
+             } else {
+                 if (placeChests) {
+                     placeChests();
+                 }
 
-            if(placeSpawners) {
-                placeSpawners();
-            }
+                 if (placeSpawners) {
+                     placeSpawners();
+                 }
 
-            if(placeLadders) {
-                placeLadders();
-            }
+                 if (placeLadders) {
+                     placeLadders();
+                 }
 
-            // replace this content deployer with a boss lock or air
-            if(placeBossLock) {
-                placeBossLock();
-            } else {
-                world.setBlockState(pos, Blocks.AIR.getDefaultState());
-                this.markRemoved();
-            }
+                 // replace this content deployer with a boss lock or air
+                 if (placeBossLock) {
+                     placeBossLock();
+                 } else {
+                     world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                     this.markRemoved();
+                 }
+             }
         }
     }
 
@@ -202,6 +209,7 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
         tag.putBoolean("PlaceChests", placeChests);
         tag.putBoolean("PlaceSpawners", placeSpawners);
         tag.putBoolean("PlaceLadders", placeLadders);
+        tag.putInt("Delay", delay);
         return super.toTag(tag);
     }
 
@@ -211,6 +219,7 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
         this.placeChests = tag.getBoolean("PlaceChests");
         this.placeSpawners = tag.getBoolean("PlaceSpawners");
         this.placeLadders = tag.getBoolean("PlaceLadders");
+        this.delay = tag.getInt("Delay");
         super.fromTag(state, tag);
     }
 }

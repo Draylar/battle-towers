@@ -7,10 +7,8 @@ import draylar.battletowers.api.spawning.BiomeConditional;
 import draylar.battletowers.api.tower.Floor;
 import draylar.battletowers.api.tower.FloorCollection;
 import draylar.battletowers.api.tower.Tower;
-import draylar.battletowers.world.BattleTowerPoolElement;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.structure.pool.SinglePoolElement;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.structure.pool.StructurePoolElement;
@@ -19,6 +17,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import robosky.structurehelpers.structure.pool.ElementRange;
+import robosky.structurehelpers.structure.pool.ExtendedSinglePoolElement;
 import robosky.structurehelpers.structure.processor.WeightedChanceProcessor;
 
 import java.util.*;
@@ -52,7 +51,7 @@ public class Towers {
                 tower.getExtraPools().forEach(extraPool -> {
                     List<Pair<StructurePoolElement, Integer>> elements = new ArrayList<>();
                     extraPool.getElements().forEach((identifier, integer) -> {
-                        elements.add(Pair.of(new SinglePoolElement(identifier.toString(), processors), integer));
+                        elements.add(Pair.of(new ExtendedSinglePoolElement(identifier, false, processors), integer));
                     });
 
                     registerPool(
@@ -108,7 +107,7 @@ public class Towers {
 
     private static void initializeFloors(Tower tower, FloorCollection floors, List<Pair<StructurePoolElement, Integer>> elements, ImmutableList<StructureProcessor> processors) {
         floors.getFloors().forEach(floor -> {
-            elements.add(Pair.of(new BattleTowerPoolElement(floor.getId(), false, processors), 1));
+            elements.add(Pair.of(new ExtendedSinglePoolElement(floor.getId(), false, processors), 1));
             floors.applyDefaults(floor);
             FLOOR_DATA.put(floor.getId(), floor);
 
@@ -129,7 +128,8 @@ public class Towers {
             }
         }
 
-        return BattleTowers.TOWER_DATA.getDefaultTower();
+//        return BattleTowers.TOWER_DATA.getDefaultTower();
+        return null; // don't add towers to unsupported biomes
     }
 
     public static Identifier getSpawnerEntryFor(Identifier floorID) {
