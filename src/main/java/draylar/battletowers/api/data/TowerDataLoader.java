@@ -21,6 +21,7 @@ public class TowerDataLoader extends JsonDataLoader {
     private static final Logger LOGGER = LogManager.getLogger();
     private Map<Identifier, Tower> towers = ImmutableMap.of();
     private Tower defaultTower =  null;
+    private boolean hasLoaded = false;
 
     public TowerDataLoader() {
         super(GSON, "towers");
@@ -49,7 +50,11 @@ public class TowerDataLoader extends JsonDataLoader {
 
         towers = loadedTowers;
         LOGGER.info("Loaded {} towers", loadedTowers.size());
-        Towers.init();
+
+        if(!hasLoaded) {
+            Towers.init();
+            hasLoaded = true;
+        }
     }
 
     public Map<Identifier, Tower> getTowers() {

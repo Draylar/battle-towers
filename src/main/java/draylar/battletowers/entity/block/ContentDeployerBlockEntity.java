@@ -1,7 +1,7 @@
 package draylar.battletowers.entity.block;
 
-import draylar.battletowers.api.spawner.MobSpawnerAccessor;
 import draylar.battletowers.api.Towers;
+import draylar.battletowers.api.spawner.MobSpawnerAccessor;
 import draylar.battletowers.api.spawner.MobSpawnerEntryBuilder;
 import draylar.battletowers.api.tower.Floor;
 import draylar.battletowers.registry.BattleTowerBlocks;
@@ -16,7 +16,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;

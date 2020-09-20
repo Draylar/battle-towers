@@ -1,8 +1,10 @@
 package draylar.battletowers.api.tower;
 
+import com.google.common.collect.ImmutableList;
 import draylar.battletowers.api.data.PoolTemplate;
 import draylar.battletowers.api.spawning.BiomeConditional;
 import draylar.battletowers.api.data.WeightedIdentifier;
+import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.util.Identifier;
 import robosky.structurehelpers.structure.pool.ElementRange;
 
@@ -27,7 +29,8 @@ public class Tower {
     private final FloorCollection roofs;
     private final FloorCollection bottoms;
     private final List<PoolTemplate> extraPools;
-    private transient List<ElementRange> limits = new ArrayList<>();
+    private transient ImmutableList.Builder<ElementRange> limits = new ImmutableList.Builder<>();
+    private transient StructurePool startPool = null;
 
     // this constructor only exists to stop inlining of the above fields
     public Tower(Map<Identifier, List<WeightedIdentifier>> processors, BiomeConditional biomeConditional, FloorCollection entrances, FloorCollection layers, FloorCollection roofs, FloorCollection bottoms, List<PoolTemplate> extraPools) {
@@ -68,17 +71,17 @@ public class Tower {
         return name;
     }
 
-    public List<ElementRange> getLimits() {
+    public ImmutableList<ElementRange> getLimits() {
         if(limits == null) {
-            limits = new ArrayList<>();
+            limits = new ImmutableList.Builder<>();
         }
 
-        return limits;
+        return limits.build();
     }
 
     public void addLimit(ElementRange range) {
         if(limits == null) {
-            limits = new ArrayList<>();
+            limits = new ImmutableList.Builder<>();
         }
 
         limits.add(range);
@@ -90,5 +93,13 @@ public class Tower {
 
     public List<PoolTemplate> getExtraPools() {
         return extraPools;
+    }
+
+    public void setStartPool(StructurePool startPool) {
+        this.startPool = startPool;
+    }
+
+    public StructurePool getStartPool() {
+        return startPool;
     }
 }

@@ -5,9 +5,10 @@
   "mixins": [
     "BossBarHudMixin",
     "DamageTrackerAccessor",
-    "EndermanEntityMixin",
     "ExtendedSinglePoolElementMixin",
+    "GenerationSettingsAccessor",
     "LivingEntityMixin",
+    "MinecraftServerMixin",
     "MobSpawnerBlockEntityMixin",
     "ServerResourceManagerMixin",
     "SpawnerBlockMixin"

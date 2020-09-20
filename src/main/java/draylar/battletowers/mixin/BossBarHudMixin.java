@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class BossBarHudMixin extends DrawableHelper {
 
     @Shadow @Final private MinecraftClient client;
-    @Shadow @Final private static Identifier BAR_TEX;
+    @Shadow @Final private static Identifier BARS_TEXTURE;
     private static final Identifier CUSTOM_BAR_TEX = BattleTowers.id("textures/gui/bars.png");
 
     @Inject(
@@ -44,6 +44,6 @@ public abstract class BossBarHudMixin extends DrawableHelper {
             ci.cancel();
         }
 
-        this.client.getTextureManager().bindTexture(BAR_TEX);
+        this.client.getTextureManager().bindTexture(BARS_TEXTURE);
     }
 }

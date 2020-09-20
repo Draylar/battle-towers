@@ -2,47 +2,42 @@ package draylar.battletowers.world;
 
 import draylar.battletowers.api.Towers;
 import draylar.battletowers.api.tower.Tower;
-import net.minecraft.structure.PoolStructurePiece;
+import net.minecraft.structure.MarginedStructureStart;
 import net.minecraft.structure.StructureManager;
-import net.minecraft.structure.StructureStart;
-import net.minecraft.util.Identifier;
+import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
-import robosky.structurehelpers.structure.ExtendedStructures;
+import robosky.structurehelpers.structure.pool.ExtendedStructurePoolFeatureConfig;
 
-import java.util.List;
+public class BattleTowerStructureStart extends MarginedStructureStart<DefaultFeatureConfig> {
 
-public class BattleTowerStructureStart extends StructureStart<DefaultFeatureConfig> {
-
-    public BattleTowerStructureStart(StructureFeature<DefaultFeatureConfig> feature, int chunkX, int chunkZ, BlockBox box, int references, long seed) {
-        super(feature, chunkX, chunkZ, box, references, seed);
+    public BattleTowerStructureStart(StructureFeature<DefaultFeatureConfig> structureFeature, int i, int j, BlockBox blockBox, int k, long l) {
+        super(structureFeature, i, j, blockBox, k, l);
     }
 
     @Override
-    public void init(ChunkGenerator chunkGenerator, StructureManager structureManager, int x, int z, Biome biome, DefaultFeatureConfig featureConfig) {
+    public void init(DynamicRegistryManager registryManager, ChunkGenerator chunkGenerator, StructureManager manager, int chunkX, int chunkZ, Biome biome, DefaultFeatureConfig config) {
         Tower tower = Towers.getEntranceFor(biome);
 
         if (tower != null) {
-            List<PoolStructurePiece> pieces = ExtendedStructures.addPieces(
-                    tower.getLimits(),
-                    0,
-                    150,
-                    new Identifier("battletowers", tower.getName() + "_entrances"),
-                    8,
+            StructurePoolBasedGenerator.method_30419(
+                    registryManager,
+                    new ExtendedStructurePoolFeatureConfig(tower.getLimits(), 0, 150, tower::getStartPool, 8),
                     BattleTowerPiece::new,
                     chunkGenerator,
-                    structureManager,
-                    new BlockPos(x * 16, 0, z * 16),
-                    random,
+                    manager,
+                    new BlockPos(chunkX * 16, 0, chunkZ * 16),
+                    this.children,
+                    this.random,
                     true,
                     true
             );
 
-            this.children.addAll(pieces);
             setBoundingBoxFromChildren();
         }
     }

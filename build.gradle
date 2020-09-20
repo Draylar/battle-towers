@@ -42,17 +42,17 @@ dependencies {
     include "me.sargunvohra.mcmods:autoconfig1u:${project.autoconfig_version}"
 
     // structure helpers for advanced jigsaw data
-    modImplementation 'com.github.kvverti:structure-helpers:master-SNAPSHOT'
-    include 'com.github.kvverti:structure-helpers:master-SNAPSHOT'
+    modImplementation 'com.github.kvverti:structure-helpers:3.0.0'
+    include 'com.github.kvverti:structure-helpers:3.0.0'
 
     // structure assistance
-    modImplementation 'net.earthcomputer:libstructure:1.3' // Or the latest version
-    include 'net.earthcomputer:libstructure:1.3'
+    modImplementation 'net.earthcomputer:libstructure:1.5' // Or the latest version
+    include 'net.earthcomputer:libstructure:1.5'
 
     // building assistance
-    modCompile 'com.github.Draylar:staff-of-building:1.1.0-1.16'
+    modCompile 'com.github.Draylar:staff-of-building:1.2.3-1.16.2'
 
-    modImplementation 'com.github.Draylar:structure-limit-nuker:master-SNAPSHOT'
+//    modImplementation 'com.github.Draylar:structure-limit-nuker:master-SNAPSHOT'
 }
 
 processResources {

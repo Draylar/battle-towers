@@ -10,8 +10,8 @@ import draylar.battletowers.api.tower.Tower;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.pool.StructurePool;
-import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.structure.pool.StructurePoolElement;
+import net.minecraft.structure.pool.StructurePools;
 import net.minecraft.structure.processor.StructureProcessor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -21,6 +21,7 @@ import robosky.structurehelpers.structure.pool.ExtendedSinglePoolElement;
 import robosky.structurehelpers.structure.processor.WeightedChanceProcessor;
 
 import java.util.*;
+import java.util.function.Function;
 
 public class Towers {
 
@@ -41,17 +42,19 @@ public class Towers {
             // build processors
             ImmutableList<StructureProcessor> processors = collectProcessors(tower);
 
-            initializeFloorCollection(tower, tower.getEntrances(), processors, BattleTowers.id(tower.getName() + "_entrances"), new Identifier("empty"));
+            StructurePool startPool = initializeFloorCollection(tower, tower.getEntrances(), processors, BattleTowers.id(tower.getName() + "_entrances"), new Identifier("empty"));
             initializeFloorCollection(tower, tower.getLayers(), processors, BattleTowers.id(tower.getName() + "_outlines"), BattleTowers.id(tower.getName() + "_tops"));
             initializeFloorCollection(tower, tower.getRoofs(), processors, BattleTowers.id(tower.getName() + "_tops"), new Identifier("empty"));
             initializeFloorCollection(tower, tower.getBottoms(), processors, BattleTowers.id(tower.getName() + "_bottoms"), new Identifier("empty"));
 
+            tower.setStartPool(startPool);
+
             // register extra pools
             if (tower.getExtraPools() != null) {
                 tower.getExtraPools().forEach(extraPool -> {
-                    List<Pair<StructurePoolElement, Integer>> elements = new ArrayList<>();
+                    List<Pair<Function<StructurePool.Projection, ? extends StructurePoolElement>, Integer>> elements = new ArrayList<>();
                     extraPool.getElements().forEach((identifier, integer) -> {
-                        elements.add(Pair.of(new ExtendedSinglePoolElement(identifier, false, processors), integer));
+                        elements.add(Pair.of(ExtendedSinglePoolElement.of(identifier, false, processors), integer));
                     });
 
                     registerPool(
@@ -64,10 +67,10 @@ public class Towers {
         });
     }
 
-    private static void initializeFloorCollection(Tower tower, FloorCollection collection, ImmutableList<StructureProcessor> processors, Identifier towerId,  Identifier terminators) {
-        List<Pair<StructurePoolElement, Integer>> elements = new ArrayList<>();
+    private static StructurePool initializeFloorCollection(Tower tower, FloorCollection collection, ImmutableList<StructureProcessor> processors, Identifier towerId,  Identifier terminators) {
+        List<Pair<Function<StructurePool.Projection, ? extends StructurePoolElement>, Integer>> elements = new ArrayList<>();
         initializeFloors(tower, collection, elements, processors);
-        registerPool(towerId, terminators, elements);
+        return registerPool(towerId, terminators, elements);
     }
 
     private static ImmutableList<StructureProcessor> collectProcessors(Tower tower) {
@@ -94,8 +97,8 @@ public class Towers {
         // NO-OP
     }
 
-    private static void registerPool(Identifier id, Identifier terminators, List<Pair<StructurePoolElement, Integer>> elements) {
-        StructurePoolBasedGenerator.REGISTRY.add(
+    private static StructurePool registerPool(Identifier id, Identifier terminators, List<Pair<Function<StructurePool.Projection, ? extends StructurePoolElement>, Integer>> elements) {
+        return StructurePools.register(
                 new StructurePool(
                         id,
                         terminators,
@@ -105,9 +108,9 @@ public class Towers {
         );
     }
 
-    private static void initializeFloors(Tower tower, FloorCollection floors, List<Pair<StructurePoolElement, Integer>> elements, ImmutableList<StructureProcessor> processors) {
+    private static void initializeFloors(Tower tower, FloorCollection floors, List<Pair<Function<StructurePool.Projection, ? extends StructurePoolElement>, Integer>> elements, ImmutableList<StructureProcessor> processors) {
         floors.getFloors().forEach(floor -> {
-            elements.add(Pair.of(new ExtendedSinglePoolElement(floor.getId(), false, processors), 1));
+            elements.add(Pair.of(ExtendedSinglePoolElement.of(floor.getId(), false, processors), 1));
             floors.applyDefaults(floor);
             FLOOR_DATA.put(floor.getId(), floor);
 

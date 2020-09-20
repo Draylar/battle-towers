@@ -40,7 +40,7 @@ public class TowerGuardianEntity extends HostileEntity {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new TowerGuardianMeleeAttackGoal(this, 1.0D, false));
         this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 32.0F));
-        this.goalSelector.add(2, new GoToEntityTargetGoal(this, 0.09D, 32.0F));
+        this.goalSelector.add(2, new WanderNearTargetGoal(this, 0.09D, 32.0F));
         this.goalSelector.add(3, new WanderAroundGoal(this, 0.6D));
         this.goalSelector.add(4, new LookAroundGoal(this));
         this.targetSelector.add(1, new RevengeGoal(this));
