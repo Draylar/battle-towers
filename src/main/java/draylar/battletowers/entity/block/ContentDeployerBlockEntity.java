@@ -1,7 +1,7 @@
 package draylar.battletowers.entity.block;
 
 import draylar.battletowers.api.Towers;
-import draylar.battletowers.api.spawner.MobSpawnerAccessor;
+import draylar.battletowers.api.spawner.SpawnerManipulator;
 import draylar.battletowers.api.spawner.MobSpawnerEntryBuilder;
 import draylar.battletowers.api.tower.Floor;
 import draylar.battletowers.registry.BattleTowerBlocks;
@@ -189,7 +189,7 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
 
                     // get spawner and set spawn entry
                     MobSpawnerBlockEntity mobSpawner = (MobSpawnerBlockEntity) world.getBlockEntity(checkPos);
-                    ((MobSpawnerAccessor) mobSpawner).setTowerSpawner(true);
+                    ((SpawnerManipulator) mobSpawner).setTowerSpawner(true);
                     mobSpawner.getLogic().setSpawnEntry(new MobSpawnerEntryBuilder(Towers.getSpawnerEntryFor(floorID)).build());
 
                     placedSpawners++;

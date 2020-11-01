@@ -14,6 +14,7 @@ import net.minecraft.server.WorldGenerationProgressListenerFactory;
 import net.minecraft.util.UserCache;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.DynamicRegistryManager;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.SaveProperties;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
@@ -36,25 +37,17 @@ public class MinecraftServerMixin {
             at = @At("RETURN")
     )
     private void addTowers(Thread thread, DynamicRegistryManager.Impl impl, LevelStorage.Session session, SaveProperties saveProperties, ResourcePackManager resourcePackManager, Proxy proxy, DataFixer dataFixer, ServerResourceManager serverResourceManager, MinecraftSessionService minecraftSessionService, GameProfileRepository gameProfileRepository, UserCache userCache, WorldGenerationProgressListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
-        BuiltinRegistries.BIOME.forEach(MinecraftServerMixin::initializeBiome);
-        RegistryEntryAddedCallback.event(BuiltinRegistries.BIOME).register((i, identifier, biome) -> initializeBiome(biome));
+        impl.get(Registry.BIOME_KEY).forEach(MinecraftServerMixin::initializeBiome);
+        RegistryEntryAddedCallback.event(impl.get(Registry.BIOME_KEY)).register((i, identifier, biome) -> initializeBiome(biome));
     }
 
     private static void initializeBiome(Biome biome) {
-        boolean biomeValid = Towers.getEntranceFor(biome) != null;
+        if (biome.getCategory() != Biome.Category.RIVER && biome.getCategory() != Biome.Category.THEEND && biome.getCategory() != Biome.Category.NONE && biome.getCategory() != Biome.Category.NETHER) {
+            System.out.println("added towers to " + biome);
 
-        if(biomeValid) {
-            if (biome.getCategory() != Biome.Category.RIVER && biome.getCategory() != Biome.Category.THEEND) {
-                // ImmutableList -> standard list so we can add to it
-                if (biome.getGenerationSettings().getStructureFeatures() instanceof ImmutableList) {
-                    List<Supplier<ConfiguredStructureFeature<?, ?>>> structureFeatures = new ArrayList<>(biome.getGenerationSettings().getStructureFeatures());
-                    ((GenerationSettingsAccessor) biome.getGenerationSettings()).setStructureFeatures(structureFeatures);
-                }
-
-                biome.getGenerationSettings().getStructureFeatures().add(() -> {
-                    return BattleTowerStructures.CONFIGURED_STRUCTURE_FEATURE;
-                });
-            }
+            List<Supplier<ConfiguredStructureFeature<?, ?>>> structureFeatures = new ArrayList<>(biome.getGenerationSettings().getStructureFeatures());
+            structureFeatures.add(() -> BattleTowerStructures.CONFIGURED);
+            ((GenerationSettingsAccessor) biome.getGenerationSettings()).setStructureFeatures(structureFeatures);
         }
     }
 }

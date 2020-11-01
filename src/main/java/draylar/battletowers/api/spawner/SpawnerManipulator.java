@@ -1,6 +1,6 @@
 package draylar.battletowers.api.spawner;
 
-public interface MobSpawnerAccessor {
+public interface SpawnerManipulator {
     void setTowerSpawner(boolean val);
     boolean isTowerSpawner();
 }

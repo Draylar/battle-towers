@@ -22,7 +22,7 @@ public class BattleTowerStructureStart extends MarginedStructureStart<DefaultFea
 
     @Override
     public void init(DynamicRegistryManager registryManager, ChunkGenerator chunkGenerator, StructureManager manager, int chunkX, int chunkZ, Biome biome, DefaultFeatureConfig config) {
-        Tower tower = Towers.getEntranceFor(biome);
+        Tower tower = Towers.getTowerFor(biome);
 
         if (tower != null) {
             StructurePoolBasedGenerator.method_30419(

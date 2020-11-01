@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 public class BattleTowers implements ModInitializer {
 
     public static final String MODID = "battletowers";
-    public static BattleTowersConfig CONFIG = AutoConfig.register(BattleTowersConfig.class, GsonConfigSerializer::new).getConfig();
+    public static final BattleTowersConfig CONFIG = AutoConfig.register(BattleTowersConfig.class, GsonConfigSerializer::new).getConfig();
     public static final ItemGroup GROUP = new BattleTowersItemGroup(BattleTowers.id("group"));
     public static final TowerDataLoader TOWER_DATA = new TowerDataLoader();
 

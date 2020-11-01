@@ -19,9 +19,9 @@ public class TowerDataLoader extends JsonDataLoader {
 
     private static final Gson GSON = new GsonBuilder().registerTypeAdapter(Identifier.class, new IdentifierTypeAdapter()).setPrettyPrinting().disableHtmlEscaping().create();
     private static final Logger LOGGER = LogManager.getLogger();
+    private static boolean hasRegisteredPools = false;
     private Map<Identifier, Tower> towers = ImmutableMap.of();
     private Tower defaultTower =  null;
-    private boolean hasLoaded = false;
 
     public TowerDataLoader() {
         super(GSON, "towers");
@@ -51,9 +51,9 @@ public class TowerDataLoader extends JsonDataLoader {
         towers = loadedTowers;
         LOGGER.info("Loaded {} towers", loadedTowers.size());
 
-        if(!hasLoaded) {
+        if(!hasRegisteredPools) {
             Towers.init();
-            hasLoaded = true;
+            hasRegisteredPools = true;
         }
     }
 

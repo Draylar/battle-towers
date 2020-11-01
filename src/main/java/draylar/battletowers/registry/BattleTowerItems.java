@@ -27,18 +27,17 @@ public class BattleTowerItems {
     }
 
     public static void init() {
-       
-            register("key_helmet", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Item.Settings().group(BattleTowers.GROUP)));
-            register("key_chestplate", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.CHEST, new Item.Settings().group(BattleTowers.GROUP)));
-            register("key_leggings", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.LEGS, new Item.Settings().group(BattleTowers.GROUP)));
-            register("key_boots", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.FEET, new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_helmet", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_chestplate", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.CHEST, new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_leggings", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.LEGS, new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_boots", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.FEET, new Item.Settings().group(BattleTowers.GROUP)));
 
-            // tool set
-            register("key_sword", new KeySwordItem(new Item.Settings().group(BattleTowers.GROUP)));
-            register("key_axe", new KeyAxeItem(new Item.Settings().group(BattleTowers.GROUP)));
-            register("key_hoe", new KeyHoeItem(new Item.Settings().group(BattleTowers.GROUP)));
-            register("key_pickaxe", new KeyPickaxeItem(new Item.Settings().group(BattleTowers.GROUP)));
-            register("key_shovel", new KeyShovelItem(new Item.Settings().group(BattleTowers.GROUP)));
+        // tool set
+        register("key_sword", new KeySwordItem(new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_axe", new KeyAxeItem(new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_hoe", new KeyHoeItem(new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_pickaxe", new KeyPickaxeItem(new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_shovel", new KeyShovelItem(new Item.Settings().group(BattleTowers.GROUP)));
     }
 
     private BattleTowerItems() {

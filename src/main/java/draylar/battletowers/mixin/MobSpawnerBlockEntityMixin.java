@@ -1,6 +1,6 @@
 package draylar.battletowers.mixin;
 
-import draylar.battletowers.api.spawner.MobSpawnerAccessor;
+import draylar.battletowers.api.spawner.SpawnerManipulator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.nbt.CompoundTag;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MobSpawnerBlockEntity.class)
-public class MobSpawnerBlockEntityMixin implements MobSpawnerAccessor {
+public class MobSpawnerBlockEntityMixin implements SpawnerManipulator {
 
     private boolean isTowerSpawner = false;
 

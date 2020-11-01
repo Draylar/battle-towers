@@ -123,7 +123,15 @@ public class Towers {
         });
     }
 
-    public static Tower getEntranceFor(Biome biome) {
+    /**
+     * Returns an appropriate tower for the given {@link Biome}.
+     * <p>
+     * If there is no appropriate tower available, the default (stone) tower is returned.
+     *
+     * @param biome  biome to check for an appropriate tower type in
+     * @return       an appropriate tower for the given biome, or the default (stone) tower if none exist
+     */
+    public static Tower getTowerFor(Biome biome) {
         // todo: consider all possible entrances instead of only the first
         for(Map.Entry<BiomeConditional, Tower> conditional : BIOME_ENTRANCES.entrySet()) {
             if(conditional.getKey().isValid(biome)) {
@@ -131,8 +139,7 @@ public class Towers {
             }
         }
 
-//        return BattleTowers.TOWER_DATA.getDefaultTower();
-        return null; // don't add towers to unsupported biomes
+        return BattleTowers.TOWER_DATA.getDefaultTower();
     }
 
     public static Identifier getSpawnerEntryFor(Identifier floorID) {

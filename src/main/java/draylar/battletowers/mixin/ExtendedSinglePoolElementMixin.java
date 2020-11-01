@@ -30,7 +30,7 @@ public abstract class ExtendedSinglePoolElementMixin {
             method = "generate",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/structure/StructureManager;getStructureOrBlank(Lnet/minecraft/util/Identifier;)Lnet/minecraft/structure/Structure;")
     )
-    private void yeet(StructureManager manager, StructureWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, BlockPos pos, BlockPos pos2, BlockRotation rotation, BlockBox box, Random rand, boolean b, CallbackInfoReturnable<Boolean> cir) {
+    private void placeContentDeployer(StructureManager manager, StructureWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, BlockPos pos, BlockPos pos2, BlockRotation rotation, BlockBox box, Random rand, boolean b, CallbackInfoReturnable<Boolean> cir) {
         // pos2 is the base position, so it accounts for the middle of the structure, but the y value stays at the bottom.
         // pos is the corner of each structure with the proper y value, but it is rotated.
         // we combine them to get the middle position of each floor

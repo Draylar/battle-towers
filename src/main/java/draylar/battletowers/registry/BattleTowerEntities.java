@@ -26,13 +26,6 @@ public class BattleTowerEntities {
 
     public static final EntityType<TowerGuardianEntity> TOWER_GUARD = register("tower_guard", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TowerGuardianEntity::new).dimensions(EntityDimensions.fixed(3, 5)).trackable(64, 4).build());
 
-    // mushroom elemental mobs
-//    public static final EntityType<ThemedZombieEntity> MUSHROOM_ZOMBIE = register("mushroom_zombie", FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ThemedZombieEntity::new).dimensions(EntityDimensions.fixed(1, 2)).trackable(64, 4).build());
-//    public static final EntityType<ThemedCreeperEntity> MUSHROOM_CREEPER = register("mushroom_creeper", FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ThemedCreeperEntity::new).dimensions(EntityDimensions.fixed(1, 2)).trackable(64, 4).build());
-//    public static final EntityType<ThemedSkeletonEntity> MUSHROOM_SKELETON = register("mushroom_skeleton", FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ThemedSkeletonEntity::new).dimensions(EntityDimensions.fixed(1, 2)).trackable(64, 4).build());
-//    public static final EntityType<ThemedSpiderEntity> MUSHROOM_SPIDER = register("mushroom_spider", FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ThemedSpiderEntity::new).dimensions(EntityDimensions.fixed(2, 1)).trackable(64, 4).build());
-
-
     public static final BlockEntityType<LadderDeployerBlockEntity> LADDER_DEPLOYER = register(
             "ladder_deployer",
             BlockEntityType.Builder.create(LadderDeployerBlockEntity::new, BattleTowerBlocks.LADDER_DEPLOYER).build(null)
@@ -53,12 +46,6 @@ public class BattleTowerEntities {
 
     public static void init() {
         FabricDefaultAttributeRegistry.register(BattleTowerEntities.TOWER_GUARD, TowerGuardianEntity.createGuardianAttributes());
-
-        // elemental mobs
-//        FabricDefaultAttributeRegistry.register(BattleTowerEntities.MUSHROOM_ZOMBIE, ZombieEntity.createZombieAttributes());
-//        FabricDefaultAttributeRegistry.register(BattleTowerEntities.MUSHROOM_CREEPER, CreeperEntity.createCreeperAttributes());
-//        FabricDefaultAttributeRegistry.register(BattleTowerEntities.MUSHROOM_SPIDER, SpiderEntity.createSpiderAttributes());
-//        FabricDefaultAttributeRegistry.register(BattleTowerEntities.MUSHROOM_SKELETON, SkeletonEntity.createAbstractSkeletonAttributes());
     }
 
     private BattleTowerEntities() {

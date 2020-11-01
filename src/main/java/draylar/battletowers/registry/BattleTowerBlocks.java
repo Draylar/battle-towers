@@ -27,7 +27,7 @@ public class BattleTowerBlocks {
 
 
     public static void init() {
-
+        // NO-OP
     }
 
     private BattleTowerBlocks() {
