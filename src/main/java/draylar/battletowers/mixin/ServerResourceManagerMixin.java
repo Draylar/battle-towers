@@ -18,7 +18,7 @@ public class ServerResourceManagerMixin {
 
     @Inject(
             method = "<init>",
-            at = @At("RETURN")
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/resource/ReloadableResourceManager;registerListener(Lnet/minecraft/resource/ResourceReloadListener;)V", ordinal = 0)
     )
     private void onInit(CommandManager.RegistrationEnvironment registrationEnvironment, int i, CallbackInfo ci) {
         this.resourceManager.registerListener(BattleTowers.TOWER_DATA);

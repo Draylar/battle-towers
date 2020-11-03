@@ -52,7 +52,9 @@ dependencies {
     // building assistance
     modCompile 'com.github.Draylar:staff-of-building:1.2.3-1.16.2'
 
-//    modImplementation 'com.github.Draylar:structure-limit-nuker:master-SNAPSHOT'
+    // static content
+    modImplementation 'com.github.Draylar:static-content:1.0.1'
+    include 'com.github.Draylar:static-content:1.0.1'
 }
 
 processResources {
