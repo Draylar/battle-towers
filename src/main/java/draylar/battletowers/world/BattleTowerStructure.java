@@ -3,9 +3,9 @@ package draylar.battletowers.world;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
-public class BattleTowerFeature extends StructureFeature<DefaultFeatureConfig> {
+public class BattleTowerStructure extends StructureFeature<DefaultFeatureConfig> {
 
-    public BattleTowerFeature() {
+    public BattleTowerStructure() {
         super(DefaultFeatureConfig.CODEC);
     }
 

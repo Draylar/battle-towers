@@ -22,7 +22,7 @@ public class BattleTowers implements ModInitializer {
         BattleTowerBlocks.init();
         BattleTowerItems.init();
         BattleTowerEntities.init();
-        BattleTowerStructures.init();
+        BattleTowerWorld.init();
         BattleTowerTags.init();
     }
 

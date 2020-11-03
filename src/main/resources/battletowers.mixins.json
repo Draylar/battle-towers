@@ -8,7 +8,6 @@
     "ExtendedSinglePoolElementMixin",
     "GenerationSettingsAccessor",
     "LivingEntityMixin",
-    "MinecraftServerMixin",
     "MobSpawnerBlockEntityMixin",
     "ServerResourceManagerMixin",
     "SpawnerBlockMixin"

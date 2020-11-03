@@ -1,6 +1,6 @@
 package draylar.battletowers.world;
 
-import draylar.battletowers.registry.BattleTowerStructures;
+import draylar.battletowers.registry.BattleTowerWorld;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.structure.PoolStructurePiece;
 import net.minecraft.structure.StructureManager;
@@ -22,6 +22,6 @@ public class BattleTowerPiece extends PoolStructurePiece {
 
     @Override
     public StructurePieceType getType() {
-        return BattleTowerStructures.PIECE;
+        return BattleTowerWorld.PIECE;
     }
 }
