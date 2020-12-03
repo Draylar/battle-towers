@@ -90,6 +90,6 @@ public class Floor {
     }
 
     public boolean placeContentDeployer() {
-        return placeChests || placeLadders || !placeSpawners || placeBossLock;
+        return placeChests || placeLadders || placeSpawners || placeBossLock;
     }
 }

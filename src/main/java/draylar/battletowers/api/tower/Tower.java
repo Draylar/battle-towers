@@ -1,9 +1,12 @@
 package draylar.battletowers.api.tower;
 
 import com.google.common.collect.ImmutableList;
+import draylar.battletowers.BattleTowers;
+import draylar.battletowers.api.Towers;
 import draylar.battletowers.api.data.PoolTemplate;
 import draylar.battletowers.api.spawning.BiomeConditional;
 import draylar.battletowers.api.data.WeightedIdentifier;
+import draylar.staticcontent.api.ContentData;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.util.Identifier;
 import robosky.structurehelpers.structure.pool.ElementRange;
@@ -19,7 +22,7 @@ import java.util.Map;
  * a {@link BiomeConditional} for deciding whether a {@link net.minecraft.world.biome.Biome} is a valid place to spawn,
  * and an entrance, layer, roof, and bottom element list for jigsaw use.
  */
-public class Tower {
+public class Tower implements ContentData {
 
     private transient String name;
     private final Map<Identifier, List<WeightedIdentifier>> processors;
@@ -41,6 +44,22 @@ public class Tower {
         this.roofs = roofs;
         this.bottoms = bottoms;
         this.extraPools = extraPools;
+    }
+
+    @Override
+    public void register(Identifier identifier) {
+        // battletowers:battletowers/towers/frosted -> battletowers:frosted
+        identifier = new Identifier(identifier.getNamespace(), identifier.getPath().replace("battletowers/towers/", "").replace(".json", ""));
+
+        // save file name as tower name
+        name = identifier.getPath();
+        Towers.register(identifier, this);
+
+        // Stone ID should be default tower
+        // todo: we can do this much better
+        if(Towers.DEFAULT_TOWER == null && identifier.equals(BattleTowers.id("stone"))) {
+            Towers.DEFAULT_TOWER = this;
+        }
     }
 
     public Map<Identifier, List<WeightedIdentifier>> getProcessors() {

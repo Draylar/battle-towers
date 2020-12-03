@@ -27,44 +27,39 @@ public class Towers {
 
     private static final Random RAND = new Random();
     private static final Identifier DEFAULT_LOOT_TABLE = new Identifier("battletowers", "default");
-    private static final List<Identifier> DEFAULT_SPAWNERS = Arrays.asList(
-            new Identifier("minecraft", "zombie"),
-            new Identifier("minecraft", "skeleton"),
-            new Identifier("minecraft", "spider")
-    );
+    private static final List<Identifier> DEFAULT_SPAWNERS = Arrays.asList(new Identifier("minecraft", "zombie"), new Identifier("minecraft", "skeleton"), new Identifier("minecraft", "spider"));
     public static final Map<BiomeConditional, Tower> BIOME_ENTRANCES = new HashMap<>();
     private static final Map<Identifier, Floor> FLOOR_DATA = new HashMap<>();
+    public static Tower DEFAULT_TOWER = null;
 
-    public static void init() {
-        BattleTowers.TOWER_DATA.getTowers().forEach((id, tower) -> {
-            BIOME_ENTRANCES.put(tower.getBiomeConditional(), tower);
+    public static void register(Identifier id, Tower tower) {
+        BIOME_ENTRANCES.put(tower.getBiomeConditional(), tower);
 
-            // build processors
-            ImmutableList<StructureProcessor> processors = collectProcessors(tower);
+        // build processors
+        ImmutableList<StructureProcessor> processors = collectProcessors(tower);
 
-            StructurePool startPool = initializeFloorCollection(tower, tower.getEntrances(), processors, BattleTowers.id(tower.getName() + "_entrances"), new Identifier("empty"));
-            initializeFloorCollection(tower, tower.getLayers(), processors, BattleTowers.id(tower.getName() + "_outlines"), BattleTowers.id(tower.getName() + "_tops"));
-            initializeFloorCollection(tower, tower.getRoofs(), processors, BattleTowers.id(tower.getName() + "_tops"), new Identifier("empty"));
-            initializeFloorCollection(tower, tower.getBottoms(), processors, BattleTowers.id(tower.getName() + "_bottoms"), new Identifier("empty"));
+        StructurePool startPool = initializeFloorCollection(tower, tower.getEntrances(), processors, BattleTowers.id(tower.getName() + "_entrances"), new Identifier("empty"));
+        initializeFloorCollection(tower, tower.getLayers(), processors, BattleTowers.id(tower.getName() + "_outlines"), BattleTowers.id(tower.getName() + "_tops"));
+        initializeFloorCollection(tower, tower.getRoofs(), processors, BattleTowers.id(tower.getName() + "_tops"), new Identifier("empty"));
+        initializeFloorCollection(tower, tower.getBottoms(), processors, BattleTowers.id(tower.getName() + "_bottoms"), new Identifier("empty"));
 
-            tower.setStartPool(startPool);
+        tower.setStartPool(startPool);
 
-            // register extra pools
-            if (tower.getExtraPools() != null) {
-                tower.getExtraPools().forEach(extraPool -> {
-                    List<Pair<Function<StructurePool.Projection, ? extends StructurePoolElement>, Integer>> elements = new ArrayList<>();
-                    extraPool.getElements().forEach((identifier, integer) -> {
-                        elements.add(Pair.of(ExtendedSinglePoolElement.of(identifier, false, processors), integer));
-                    });
-
-                    registerPool(
-                            extraPool.getId(),
-                            extraPool.getTerminator() == null ? new Identifier("empty") : extraPool.getTerminator(),
-                            elements
-                    );
+        // register extra pools
+        if (tower.getExtraPools() != null) {
+            tower.getExtraPools().forEach(extraPool -> {
+                List<Pair<Function<StructurePool.Projection, ? extends StructurePoolElement>, Integer>> elements = new ArrayList<>();
+                extraPool.getElements().forEach((identifier, integer) -> {
+                    elements.add(Pair.of(ExtendedSinglePoolElement.of(identifier, false, processors), integer));
                 });
-            }
-        });
+
+                registerPool(
+                        extraPool.getId(),
+                        extraPool.getTerminator() == null ? new Identifier("empty") : extraPool.getTerminator(),
+                        elements
+                );
+            });
+        }
     }
 
     private static StructurePool initializeFloorCollection(Tower tower, FloorCollection collection, ImmutableList<StructureProcessor> processors, Identifier towerId,  Identifier terminators) {
@@ -139,7 +134,7 @@ public class Towers {
             }
         }
 
-        return BattleTowers.TOWER_DATA.getDefaultTower();
+        return DEFAULT_TOWER;
     }
 
     public static Identifier getSpawnerEntryFor(Identifier floorID) {

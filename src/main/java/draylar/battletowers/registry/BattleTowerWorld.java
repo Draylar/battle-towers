@@ -1,8 +1,10 @@
 package draylar.battletowers.registry;
 
 import draylar.battletowers.BattleTowers;
+import draylar.battletowers.api.tower.Tower;
 import draylar.battletowers.world.BattleTowerStructure;
 import draylar.battletowers.world.BattleTowerPiece;
+import draylar.staticcontent.StaticContent;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
@@ -26,7 +28,7 @@ public class BattleTowerWorld {
     public static final StructurePieceType PIECE = Registry.register(Registry.STRUCTURE_PIECE, BattleTowers.id("piece"), BattleTowerPiece::new);
     public static final ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> CONFIGURED_BATTLE_TOWER = BATTLE_TOWER.configure(DefaultFeatureConfig.DEFAULT);
 
-    private static final List<Biome.Category> blacklistedCategories = Arrays.asList(Biome.Category.RIVER, Biome.Category.THEEND, Biome.Category.NONE, Biome.Category.NETHER);
+    private static final List<Biome.Category> blacklistedCategories = Arrays.asList(Biome.Category.RIVER, Biome.Category.THEEND, Biome.Category.NONE, Biome.Category.NETHER, Biome.Category.OCEAN);
 
     public static void init() {
         Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, BattleTowers.id("configured_tower"), CONFIGURED_BATTLE_TOWER);
@@ -47,5 +49,8 @@ public class BattleTowerWorld {
                         ModificationPhase.ADDITIONS,
                         context -> !blacklistedCategories.contains(context.getBiome().getCategory()),
                         context -> context.getGenerationSettings().addBuiltInStructure(CONFIGURED_BATTLE_TOWER));
+
+        // Register pools
+        StaticContent.load(BattleTowers.id("towers"), Tower.class);
     }
 }

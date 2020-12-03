@@ -149,7 +149,7 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
     }
 
     private double getSquaredMaxAttackDistance(LivingEntity entity) {
-        return this.mob.getWidth() * 1.25F * this.mob.getWidth() * 1.25F + entity.getWidth();
+        return this.mob.getWidth() * this.mob.getWidth();
     }
 }
 

@@ -4,6 +4,7 @@ import draylar.battletowers.api.Towers;
 import draylar.battletowers.api.tower.Floor;
 import draylar.battletowers.entity.block.ContentDeployerBlockEntity;
 import draylar.battletowers.registry.BattleTowerBlocks;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
@@ -41,14 +42,22 @@ public abstract class ExtendedSinglePoolElementMixin {
             if (floor != null) {
                 BlockPos deployerPos = new BlockPos(pos2.getX(), pos.getY() + 1, pos2.getZ());
 
+                // Check if the middle pos + 1 is still solid (if it is, move up again)
+                if(!world.getBlockState(deployerPos).isAir()) {
+                    deployerPos = deployerPos.up();
+                }
+
                 // some rooms call generate twice, so check for stacking content deployers
                 if (!world.getBlockState(deployerPos.down()).getBlock().equals(BattleTowerBlocks.CONTENT_DEPLOYER)) {
                     if (floor.placeContentDeployer()) {
                         world.setBlockState(deployerPos, BattleTowerBlocks.CONTENT_DEPLOYER.getDefaultState(), 3);
-                        ContentDeployerBlockEntity contentDeployer = (ContentDeployerBlockEntity) world.getBlockEntity(deployerPos);
+                        BlockEntity blockEntity = world.getBlockEntity(deployerPos);
 
-                        // apply floor data to content deployer
-                        if (contentDeployer != null) {
+                        // Some floors were crashing in #33 due to the BE at this position not being a ContentDeployer despite
+                        //  the previous setBlockState. We now check for instanceof before casting (but it should always be valid).
+                        // The only case where this should not be true is when a block occupies the space the content deployer should be at.
+                        if (blockEntity instanceof ContentDeployerBlockEntity) {
+                            ContentDeployerBlockEntity contentDeployer = (ContentDeployerBlockEntity) blockEntity;
                             contentDeployer.apply(floor);
                         }
                     }

@@ -9,7 +9,6 @@
     "GenerationSettingsAccessor",
     "LivingEntityMixin",
     "MobSpawnerBlockEntityMixin",
-    "ServerResourceManagerMixin",
     "SpawnerBlockMixin"
   ],
   "injectors": {
