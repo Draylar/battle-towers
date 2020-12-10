@@ -29,6 +29,11 @@ public abstract class BossBarHudMixin extends DrawableHelper {
             cancellable = true
     )
     private void renderCustomBossBar(MatrixStack matrixStack, int i, int j, BossBar bossBar, CallbackInfo ci) {
+        // Prevent issues with non-translatable text boss bar titles
+        if(!(bossBar.getName() instanceof TranslatableText)) {
+            return;
+        }
+
         if(bossBar instanceof ClientBossBar && ((TranslatableText) bossBar.getName()).getKey().contains("tower_guard")) {
             this.client.getTextureManager().bindTexture(CUSTOM_BAR_TEX);
 
