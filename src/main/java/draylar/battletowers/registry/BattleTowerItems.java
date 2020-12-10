@@ -2,6 +2,7 @@ package draylar.battletowers.registry;
 
 import draylar.battletowers.BattleTowers;
 import draylar.battletowers.item.*;
+import draylar.battletowers.material.KeyArmorMaterial;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.Item;
@@ -27,10 +28,10 @@ public class BattleTowerItems {
     }
 
     public static void init() {
-        register("key_helmet", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Item.Settings().group(BattleTowers.GROUP)));
-        register("key_chestplate", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.CHEST, new Item.Settings().group(BattleTowers.GROUP)));
-        register("key_leggings", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.LEGS, new Item.Settings().group(BattleTowers.GROUP)));
-        register("key_boots", new KeyArmorItem(ArmorMaterials.IRON, EquipmentSlot.FEET, new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_helmet", new KeyArmorItem(KeyArmorMaterial.INSTANCE, EquipmentSlot.HEAD, new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_chestplate", new KeyArmorItem(KeyArmorMaterial.INSTANCE, EquipmentSlot.CHEST, new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_leggings", new KeyArmorItem(KeyArmorMaterial.INSTANCE, EquipmentSlot.LEGS, new Item.Settings().group(BattleTowers.GROUP)));
+        register("key_boots", new KeyArmorItem(KeyArmorMaterial.INSTANCE, EquipmentSlot.FEET, new Item.Settings().group(BattleTowers.GROUP)));
 
         // tool set
         register("key_sword", new KeySwordItem(new Item.Settings().group(BattleTowers.GROUP)));

@@ -1,5 +1,6 @@
 package draylar.battletowers.item;
 
+import draylar.battletowers.material.KeyToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.ToolMaterials;
@@ -10,7 +11,7 @@ import net.minecraft.util.Formatting;
 public class KeyShovelItem extends ShovelItem {
 
     public KeyShovelItem(Settings settings) {
-        super(ToolMaterials.GOLD, 4, -3.0f, settings);
+        super(KeyToolMaterial.INSTANCE, 4, -3.0f, settings);
     }
 
     @Override

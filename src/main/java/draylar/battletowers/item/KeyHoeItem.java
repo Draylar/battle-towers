@@ -1,5 +1,6 @@
 package draylar.battletowers.item;
 
+import draylar.battletowers.material.KeyToolMaterial;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
@@ -10,7 +11,7 @@ import net.minecraft.util.Formatting;
 public class KeyHoeItem extends HoeItem {
 
     public KeyHoeItem(Settings settings) {
-        super(ToolMaterials.GOLD, 3, -2.4f, settings);
+        super(KeyToolMaterial.INSTANCE, 3, -2.4f, settings);
     }
 
     @Override

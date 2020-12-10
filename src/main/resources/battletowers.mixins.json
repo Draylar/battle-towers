@@ -9,7 +9,9 @@
     "GenerationSettingsAccessor",
     "LivingEntityMixin",
     "MobSpawnerBlockEntityMixin",
-    "SpawnerBlockMixin"
+    "PlayerEntitySetBonusMixin",
+    "SpawnerBlockMixin",
+    "StatusEffectAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

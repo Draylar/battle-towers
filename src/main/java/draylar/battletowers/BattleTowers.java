@@ -25,6 +25,7 @@ public class BattleTowers implements ModInitializer {
         BattleTowerEntities.init();
         BattleTowerWorld.init();
         BattleTowerTags.init();
+        BattleTowerStatusEffects.init();
         validateConfig();
     }
 
