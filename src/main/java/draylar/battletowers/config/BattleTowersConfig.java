@@ -25,4 +25,7 @@ public class BattleTowersConfig implements ConfigData {
 
     @Comment(value = "Minimum distance, in chunks, between Battle Tower spawn attempts.")
     public int towerSeparation = 24;
+
+    @Comment(value = "Maximum height for towers to generate at to avoid clipping at 256.")
+    public int maxHeight = 125;
 }

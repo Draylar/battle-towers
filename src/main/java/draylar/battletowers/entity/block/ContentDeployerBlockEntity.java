@@ -149,11 +149,13 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
                 BlockState underState = world.getBlockState(checkPos.down());
 
                 if(checkState.isAir() && underState.isSolidBlock(world, checkPos.down())) {
-                    world.setBlockState(checkPos, Blocks.CHEST.getDefaultState());
+                    boolean success = world.setBlockState(checkPos, Blocks.CHEST.getDefaultState());
 
-                    // get chest and set loot table
-                    ChestBlockEntity chestBlockEntity = (ChestBlockEntity) world.getBlockEntity(checkPos);
-                    chestBlockEntity.setLootTable(Towers.getLootTableFor(floorID), world.getRandom().nextInt(1000));
+                    if(success) {
+                        // get chest and set loot table
+                        ChestBlockEntity chestBlockEntity = (ChestBlockEntity) world.getBlockEntity(checkPos);
+                        chestBlockEntity.setLootTable(Towers.getLootTableFor(floorID), world.getRandom().nextInt(1000));
+                    }
 
                     placedChests++;
                     break;
@@ -185,12 +187,14 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
                 BlockState underState = world.getBlockState(checkPos.down());
 
                 if(checkState.isAir() && underState.isSolidBlock(world, checkPos.down())) {
-                    world.setBlockState(checkPos, Blocks.SPAWNER.getDefaultState());
+                    boolean success = world.setBlockState(checkPos, Blocks.SPAWNER.getDefaultState());
 
-                    // get spawner and set spawn entry
-                    MobSpawnerBlockEntity mobSpawner = (MobSpawnerBlockEntity) world.getBlockEntity(checkPos);
-                    ((SpawnerManipulator) mobSpawner).setTowerSpawner(true);
-                    mobSpawner.getLogic().setSpawnEntry(new MobSpawnerEntryBuilder(Towers.getSpawnerEntryFor(floorID)).build());
+                    if(success) {
+                        // get spawner and set spawn entry
+                        MobSpawnerBlockEntity mobSpawner = (MobSpawnerBlockEntity) world.getBlockEntity(checkPos);
+                        ((SpawnerManipulator) mobSpawner).setTowerSpawner(true);
+                        mobSpawner.getLogic().setSpawnEntry(new MobSpawnerEntryBuilder(Towers.getSpawnerEntryFor(floorID)).build());
+                    }
 
                     placedSpawners++;
                     break;
