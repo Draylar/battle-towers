@@ -10,8 +10,12 @@
   ],
 
   "license": "GPLv3",
-  "icon": "assets/battle-towers/icon.png",
-
+  "icon": "assets/battletowers/icon.png",
+  "contact": {
+    "issues": "https://github.com/Draylar/battle-towers/issues",
+    "sources": "https://github.com/Draylar/battle-towers",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/draylars-battle-towers"
+  },
   "environment": "*",
   "entrypoints": {
     "main": [
