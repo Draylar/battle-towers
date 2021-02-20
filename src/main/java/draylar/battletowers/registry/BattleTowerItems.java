@@ -39,6 +39,8 @@ public class BattleTowerItems {
         register("key_hoe", new KeyHoeItem(new Item.Settings().group(BattleTowers.GROUP)));
         register("key_pickaxe", new KeyPickaxeItem(new Item.Settings().group(BattleTowers.GROUP)));
         register("key_shovel", new KeyShovelItem(new Item.Settings().group(BattleTowers.GROUP)));
+
+        register("foreign_key", new ForeignKeyItem(new Item.Settings().group(BattleTowers.GROUP)));
     }
 
     private BattleTowerItems() {

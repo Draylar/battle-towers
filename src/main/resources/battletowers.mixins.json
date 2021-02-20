@@ -10,6 +10,7 @@
     "LivingEntityMixin",
     "MobSpawnerBlockEntityMixin",
     "PlayerEntitySetBonusMixin",
+    "SinglePoolElementAccessor",
     "SpawnerBlockMixin"
   ],
   "injectors": {
