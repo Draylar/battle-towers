@@ -49,8 +49,11 @@ dependencies {
     modCompile 'com.github.Draylar:staff-of-building:1.2.3-1.16.2'
 
     // static content
-    modImplementation 'com.github.Draylar:static-content:1.0.1'
-    include 'com.github.Draylar:static-content:1.0.1'
+    modImplementation 'com.github.Draylar:static-content:1.0.2'
+    include 'com.github.Draylar:static-content:1.0.2'
+    modImplementation ("io.github.cottonmc:StaticData:1.1.2") { // ?????????????????????
+        exclude group: "net.fabricmc.fabric-api"
+    }
 }
 
 processResources {
