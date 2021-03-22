@@ -14,13 +14,13 @@ public class BattleTowerStatusEffects {
             .addAttributeModifier(
                     EntityAttributes.GENERIC_ATTACK_DAMAGE,
                     "91AEAA56-376B-4498-935B-2F7F68070635",
-                    0.1D,
+                    1.1D,
                     EntityAttributeModifier.Operation.MULTIPLY_TOTAL
             )
             .addAttributeModifier(
                     EntityAttributes.GENERIC_ATTACK_SPEED,
                     "91AEAA56-376B-4498-935B-2F7F68070635",
-                    0.1D,
+                    1.1D,
                     EntityAttributeModifier.Operation.MULTIPLY_TOTAL
             )
             .addAttributeModifier(
