@@ -9,7 +9,7 @@
     "Draylar"
   ],
 
-  "license": "GPLv3",
+  "license": "MIT",
   "icon": "assets/battletowers/icon.png",
   "contact": {
     "issues": "https://github.com/Draylar/battle-towers/issues",
