@@ -14,11 +14,6 @@ repositories {
     maven { url = "https://minecraft.curseforge.com/api/maven" }
     maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
     maven { url 'http://server.bbkr.space:8081/artifactory/libs-release' }
-
-    maven {
-        name = 'Earthcomputer Mods'
-        url = 'https://dl.bintray.com/earthcomputer/mods'
-    }
 }
 
 dependencies {
@@ -40,10 +35,6 @@ dependencies {
     // structure helpers for advanced jigsaw data
     modImplementation 'com.github.kvverti:structure-helpers:3.0.0'
     include 'com.github.kvverti:structure-helpers:3.0.0'
-
-    // structure assistance
-    modImplementation 'net.earthcomputer:libstructure:1.5' // Or the latest version
-    include 'net.earthcomputer:libstructure:1.5'
 
     // building assistance
     modCompile 'com.github.Draylar:staff-of-building:1.2.3-1.16.2'
