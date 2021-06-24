@@ -29,18 +29,7 @@ public class BattleTowers implements ModInitializer {
         BattleTowerWorld.init();
         BattleTowerTags.init();
         BattleTowerStatusEffects.init();
-        validateConfig();
     }
 
-    public void validateConfig() {
-        if (CONFIG.towerSpacing == 0) {
-            LOGGER.warn("Tower Spacing config value was set to 0, but it needs to be at least 1. Temporarily replacing value with 32.");
-            CONFIG.towerSpacing = 32;
-        }
 
-        if (CONFIG.towerSeparation >= CONFIG.towerSpacing) {
-            LOGGER.warn(String.format("Tower Separation must be lower than Tower Spacing. Temporarily replacing Tower Separation value with %d (half of configured Tower Spacing).", CONFIG.towerSpacing / 2));
-            CONFIG.towerSeparation = CONFIG.towerSeparation / 2;
-        }
-    }
 }

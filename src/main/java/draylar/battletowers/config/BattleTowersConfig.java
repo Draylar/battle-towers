@@ -1,6 +1,7 @@
 package draylar.battletowers.config;
 
 
+import draylar.battletowers.BattleTowers;
 import draylar.omegaconfig.api.Comment;
 import draylar.omegaconfig.api.Config;
 
@@ -35,5 +36,19 @@ public class BattleTowersConfig implements Config {
     @Override
     public String getExtension() {
         return "json5";
+    }
+
+    @Override
+    public void save() {
+        if (BattleTowers.CONFIG.towerSpacing == 0) {
+            BattleTowers.LOGGER.warn("Tower Spacing config value was set to 0, but it needs to be at least 1. Temporarily replacing value with 32.");
+            BattleTowers.CONFIG.towerSpacing = 32;
+        }
+
+        if (BattleTowers.CONFIG.towerSeparation >= BattleTowers.CONFIG.towerSpacing) {
+            BattleTowers.LOGGER.warn(String.format("Tower Separation must be lower than Tower Spacing. Temporarily replacing Tower Separation value with %d (half of configured Tower Spacing).", BattleTowers.CONFIG.towerSpacing / 2));
+            BattleTowers.CONFIG.towerSeparation = BattleTowers.CONFIG.towerSeparation / 2;
+        }
+        Config.super.save();
     }
 }
