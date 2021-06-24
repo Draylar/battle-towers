@@ -23,8 +23,10 @@ import java.util.List;
 @Mixin(CreativeInventoryScreen.class)
 public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> {
 
-    @Unique private List<ItemGroupTabWidget> bt_tabButtons = Lists.newArrayList();
-    @Unique private ItemGroupTabWidget bt_selectedSubtab;
+    @Unique
+    private final List<ItemGroupTabWidget> bt_tabButtons = Lists.newArrayList();
+    @Unique
+    private ItemGroupTabWidget bt_selectedSubtab;
 
     private CreativeInventoryScreenMixin(CreativeInventoryScreen.CreativeScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);
@@ -32,11 +34,10 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
 
     @Inject(at = @At("HEAD"), method = "setSelectedTab(Lnet/minecraft/item/ItemGroup;)V")
     private void bt_setSelectedTab(ItemGroup group, CallbackInfo cbi) {
-        buttons.removeAll(bt_tabButtons);
+        this.bt_tabButtons.removeAll(bt_tabButtons);
         bt_tabButtons.clear();
 
-        if (group instanceof TabbedItemGroup) {
-            TabbedItemGroup tGroup = (TabbedItemGroup) group;
+        if (group instanceof TabbedItemGroup tGroup) {
             if (!tGroup.hasInitialized())
                 tGroup.initialize();
 
@@ -55,7 +56,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
                 }
 
                 bt_tabButtons.add(b);
-                addButton(b);
+                this.addDrawable(b); //TODO is this addButton?
             }
         }
     }

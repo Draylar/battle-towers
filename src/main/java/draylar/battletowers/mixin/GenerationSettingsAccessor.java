@@ -1,7 +1,6 @@
 package draylar.battletowers.mixin;
 
 import net.minecraft.world.biome.GenerationSettings;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;

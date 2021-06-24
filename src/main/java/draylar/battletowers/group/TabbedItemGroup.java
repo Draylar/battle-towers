@@ -16,11 +16,16 @@ import java.util.List;
 public abstract class TabbedItemGroup extends ItemGroup {
 
     private int selectedTab = 0;
-    private List<ItemTab> tabs = Lists.newArrayList();
+    private final List<ItemTab> tabs = Lists.newArrayList();
     private boolean hasInitialized = false;
 
     protected TabbedItemGroup(Identifier id) {
         super(createTabIndex(), String.format("%s.%s", id.getNamespace(), id.getPath()));
+    }
+
+    private static int createTabIndex() {
+        ((ItemGroupExtensions) ItemGroup.BUILDING_BLOCKS).fabric_expandArray();
+        return ItemGroup.GROUPS.length - 1;
     }
 
     public void initialize() {
@@ -47,12 +52,12 @@ public abstract class TabbedItemGroup extends ItemGroup {
         return tabs.get(selectedTab);
     }
 
-    public List<ItemTab> getTabs() {
-        return tabs;
-    }
-
     public void setSelectedTab(int selectedTab) {
         this.selectedTab = selectedTab;
+    }
+
+    public List<ItemTab> getTabs() {
+        return tabs;
     }
 
     public int getSelectedTabIndex() {
@@ -61,10 +66,5 @@ public abstract class TabbedItemGroup extends ItemGroup {
 
     public boolean hasInitialized() {
         return hasInitialized;
-    }
-
-    private static int createTabIndex() {
-        ((ItemGroupExtensions) ItemGroup.BUILDING_BLOCKS).fabric_expandArray();
-        return ItemGroup.GROUPS.length - 1;
     }
 }

@@ -2,7 +2,6 @@ package draylar.battletowers.api.tower;
 
 import net.minecraft.util.Identifier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Floor {
@@ -12,10 +11,10 @@ public class Floor {
     private Boolean placeChests;
     private Boolean placeSpawners;
     private Boolean placeBossLock;
-    private List<Identifier> lootTables = new ArrayList<>();
-    private List<Identifier> entities = new ArrayList<>();
-    private int minSpawns = 0;
-    private int maxSpawns = 0;
+    private List<Identifier> lootTables;
+    private List<Identifier> entities;
+    private int minSpawns;
+    private int maxSpawns;
 
     // this constructor only exists to stop inlining of the above fields
     public Floor(Boolean placeLadders, Boolean placeChests, Boolean placeSpawners, Boolean placeBossLock, List<Identifier> lootTables, List<Identifier> entities, int minSpawns, int maxSpawns) {
@@ -37,8 +36,16 @@ public class Floor {
         return lootTables;
     }
 
+    public void setLootTables(List<Identifier> lootTables) {
+        this.lootTables = lootTables;
+    }
+
     public List<Identifier> getEntities() {
         return entities;
+    }
+
+    public void setEntities(List<Identifier> entities) {
+        this.entities = entities;
     }
 
     public Boolean placeLadders() {
@@ -55,14 +62,6 @@ public class Floor {
 
     public Boolean placeBossLock() {
         return placeBossLock;
-    }
-
-    public void setLootTables(List<Identifier> lootTables) {
-        this.lootTables = lootTables;
-    }
-
-    public void setEntities(List<Identifier> entities) {
-        this.entities = entities;
     }
 
     public void setPlaceLadders(boolean placeLadders) {

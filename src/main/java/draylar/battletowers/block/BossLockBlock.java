@@ -64,7 +64,7 @@ public class BossLockBlock extends Block {
         ItemStack stack = player.inventory.main.get(player.inventory.selectedSlot);
 
         if (stack.getItem().equals(requiredItem) && stack.getCount() >= requiredKeys) {
-            if(!world.isClient) {
+            if (!world.isClient) {
                 stack.setCount(stack.getCount() - requiredKeys);
                 world.setBlockState(pos, Blocks.AIR.getDefaultState());
 

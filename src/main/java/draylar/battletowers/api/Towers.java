@@ -25,12 +25,16 @@ import java.util.function.Function;
 
 public class Towers {
 
+    public static final Map<BiomeConditional, Tower> BIOME_ENTRANCES = new HashMap<>();
     private static final Random RAND = new Random();
     private static final Identifier DEFAULT_LOOT_TABLE = new Identifier("battletowers", "default");
     private static final List<Identifier> DEFAULT_SPAWNERS = Arrays.asList(new Identifier("minecraft", "zombie"), new Identifier("minecraft", "skeleton"), new Identifier("minecraft", "spider"));
-    public static final Map<BiomeConditional, Tower> BIOME_ENTRANCES = new HashMap<>();
     private static final Map<Identifier, Floor> FLOOR_DATA = new HashMap<>();
     public static Tower DEFAULT_TOWER = null;
+
+    private Towers() {
+        // NO-OP
+    }
 
     public static void register(Identifier id, Tower tower) {
         BIOME_ENTRANCES.put(tower.getBiomeConditional(), tower);
@@ -49,20 +53,18 @@ public class Towers {
         if (tower.getExtraPools() != null) {
             tower.getExtraPools().forEach(extraPool -> {
                 List<Pair<Function<StructurePool.Projection, ? extends StructurePoolElement>, Integer>> elements = new ArrayList<>();
-                extraPool.getElements().forEach((identifier, integer) -> {
-                    elements.add(Pair.of(ExtendedSinglePoolElement.of(identifier, false, processors), integer));
-                });
+                extraPool.elements().forEach((identifier, integer) -> elements.add(Pair.of(ExtendedSinglePoolElement.of(identifier, false, processors), integer)));
 
                 registerPool(
-                        extraPool.getId(),
-                        extraPool.getTerminator() == null ? new Identifier("empty") : extraPool.getTerminator(),
+                        extraPool.id(),
+                        extraPool.terminator() == null ? new Identifier("empty") : extraPool.terminator(),
                         elements
                 );
             });
         }
     }
 
-    private static StructurePool initializeFloorCollection(Tower tower, FloorCollection collection, ImmutableList<StructureProcessor> processors, Identifier towerId,  Identifier terminators) {
+    private static StructurePool initializeFloorCollection(Tower tower, FloorCollection collection, ImmutableList<StructureProcessor> processors, Identifier towerId, Identifier terminators) {
         List<Pair<Function<StructurePool.Projection, ? extends StructurePoolElement>, Integer>> elements = new ArrayList<>();
         initializeFloors(tower, collection, elements, processors);
         return registerPool(towerId, terminators, elements);
@@ -76,20 +78,16 @@ public class Towers {
 
             // for each output
             weightedOutputIds.forEach(weightedOutput -> {
-                int weight = weightedOutput.getWeight();
+                int weight = weightedOutput.weight();
 
                 // add block if it is valid
-                if(Registry.BLOCK.get(weightedOutput.getId()) != Blocks.AIR && weight > 0) {
-                    builder.add(input, WeightedChanceProcessor.Entry.of(Registry.BLOCK.get(weightedOutput.getId()), weight));
+                if (Registry.BLOCK.get(weightedOutput.id()) != Blocks.AIR && weight > 0) {
+                    builder.add(input, WeightedChanceProcessor.Entry.of(Registry.BLOCK.get(weightedOutput.id()), weight));
                 }
             });
         });
 
         return ImmutableList.<StructureProcessor>builder().add(builder.build()).build();
-    }
-
-    private Towers() {
-        // NO-OP
     }
 
     private static StructurePool registerPool(Identifier id, Identifier terminators, List<Pair<Function<StructurePool.Projection, ? extends StructurePoolElement>, Integer>> elements) {
@@ -111,7 +109,7 @@ public class Towers {
 
             // if max spawns or min spawns has been set, save data to tower
             // if max is 0, set to 100 (user did not define a value), otherwise set max to the highest between the min and max to avoid breaking the system
-            if(floor.getMaxSpawns() != 0 || floor.getMinSpawns() != 0) {
+            if (floor.getMaxSpawns() != 0 || floor.getMinSpawns() != 0) {
                 int max = Math.max(floor.getMinSpawns(), floor.getMaxSpawns());
                 tower.addLimit(ElementRange.of(floor.getId(), floor.getMinSpawns(), max == 0 ? 100 : Math.max(floor.getMinSpawns(), floor.getMaxSpawns())));
             }
@@ -123,13 +121,13 @@ public class Towers {
      * <p>
      * If there is no appropriate tower available, the default (stone) tower is returned.
      *
-     * @param biome  biome to check for an appropriate tower type in
-     * @return       an appropriate tower for the given biome, or the default (stone) tower if none exist
+     * @param biome biome to check for an appropriate tower type in
+     * @return an appropriate tower for the given biome, or the default (stone) tower if none exist
      */
     public static Tower getTowerFor(Biome biome) {
         // todo: consider all possible entrances instead of only the first
-        for(Map.Entry<BiomeConditional, Tower> conditional : BIOME_ENTRANCES.entrySet()) {
-            if(conditional.getKey().isValid(biome)) {
+        for (Map.Entry<BiomeConditional, Tower> conditional : BIOME_ENTRANCES.entrySet()) {
+            if (conditional.getKey().isValid(biome)) {
                 return conditional.getValue();
             }
         }
@@ -138,42 +136,42 @@ public class Towers {
     }
 
     public static Identifier getSpawnerEntryFor(Identifier floorID) {
-        if(FLOOR_DATA.containsKey(floorID)) {
+        if (FLOOR_DATA.containsKey(floorID)) {
             List<Identifier> spawnerEntries = FLOOR_DATA.get(floorID).getEntities();
 
-            if(spawnerEntries == null) {
+            if (spawnerEntries == null) {
                 spawnerEntries = new ArrayList<>();
                 spawnerEntries.add(new Identifier("minecraft:zombie"));
             }
 
-            if(!spawnerEntries.isEmpty()) {
+            if (!spawnerEntries.isEmpty()) {
                 return spawnerEntries.get(RAND.nextInt(spawnerEntries.size()));
             } else {
-                System.out.println(String.format("[Battle Towers] floor %s's content provider has no valid spawners. Falling back to defaults.", floorID.toString()));
+                System.out.printf("[Battle Towers] floor %s's content provider has no valid spawners. Falling back to defaults.%n", floorID.toString());
             }
         } else {
-            System.out.println(String.format("[Battle Towers] floor %s doesn't have a registered content provider. Falling back to defaults.", floorID.toString()));
+            System.out.printf("[Battle Towers] floor %s doesn't have a registered content provider. Falling back to defaults.%n", floorID.toString());
         }
 
         return DEFAULT_SPAWNERS.get(RAND.nextInt(DEFAULT_SPAWNERS.size()));
     }
 
     public static Identifier getLootTableFor(Identifier floorID) {
-        if(FLOOR_DATA.containsKey(floorID)) {
+        if (FLOOR_DATA.containsKey(floorID)) {
             List<Identifier> lootTables = FLOOR_DATA.get(floorID).getLootTables();
 
-            if(lootTables == null) {
+            if (lootTables == null) {
                 lootTables = new ArrayList<>();
                 lootTables.add(BattleTowers.id("default"));
             }
 
-            if(!lootTables.isEmpty()) {
+            if (!lootTables.isEmpty()) {
                 return lootTables.get(RAND.nextInt(lootTables.size()));
             } else {
-                System.out.println(String.format("[Battle Towers] floor %s's content provider has no valid loot tables. Falling back to defaults.", floorID.toString()));
+                System.out.printf("[Battle Towers] floor %s's content provider has no valid loot tables. Falling back to defaults.%n", floorID.toString());
             }
         } else {
-            System.out.println(String.format("[Battle Towers] floor %s doesn't have a registered content provider. Falling back to defaults.", floorID.toString()));
+            System.out.printf("[Battle Towers] floor %s doesn't have a registered content provider. Falling back to defaults.%n", floorID.toString());
         }
 
         return DEFAULT_LOOT_TABLE;

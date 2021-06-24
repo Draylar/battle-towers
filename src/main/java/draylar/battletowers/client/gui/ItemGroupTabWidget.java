@@ -4,8 +4,6 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import draylar.battletowers.BattleTowers;
 import draylar.battletowers.group.ItemTab;
-import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
-import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -36,7 +34,8 @@ public class ItemGroupTabWidget extends ButtonWidget {
     public void renderButton(MatrixStack matrixStack, int mouseX, int mouseY, float delta) {
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         minecraftClient.getTextureManager().bindTexture(TEXTURE);
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, this.alpha);
+
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, this.alpha);
         int i = this.getYImage(this.isHovered());
 
         RenderSystem.enableBlend();
@@ -44,7 +43,7 @@ public class ItemGroupTabWidget extends ButtonWidget {
         RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
 
         this.drawTexture(matrixStack, this.x, this.y, 0, i * height, this.width, this.height);
-        this.renderBg(matrixStack, minecraftClient, mouseX, mouseY);
+        this.renderBackground(matrixStack, minecraftClient, mouseX, mouseY);
 
         minecraftClient.getItemRenderer().renderGuiItemIcon(tab.getIcon(), this.x + 15, this.y + 2);
     }

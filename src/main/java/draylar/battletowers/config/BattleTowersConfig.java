@@ -1,12 +1,10 @@
 package draylar.battletowers.config;
 
 
-import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
-import me.sargunvohra.mcmods.autoconfig1u.shadowed.blue.endless.jankson.Comment;
+import draylar.omegaconfig.api.Comment;
+import draylar.omegaconfig.api.Config;
 
-@Config(name = "battletowers")
-public class BattleTowersConfig implements ConfigData {
+public class BattleTowersConfig implements Config {
 
     @Comment(value = "Number of \"keys\" required to unlock the Boss Lock at the top of a Battle Tower.")
     public int requiredKeys = 10;
@@ -28,4 +26,14 @@ public class BattleTowersConfig implements ConfigData {
 
     @Comment(value = "Maximum height for towers to generate at to avoid clipping at 256.")
     public int maxHeight = 125;
+
+    @Override
+    public String getName() {
+        return "battletowers";
+    }
+
+    @Override
+    public String getExtension() {
+        return "json5";
+    }
 }

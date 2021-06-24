@@ -27,7 +27,7 @@ public class TowerGuardEntityModel extends EntityModel<TowerGuardianEntity> {
 
         // head, y12 -> y0
         head = new ModelPart(this, 52, 0);
-        head.addCuboid( -6, -12, -6, 12, 12, 12, 0);
+        head.addCuboid(-6, -12, -6, 12, 12, 12, 0);
         head.setPivot(0.0F, 0.0F, 0.0F);
 
         // main body, y0 -> -y27

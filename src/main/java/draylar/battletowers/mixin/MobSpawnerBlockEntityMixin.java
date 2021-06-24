@@ -32,12 +32,12 @@ public class MobSpawnerBlockEntityMixin implements SpawnerManipulator {
     }
 
     @Override
-    public void setTowerSpawner(boolean val) {
-        this.isTowerSpawner = val;
+    public boolean isTowerSpawner() {
+        return isTowerSpawner;
     }
 
     @Override
-    public boolean isTowerSpawner() {
-        return isTowerSpawner;
+    public void setTowerSpawner(boolean val) {
+        this.isTowerSpawner = val;
     }
 }

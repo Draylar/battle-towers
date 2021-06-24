@@ -19,7 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntitySetBonusMixin extends LivingEntity {
 
-    @Shadow @Final public PlayerInventory inventory;
+    @Shadow
+    @Final
+    public PlayerInventory inventory;
 
     protected PlayerEntitySetBonusMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -30,10 +32,10 @@ public abstract class PlayerEntitySetBonusMixin extends LivingEntity {
             at = @At("HEAD")
     )
     private void onTick(CallbackInfo ci) {
-        if(!world.isClient && age % 20 == 0) {
+        if (!world.isClient && age % 20 == 0) {
             // Ensure all armor stacks are key armor
             for (ItemStack armor : inventory.armor) {
-                if(!(armor.getItem() instanceof KeyArmorItem)) {
+                if (!(armor.getItem() instanceof KeyArmorItem)) {
                     return;
                 }
             }

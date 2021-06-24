@@ -2,11 +2,10 @@ package draylar.battletowers.registry;
 
 import draylar.battletowers.BattleTowers;
 import draylar.battletowers.api.tower.Tower;
-import draylar.battletowers.world.BattleTowerStructure;
 import draylar.battletowers.world.BattleTowerPiece;
+import draylar.battletowers.world.BattleTowerStructure;
 import draylar.staticcontent.StaticContent;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 import net.minecraft.structure.StructurePieceType;
@@ -20,7 +19,6 @@ import net.minecraft.world.gen.feature.StructureFeature;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class BattleTowerWorld {
 
@@ -38,7 +36,7 @@ public class BattleTowerWorld {
         FabricStructureBuilder
                 .create(BattleTowers.id("battletower"), BATTLE_TOWER)
                 .step(GenerationStep.Feature.SURFACE_STRUCTURES)
-                .defaultConfig(BattleTowers.CONFIG.towerSpacing, BattleTowers.CONFIG.towerSeparation, 185815)
+                .defaultConfig(BattleTowers.CONFIG.towerSpacing, BattleTowers.CONFIG.towerSeparation, 32132815)
                 .adjustsSurface() // might need to remove
                 .register();
 

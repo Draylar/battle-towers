@@ -25,7 +25,8 @@ import java.util.Random;
 @Mixin(ExtendedSinglePoolElement.class)
 public abstract class ExtendedSinglePoolElementMixin {
 
-    @Shadow public abstract Identifier location();
+    @Shadow
+    public abstract Identifier location();
 
     @Inject(
             method = "generate",
@@ -43,7 +44,7 @@ public abstract class ExtendedSinglePoolElementMixin {
                 BlockPos deployerPos = new BlockPos(pos2.getX(), pos.getY() + 1, pos2.getZ());
 
                 // Check if the middle pos + 1 is still solid (if it is, move up again)
-                if(!world.getBlockState(deployerPos).isAir()) {
+                if (!world.getBlockState(deployerPos).isAir()) {
                     deployerPos = deployerPos.up();
                 }
 
@@ -56,8 +57,7 @@ public abstract class ExtendedSinglePoolElementMixin {
                         // Some floors were crashing in #33 due to the BE at this position not being a ContentDeployer despite
                         //  the previous setBlockState. We now check for instanceof before casting (but it should always be valid).
                         // The only case where this should not be true is when a block occupies the space the content deployer should be at.
-                        if (blockEntity instanceof ContentDeployerBlockEntity) {
-                            ContentDeployerBlockEntity contentDeployer = (ContentDeployerBlockEntity) blockEntity;
+                        if (blockEntity instanceof ContentDeployerBlockEntity contentDeployer) {
                             contentDeployer.apply(floor);
                         }
                     }

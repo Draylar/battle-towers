@@ -30,15 +30,15 @@ public class BattleTowerStatusEffects {
                     EntityAttributeModifier.Operation.ADDITION
             );
 
+    private BattleTowerStatusEffects() {
+
+    }
+
     private static StatusEffect register(String id, StatusEffect entry) {
         return Registry.register(Registry.STATUS_EFFECT, BattleTowers.id(id), entry);
     }
 
     public static void init() {
-
-    }
-
-    private BattleTowerStatusEffects() {
 
     }
 }
