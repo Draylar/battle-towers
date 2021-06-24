@@ -9,7 +9,6 @@ import net.minecraft.tag.Tag;
 public record ItemTab(ItemStack icon, String name, Tag<Item> itemTag) {
 
 
-
     public boolean matches(Item item) {
         return itemTag == null || itemTag.contains(item);
     }

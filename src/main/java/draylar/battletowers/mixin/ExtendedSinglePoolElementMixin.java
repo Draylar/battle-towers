@@ -1,10 +1,12 @@
 package draylar.battletowers.mixin;
 
+import com.mojang.datafixers.util.Either;
 import draylar.battletowers.api.Towers;
 import draylar.battletowers.api.tower.Floor;
 import draylar.battletowers.entity.block.ContentDeployerBlockEntity;
 import draylar.battletowers.registry.BattleTowerBlocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
@@ -13,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,7 +29,8 @@ import java.util.Random;
 public abstract class ExtendedSinglePoolElementMixin {
 
     @Shadow
-    public abstract Identifier location();
+    @Final
+    protected Either<Identifier, Structure> location;
 
     @Inject(
             method = "generate",
@@ -37,8 +41,8 @@ public abstract class ExtendedSinglePoolElementMixin {
         // pos is the corner of each structure with the proper y value, but it is rotated.
         // we combine them to get the middle position of each floor
 
-        if (this.location().toString().contains("battletowers")) {
-            Floor floor = Towers.getFloor(this.location());
+        if (this.location.left().get().toString().contains("battletowers")) {
+            Floor floor = Towers.getFloor(this.location.left().get());
 
             if (floor != null) {
                 BlockPos deployerPos = new BlockPos(pos2.getX(), pos.getY() + 1, pos2.getZ());

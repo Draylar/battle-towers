@@ -15,8 +15,8 @@ import java.util.List;
 // which is licensed under MIT.
 public abstract class TabbedItemGroup extends ItemGroup {
 
-    private int selectedTab = 0;
     private final List<ItemTab> tabs = Lists.newArrayList();
+    private int selectedTab = 0;
     private boolean hasInitialized = false;
 
     protected TabbedItemGroup(Identifier id) {

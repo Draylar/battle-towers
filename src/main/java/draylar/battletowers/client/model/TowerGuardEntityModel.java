@@ -1,13 +1,16 @@
+// Made with Model Converter by Globox_Z
+// Generate all required imports
 package draylar.battletowers.client.model;
 
+
 import draylar.battletowers.entity.TowerGuardianEntity;
-import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 
-public class TowerGuardEntityModel extends EntityModel<TowerGuardianEntity> {
 
+public class TowerGuardEntityModel extends EntityModel<TowerGuardianEntity> {
     private final ModelPart torso;
     private final ModelPart leftLeg;
     private final ModelPart leftLegLower;
@@ -21,76 +24,50 @@ public class TowerGuardEntityModel extends EntityModel<TowerGuardianEntity> {
     private final ModelPart leftTorch;
     private final ModelPart rightTorch;
 
-    public TowerGuardEntityModel() {
-        textureWidth = 112;
-        textureHeight = 112;
-
-        // head, y12 -> y0
-        head = new ModelPart(this, 52, 0);
-        head.addCuboid(-6, -12, -6, 12, 12, 12, 0);
-        head.setPivot(0.0F, 0.0F, 0.0F);
-
-        // main body, y0 -> -y27
-        torso = new ModelPart(this, 0, 0);
-        torso.addCuboid(-9, 0, -4, 18, 27, 8, 0);
-        torso.setPivot(0.0F, 0.0F, 0.0F);
-
-        // left leg, -y27 -> -y47
-        leftLeg = new ModelPart(this, 26, 35);
-        leftLeg.addCuboid(1, 0, -3f, 7f, 15f, 6f);
-        leftLeg.setPivot(0.0F, 25f, 0.0F);
-
-        leftLegLower = new ModelPart(this, 0, 35);
-        leftLegLower.addCuboid(.5f, 0, -3.5f, 8f, 15f, 7f);
-        leftLegLower.setPivot(0.0F, 13, 0.0F);
-        leftLeg.addChild(leftLegLower);
-
-        // right left, -y27 -> -y47
-        rightLeg = new ModelPart(this, 0, 35);
-        rightLeg.addCuboid(-8f, 0, -3f, 7, 15, 6, 0);
-        rightLeg.setPivot(0.0F, 25f, 0.0F);
-
-        rightLegLower = new ModelPart(this, 0, 35);
-        rightLegLower.addCuboid(-8.5f, 0, -3.5f, 8, 15, 7, 0);
-        rightLegLower.setPivot(0.0F, 13, 0.0F);
-        rightLeg.addChild(rightLegLower);
-
-        // right arm
-        leftArm = new ModelPart(this, 56, 61);
-        leftArm.addCuboid(9, 1, -3, 8, 14, 6, 0);
-        leftArm.setPivot(0.0F, 0.0F, 0.0F);
-
-        leftArmLower = new ModelPart(this, 52, 35);
-        leftArmLower.addCuboid(9, 0, -3, 8, 14, 6, 0);
-        leftArmLower.setPivot(0.0F, 15, 0.0F);
-        leftArm.addChild(leftArmLower);
-
-        // left arm
-        rightArm = new ModelPart(this, 0, 61);
-        rightArm.addCuboid(-17, 1, -3, 8, 14, 6, 0);
-        rightArm.setPivot(0.0F, 0.0F, 0.0F);
-
-        rightArmLower = new ModelPart(this, 28, 61);
-        rightArmLower.addCuboid(-17, 0, -3, 8, 14, 6, 0);
-        rightArmLower.setPivot(0.0F, 15, 0.0F);
-        rightArm.addChild(rightArmLower);
-
-        // horns
-        leftTorch = new ModelPart(this);
-        leftTorch.addCuboid("left_torch", 0, 0, 0, 2, 9, 2, 0, 8, 81);
-        leftTorch.setPivot(9, -15, 0.0f);
-        head.addChild(leftTorch);
-
-        rightTorch = new ModelPart(this);
-        rightTorch.addCuboid("right_torch", 0, 0, 0, 2, 9, 2, 0, 0, 81);
-        rightTorch.setPivot(-11, -13, 0.0f);
-        head.addChild(rightTorch);
+    public TowerGuardEntityModel(ModelPart root) {
+        this.torso = root.getChild("torso");
+        this.leftLeg = root.getChild("leftLeg");
+        this.leftLegLower = this.leftLeg.getChild("leftLegLower");
+        this.rightLeg = root.getChild("rightLeg");
+        this.rightLegLower = this.rightLeg.getChild("rightLegLower");
+        this.leftArm = root.getChild("leftArm");
+        this.leftArmLower = this.leftArm.getChild("leftArmLower");
+        this.rightArm = root.getChild("rightArm");
+        this.rightArmLower = this.rightArm.getChild("rightArmLower");
+        this.head = root.getChild("head");
+        this.rightTorch = this.head.getChild("rightTorch");
+        this.leftTorch = this.head.getChild("leftTorch");
 
         rightArm.pitch = -.1f;
         leftArm.pitch = -.1f;
-
         leftTorch.roll = .58f;
         rightTorch.roll = -.58f;
+    }
+
+    public static TexturedModelData getTexturedModelData() {
+        ModelData modelData = new ModelData();
+        ModelPartData modelPartData = modelData.getRoot();
+        // head, y12 -> y0
+        // main body, y0 -> -y27
+        // left leg, -y27 -> -y47
+        ModelPartData modelPartData5 = modelPartData.addChild("head", ModelPartBuilder.create().uv(52, 0).cuboid(-6, -12, -6, 12, 12, 12), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        modelPartData.addChild("torso", ModelPartBuilder.create().uv(0, 0).cuboid(-9, 0, -4, 18, 27, 8), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData modelPartData1 = modelPartData.addChild("leftLeg", ModelPartBuilder.create().uv(26, 35).cuboid(1, 0, -3f, 7f, 15f, 6f), ModelTransform.pivot(0.0F, 25F, 0.0F));
+        modelPartData1.addChild("leftLegLower", ModelPartBuilder.create().uv(0, 35).cuboid(.5f, 0, -3.5f, 8f, 15f, 7f), ModelTransform.pivot(0.0F, 13F, 0.0F));
+        ModelPartData modelPartData2 = modelPartData.addChild("rightLeg", ModelPartBuilder.create().uv(0, 35).cuboid(-8f, 0, -3f, 7, 15, 6), ModelTransform.pivot(0.0F, 25F, 0.0F));
+        modelPartData2.addChild("rightLegLower", ModelPartBuilder.create().uv(0, 35).cuboid(-8.5f, 0, -3.5f, 8, 15, 7), ModelTransform.pivot(0.0F, 13F, 0.0F));
+        ModelPartData modelPartData3 = modelPartData.addChild("leftArm", ModelPartBuilder.create().uv(56, 61).cuboid(9, 1, -3, 8, 14, 6), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        modelPartData3.addChild("leftArmLower", ModelPartBuilder.create().uv(52, 35).cuboid(9, 0, -3, 8, 14, 6), ModelTransform.pivot(0.0F, 15F, 0.0F));
+        ModelPartData modelPartData4 = modelPartData.addChild("rightArm", ModelPartBuilder.create().uv(0, 61).cuboid(-17, 1, -3, 8, 14, 6), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        modelPartData4.addChild("rightArmLower", ModelPartBuilder.create().uv(28, 61).cuboid(-17, 0, -3, 8, 14, 6), ModelTransform.pivot(0.0F, 15F, 0.0F));
+        modelPartData5.addChild("leftTorch", ModelPartBuilder.create().uv(0, 0).cuboid("left_torch", 0, 0, 0, 2, 9, 2, Dilation.NONE, 8, 81), ModelTransform.pivot(9F, 15F, 0.0F));
+        modelPartData5.addChild("rightTorch", ModelPartBuilder.create().uv(0, 0).cuboid("right_torch", 0, 0, 0, 2, 9, 2, Dilation.NONE, 0, 81), ModelTransform.pivot(11F, 13F, 0.0F));
+        return TexturedModelData.of(modelData, 112, 112);
+        // right left, -y27 -> -y47
+        // right arm
+        // left arm
+        // horns
+
     }
 
     @Override

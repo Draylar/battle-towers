@@ -51,7 +51,7 @@ dependencies {
 import groovy.json.JsonSlurper
 import groovy.json.JsonOutput
 processResources {
-    inputs.property "version", project.version
+    /*inputs.property "version", project.version
 
     from(sourceSets.main.resources.srcDirs) {
         include "fabric.mod.json"
@@ -61,6 +61,8 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude "fabric.mod.json"
     }
+
+     */
 
     doLast {
 
