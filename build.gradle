@@ -34,8 +34,8 @@ dependencies {
 
 
     // structure helpers for advanced jigsaw data
-    modImplementation 'com.github.kvverti:structure-helpers:3.1.0'
-    include 'com.github.kvverti:structure-helpers:3.1.0'
+    modImplementation 'com.github.Draylar:structure-helpers:1.17-SNAPSHOT'
+    include 'com.github.Draylar:structure-helpers:1.17-SNAPSHOT'
 
     // building assistance
     //modImplementation 'com.github.Draylar:staff-of-building:1.2.3-1.16.2'

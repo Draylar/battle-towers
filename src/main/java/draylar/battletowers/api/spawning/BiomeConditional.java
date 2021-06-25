@@ -13,8 +13,16 @@ import java.util.List;
  * Note that biome IDs take priority over categories.
  * If a biome ID is valid but not attached to a registered biome, only ??? will accept the conditional.
  */
-public record BiomeConditional(List<Identifier> biomeIDs, List<String> biomeCategories) {
+// Do not convert this into a record; needs to be serialized.
+public class BiomeConditional {
 
+    private final List<Identifier> biomeIDs;
+    private final List<String> biomeCategories;
+
+    public BiomeConditional(List<Identifier> biomeIDs, List<String> biomeCategories) {
+        this.biomeIDs = biomeIDs;
+        this.biomeCategories = biomeCategories;
+    }
 
     public boolean isValid(Biome biome) {
         if (biomeIDs != null) {

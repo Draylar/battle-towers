@@ -40,15 +40,16 @@ public class BattleTowersConfig implements Config {
 
     @Override
     public void save() {
-        if (BattleTowers.CONFIG.towerSpacing == 0) {
+        if (towerSpacing == 0) {
             BattleTowers.LOGGER.warn("Tower Spacing config value was set to 0, but it needs to be at least 1. Temporarily replacing value with 32.");
-            BattleTowers.CONFIG.towerSpacing = 32;
+            towerSpacing = 32;
         }
 
-        if (BattleTowers.CONFIG.towerSeparation >= BattleTowers.CONFIG.towerSpacing) {
+        if (towerSeparation >= towerSpacing) {
             BattleTowers.LOGGER.warn(String.format("Tower Separation must be lower than Tower Spacing. Temporarily replacing Tower Separation value with %d (half of configured Tower Spacing).", BattleTowers.CONFIG.towerSpacing / 2));
-            BattleTowers.CONFIG.towerSeparation = BattleTowers.CONFIG.towerSeparation / 2;
+            towerSeparation = towerSeparation / 2;
         }
+
         Config.super.save();
     }
 }

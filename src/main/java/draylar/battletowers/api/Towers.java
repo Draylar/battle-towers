@@ -78,11 +78,11 @@ public class Towers {
 
             // for each output
             weightedOutputIds.forEach(weightedOutput -> {
-                int weight = weightedOutput.weight();
+                int weight = weightedOutput.getWeight();
 
                 // add block if it is valid
-                if (Registry.BLOCK.get(weightedOutput.id()) != Blocks.AIR && weight > 0) {
-                    builder.add(input, WeightedChanceProcessor.Entry.of(Registry.BLOCK.get(weightedOutput.id()), weight));
+                if (Registry.BLOCK.get(weightedOutput.getId()) != Blocks.AIR && weight > 0) {
+                    builder.add(input, WeightedChanceProcessor.Entry.of(Registry.BLOCK.get(weightedOutput.getId()), weight));
                 }
             });
         });

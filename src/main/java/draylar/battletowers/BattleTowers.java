@@ -30,6 +30,4 @@ public class BattleTowers implements ModInitializer {
         BattleTowerTags.init();
         BattleTowerStatusEffects.init();
     }
-
-
 }

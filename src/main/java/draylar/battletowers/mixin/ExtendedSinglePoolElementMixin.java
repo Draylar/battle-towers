@@ -8,6 +8,9 @@ import draylar.battletowers.registry.BattleTowerBlocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructureManager;
+import net.minecraft.structure.pool.SinglePoolElement;
+import net.minecraft.structure.pool.StructurePool;
+import net.minecraft.structure.processor.StructureProcessorList;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
@@ -15,22 +18,21 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import robosky.structurehelpers.structure.pool.ExtendedSinglePoolElement;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 @Mixin(ExtendedSinglePoolElement.class)
-public abstract class ExtendedSinglePoolElementMixin {
+public abstract class ExtendedSinglePoolElementMixin extends SinglePoolElement {
 
-    @Shadow
-    @Final
-    protected Either<Identifier, Structure> location;
+    private ExtendedSinglePoolElementMixin(Either<Identifier, Structure> location, Supplier<StructureProcessorList> processors, StructurePool.Projection projection) {
+        super(location, processors, projection);
+    }
 
     @Inject(
             method = "generate",
