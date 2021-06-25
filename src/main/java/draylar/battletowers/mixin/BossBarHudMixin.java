@@ -19,9 +19,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BossBarHud.class)
 public abstract class BossBarHudMixin extends DrawableHelper {
 
-    @Shadow @Final private MinecraftClient client;
-    @Shadow @Final private static Identifier BARS_TEXTURE;
     private static final Identifier CUSTOM_BAR_TEX = BattleTowers.id("textures/gui/bars.png");
+    @Shadow
+    @Final
+    private static Identifier BARS_TEXTURE;
+    @Shadow
+    @Final
+    private MinecraftClient client;
 
     @Inject(
             method = "renderBossBar",
@@ -30,18 +34,18 @@ public abstract class BossBarHudMixin extends DrawableHelper {
     )
     private void renderCustomBossBar(MatrixStack matrixStack, int i, int j, BossBar bossBar, CallbackInfo ci) {
         // Prevent issues with non-translatable text boss bar titles
-        if(!(bossBar.getName() instanceof TranslatableText)) {
+        if (!(bossBar.getName() instanceof TranslatableText)) {
             return;
         }
 
-        if(bossBar instanceof ClientBossBar && ((TranslatableText) bossBar.getName()).getKey().contains("tower_guard")) {
+        if (bossBar instanceof ClientBossBar && ((TranslatableText) bossBar.getName()).getKey().contains("tower_guard")) {
             this.client.getTextureManager().bindTexture(CUSTOM_BAR_TEX);
 
             // draw empty background bar
-            this.drawTexture(matrixStack, i, j, 0, 2 , 185, 9);
+            this.drawTexture(matrixStack, i, j, 0, 2, 185, 9);
 
             // percentage -> texture width
-            int overlayBarWidth = (int)(bossBar.getPercent() * 185.0F);
+            int overlayBarWidth = (int) (bossBar.getPercent() * 185.0F);
 
             // draw overlay
             this.drawTexture(matrixStack, i, j, 0, 24, overlayBarWidth, 9);

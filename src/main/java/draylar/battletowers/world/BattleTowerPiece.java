@@ -1,7 +1,8 @@
 package draylar.battletowers.world;
 
 import draylar.battletowers.registry.BattleTowerWorld;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.PoolStructurePiece;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePieceType;
@@ -16,8 +17,8 @@ public class BattleTowerPiece extends PoolStructurePiece {
         super(manager, poolElement, pos, groundLevelDelta, rotation, boundingBox);
     }
 
-    public BattleTowerPiece(StructureManager manager, CompoundTag tag) {
-        super(manager, tag);
+    public BattleTowerPiece(ServerWorld world, NbtCompound tag) {
+        super(world, tag);
     }
 
     @Override

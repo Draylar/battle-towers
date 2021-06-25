@@ -4,14 +4,13 @@ import com.google.common.collect.ImmutableList;
 import draylar.battletowers.BattleTowers;
 import draylar.battletowers.api.Towers;
 import draylar.battletowers.api.data.PoolTemplate;
-import draylar.battletowers.api.spawning.BiomeConditional;
 import draylar.battletowers.api.data.WeightedIdentifier;
+import draylar.battletowers.api.spawning.BiomeConditional;
 import draylar.staticcontent.api.ContentData;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.util.Identifier;
 import robosky.structurehelpers.structure.pool.ElementRange;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +23,6 @@ import java.util.Map;
  */
 public class Tower implements ContentData {
 
-    private transient String name;
     private final Map<Identifier, List<WeightedIdentifier>> processors;
     private final BiomeConditional biomeConditional;
     private final FloorCollection entrances;
@@ -32,6 +30,7 @@ public class Tower implements ContentData {
     private final FloorCollection roofs;
     private final FloorCollection bottoms;
     private final List<PoolTemplate> extraPools;
+    private transient String name;
     private transient ImmutableList.Builder<ElementRange> limits = new ImmutableList.Builder<>();
     private transient StructurePool startPool = null;
 
@@ -57,7 +56,7 @@ public class Tower implements ContentData {
 
         // Stone ID should be default tower
         // todo: we can do this much better
-        if(Towers.DEFAULT_TOWER == null && identifier.equals(BattleTowers.id("stone"))) {
+        if (Towers.DEFAULT_TOWER == null && identifier.equals(BattleTowers.id("stone"))) {
             Towers.DEFAULT_TOWER = this;
         }
     }
@@ -82,16 +81,16 @@ public class Tower implements ContentData {
         return bottoms;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public ImmutableList<ElementRange> getLimits() {
-        if(limits == null) {
+        if (limits == null) {
             limits = new ImmutableList.Builder<>();
         }
 
@@ -99,7 +98,7 @@ public class Tower implements ContentData {
     }
 
     public void addLimit(ElementRange range) {
-        if(limits == null) {
+        if (limits == null) {
             limits = new ImmutableList.Builder<>();
         }
 
@@ -114,11 +113,11 @@ public class Tower implements ContentData {
         return extraPools;
     }
 
-    public void setStartPool(StructurePool startPool) {
-        this.startPool = startPool;
-    }
-
     public StructurePool getStartPool() {
         return startPool;
+    }
+
+    public void setStartPool(StructurePool startPool) {
+        this.startPool = startPool;
     }
 }

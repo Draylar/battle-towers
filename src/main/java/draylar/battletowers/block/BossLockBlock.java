@@ -61,10 +61,10 @@ public class BossLockBlock extends Block {
             requiredItem = BattleTowerItems.BOSS_KEY;
         }
 
-        ItemStack stack = player.inventory.main.get(player.inventory.selectedSlot);
+        ItemStack stack = player.getStackInHand(hand); //TODO check if this is broke
 
         if (stack.getItem().equals(requiredItem) && stack.getCount() >= requiredKeys) {
-            if(!world.isClient) {
+            if (!world.isClient) {
                 stack.setCount(stack.getCount() - requiredKeys);
                 world.setBlockState(pos, Blocks.AIR.getDefaultState());
 

@@ -21,7 +21,6 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
     private double targetZ;
     private int updateCountdownTicks;
     private int field_24667;
-    private final int attackIntervalTicks = 20;
     private long lastUpdateTime;
 
     public TowerGuardianMeleeAttackGoal(TowerGuardianEntity towerGuardian, double speed, boolean pauseWhenMobIdle) {
@@ -51,7 +50,7 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
                 if (this.path != null) {
                     return true;
                 } else {
-                    return this.getSquaredMaxAttackDistance(target) >= this.mob.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
+                    return this.getSquaredMaxAttackDistance() >= this.mob.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
                 }
             }
         }
@@ -70,7 +69,7 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
         } else if (!this.mob.isInWalkTargetRange(target.getBlockPos())) {
             return false;
         } else {
-            return !(target instanceof PlayerEntity) || !target.isSpectator() && !((PlayerEntity)target).isCreative();
+            return !(target instanceof PlayerEntity) || !target.isSpectator() && !((PlayerEntity) target).isCreative();
         }
     }
 
@@ -123,7 +122,7 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
     }
 
     private void attack(LivingEntity target, double squaredDistance) {
-        double maxAttackDistance = this.getSquaredMaxAttackDistance(target);
+        double maxAttackDistance = this.getSquaredMaxAttackDistance();
 
         if (squaredDistance <= maxAttackDistance && this.field_24667 <= 0) {
             this.method_28346();
@@ -136,19 +135,7 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
         this.field_24667 = 20;
     }
 
-    protected boolean method_28347() {
-        return this.field_24667 <= 0;
-    }
-
-    protected int method_28348() {
-        return this.field_24667;
-    }
-
-    protected int method_28349() {
-        return 20;
-    }
-
-    private double getSquaredMaxAttackDistance(LivingEntity entity) {
+    private double getSquaredMaxAttackDistance() {
         return this.mob.getWidth() * this.mob.getWidth();
     }
 }

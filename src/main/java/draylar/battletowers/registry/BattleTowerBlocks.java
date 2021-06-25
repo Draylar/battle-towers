@@ -15,6 +15,10 @@ public class BattleTowerBlocks {
     public static final Block LADDER_DEPLOYER = register("ladder_deployer", new LadderDeployerBlock(), new Item.Settings());
     public static final Block CONTENT_DEPLOYER = register("content_deployer", new ContentDeployerBlock(), new Item.Settings());
 
+    private BattleTowerBlocks() {
+        // NO-OP
+    }
+
     private static Block register(String name, Block block) {
         return Registry.register(Registry.BLOCK, BattleTowers.id(name), block);
     }
@@ -25,12 +29,7 @@ public class BattleTowerBlocks {
         return registeredBlock;
     }
 
-
     public static void init() {
-        // NO-OP
-    }
-
-    private BattleTowerBlocks() {
         // NO-OP
     }
 }

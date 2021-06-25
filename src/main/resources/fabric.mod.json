@@ -2,13 +2,11 @@
   "schemaVersion": 1,
   "id": "battletowers",
   "version": "${version}",
-
   "name": "Battle Towers",
   "description": "Battle Towers, reborn for Fabric!",
   "authors": [
     "Draylar"
   ],
-
   "license": "MIT",
   "icon": "assets/battletowers/icon.png",
   "contact": {

@@ -32,19 +32,7 @@ public class TowerGuardianEntity extends HostileEntity {
 
     public TowerGuardianEntity(EntityType<TowerGuardianEntity> entityType, World world) {
         super(entityType, world);
-        this.bossBar = (ServerBossBar)(new ServerBossBar(this.getDisplayName(), BossBar.Color.PURPLE, BossBar.Style.PROGRESS)).setDarkenSky(true);
-    }
-
-    @Override
-    public void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new TowerGuardianMeleeAttackGoal(this, 1.0D, false));
-        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 32.0F));
-        this.goalSelector.add(2, new WanderNearTargetGoal(this, 0.09D, 32.0F));
-        this.goalSelector.add(3, new WanderAroundGoal(this, 0.6D));
-        this.goalSelector.add(4, new LookAroundGoal(this));
-        this.targetSelector.add(1, new RevengeGoal(this));
-        this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, false));
+        this.bossBar = (ServerBossBar) (new ServerBossBar(this.getDisplayName(), BossBar.Color.PURPLE, BossBar.Style.PROGRESS)).setDarkenSky(true);
     }
 
     public static DefaultAttributeContainer.Builder createGuardianAttributes() {
@@ -59,11 +47,17 @@ public class TowerGuardianEntity extends HostileEntity {
                 .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 2);
     }
 
-//    @Override
-//    public void onPlayerCollision(PlayerEntity player) {
-//        this.playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-//        player.damage(DamageSource.mob(this), (float) this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).getValue());
-//    }
+    @Override
+    public void initGoals() {
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(1, new TowerGuardianMeleeAttackGoal(this, 1.0D, false));
+        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 32.0F));
+        this.goalSelector.add(2, new WanderNearTargetGoal(this, 0.09D, 32.0F));
+        this.goalSelector.add(3, new WanderAroundGoal(this, 0.6D));
+        this.goalSelector.add(4, new LookAroundGoal(this));
+        this.targetSelector.add(1, new RevengeGoal(this));
+        this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, false));
+    }
 
     @Override
     public void mobTick() {
@@ -77,7 +71,7 @@ public class TowerGuardianEntity extends HostileEntity {
         ((DamageTrackerAccessor) this.getDamageTracker()).getRecentDamage().forEach(damageSource -> {
             Entity attacker = damageSource.getDamageSource().getAttacker();
 
-            if(attacker instanceof PlayerEntity) {
+            if (attacker instanceof PlayerEntity) {
                 players.add((PlayerEntity) attacker);
             }
         });
@@ -92,7 +86,7 @@ public class TowerGuardianEntity extends HostileEntity {
     }
 
     public void dropPrivateStack(ItemStack stack, PlayerEntity player) {
-        if(!world.isClient) {
+        if (!world.isClient) {
             ItemEntity itemEntity = new ItemEntity(this.world, this.getX(), this.getY(), this.getZ(), stack);
             itemEntity.setToDefaultPickupDelay();
             itemEntity.setOwner(player.getUuid());
@@ -109,7 +103,6 @@ public class TowerGuardianEntity extends HostileEntity {
     public int getSafeFallDistance() {
         return 1000;
     }
-
 
 
     @Override

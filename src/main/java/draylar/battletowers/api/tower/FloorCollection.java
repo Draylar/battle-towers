@@ -7,13 +7,13 @@ import java.util.List;
 
 public class FloorCollection {
 
-    private boolean placeLadders;
-    private boolean placeChests;
-    private boolean placeSpawners;
-    private boolean placeBossLock;
     private final List<Identifier> lootTables = new ArrayList<>();
     private final List<Identifier> entities = new ArrayList<>();
     private final List<Floor> floors = new ArrayList<>();
+    private final boolean placeLadders;
+    private final boolean placeChests;
+    private final boolean placeSpawners;
+    private final boolean placeBossLock;
 
     public FloorCollection(boolean placeLadders, boolean placeChests, boolean placeSpawners, boolean placeBossLock) {
         this.placeLadders = placeLadders;
@@ -43,27 +43,27 @@ public class FloorCollection {
     }
 
     public void applyDefaults(Floor floor) {
-        if(floor.placeLadders() == null) {
+        if (floor.placeLadders() == null) {
             floor.setPlaceLadders(this.placeLadders);
         }
 
-        if(floor.placeChests() == null) {
+        if (floor.placeChests() == null) {
             floor.setPlaceChests(this.placeChests);
         }
 
-        if(floor.placeSpawners() == null) {
+        if (floor.placeSpawners() == null) {
             floor.setPlaceSpawners(this.placeSpawners);
         }
 
-        if(floor.placeBossLock() == null) {
+        if (floor.placeBossLock() == null) {
             floor.setPlaceBossLock(this.placeBossLock);
         }
 
-        if(entities != null && !entities.isEmpty()) {
+        if (entities != null && !entities.isEmpty()) {
             floor.setEntities(entities);
         }
 
-        if(lootTables != null && !lootTables.isEmpty()) {
+        if (lootTables != null && !lootTables.isEmpty()) {
             floor.setLootTables(lootTables);
         }
     }
