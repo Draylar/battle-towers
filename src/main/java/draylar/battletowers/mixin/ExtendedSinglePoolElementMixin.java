@@ -1,11 +1,16 @@
 package draylar.battletowers.mixin;
 
+import com.mojang.datafixers.util.Either;
 import draylar.battletowers.api.Towers;
 import draylar.battletowers.api.tower.Floor;
 import draylar.battletowers.entity.block.ContentDeployerBlockEntity;
 import draylar.battletowers.registry.BattleTowerBlocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructureManager;
+import net.minecraft.structure.pool.SinglePoolElement;
+import net.minecraft.structure.pool.StructurePool;
+import net.minecraft.structure.processor.StructureProcessorList;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockBox;
@@ -14,18 +19,20 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import robosky.structurehelpers.structure.pool.ExtendedSinglePoolElement;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 @Mixin(ExtendedSinglePoolElement.class)
-public abstract class ExtendedSinglePoolElementMixin {
+public abstract class ExtendedSinglePoolElementMixin extends SinglePoolElement {
 
-    @Shadow public abstract Identifier location();
+    private ExtendedSinglePoolElementMixin(Either<Identifier, Structure> location, Supplier<StructureProcessorList> processors, StructurePool.Projection projection) {
+        super(location, processors, projection);
+    }
 
     @Inject(
             method = "generate",
@@ -36,14 +43,14 @@ public abstract class ExtendedSinglePoolElementMixin {
         // pos is the corner of each structure with the proper y value, but it is rotated.
         // we combine them to get the middle position of each floor
 
-        if (this.location().toString().contains("battletowers")) {
-            Floor floor = Towers.getFloor(this.location());
+        if (this.location.left().get().toString().contains("battletowers")) {
+            Floor floor = Towers.getFloor(this.location.left().get());
 
             if (floor != null) {
                 BlockPos deployerPos = new BlockPos(pos2.getX(), pos.getY() + 1, pos2.getZ());
 
                 // Check if the middle pos + 1 is still solid (if it is, move up again)
-                if(!world.getBlockState(deployerPos).isAir()) {
+                if (!world.getBlockState(deployerPos).isAir()) {
                     deployerPos = deployerPos.up();
                 }
 
@@ -56,8 +63,7 @@ public abstract class ExtendedSinglePoolElementMixin {
                         // Some floors were crashing in #33 due to the BE at this position not being a ContentDeployer despite
                         //  the previous setBlockState. We now check for instanceof before casting (but it should always be valid).
                         // The only case where this should not be true is when a block occupies the space the content deployer should be at.
-                        if (blockEntity instanceof ContentDeployerBlockEntity) {
-                            ContentDeployerBlockEntity contentDeployer = (ContentDeployerBlockEntity) blockEntity;
+                        if (blockEntity instanceof ContentDeployerBlockEntity contentDeployer) {
                             contentDeployer.apply(floor);
                         }
                     }

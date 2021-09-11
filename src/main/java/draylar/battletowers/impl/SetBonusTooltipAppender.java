@@ -22,8 +22,8 @@ public class SetBonusTooltipAppender {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         assert player != null;
 
-        if(world.isClient) {
-            for (ItemStack armor : player.inventory.armor) {
+        if (world.isClient) {
+            for (ItemStack armor : player.getInventory().armor) {
                 if (!(armor.getItem() instanceof KeyArmorItem)) {
                     return;
                 }
@@ -32,8 +32,8 @@ public class SetBonusTooltipAppender {
 
         tooltip.add(new LiteralText(" "));
         tooltip.add(new TranslatableText("battletowers.set_bonus").formatted(Formatting.GOLD));
-        tooltip.add(new LiteralText(" " ).append(new TranslatableText("battletowers.key_bonus_1").formatted(Formatting.GRAY)));
-        tooltip.add(new LiteralText(" " ).append(new TranslatableText("battletowers.key_bonus_2").formatted(Formatting.GRAY)));
-        tooltip.add(new LiteralText(" " ).append(new TranslatableText("battletowers.key_bonus_3").formatted(Formatting.GRAY)));
+        tooltip.add(new LiteralText(" ").append(new TranslatableText("battletowers.key_bonus_1").formatted(Formatting.GRAY)));
+        tooltip.add(new LiteralText(" ").append(new TranslatableText("battletowers.key_bonus_2").formatted(Formatting.GRAY)));
+        tooltip.add(new LiteralText(" ").append(new TranslatableText("battletowers.key_bonus_3").formatted(Formatting.GRAY)));
     }
 }

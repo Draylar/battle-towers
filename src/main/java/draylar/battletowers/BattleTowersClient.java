@@ -15,7 +15,7 @@ public class BattleTowersClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.INSTANCE.register(BattleTowerEntities.TOWER_GUARD, ((entityRenderDispatcher, context) -> new TowerGuardEntityRenderer(entityRenderDispatcher)));
+        EntityRendererRegistry.INSTANCE.register(BattleTowerEntities.TOWER_GUARD, TowerGuardEntityRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(BattleTowerBlocks.BOSS_LOCK, RenderLayer.getCutout());
     }
 }

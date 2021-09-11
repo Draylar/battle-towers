@@ -14,14 +14,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
-    @Shadow public abstract DamageTracker getDamageTracker();
+    @Shadow
+    public abstract DamageTracker getDamageTracker();
 
     @Redirect(
             method = "onDeath",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageTracker;update()V")
     )
     private void cancelTowerGuardianDamageTrackerUpdate(DamageTracker damageTracker) {
-        if(!((Object) this instanceof TowerGuardianEntity)) {
+        if (!((Object) this instanceof TowerGuardianEntity)) {
             this.getDamageTracker().update();
         }
     }
@@ -31,7 +32,7 @@ public abstract class LivingEntityMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;sendEntityStatus(Lnet/minecraft/entity/Entity;B)V")
     )
     private void updateTowerGuardianDamageTracker(DamageSource source, CallbackInfo ci) {
-        if((Object) this instanceof TowerGuardianEntity) {
+        if ((Object) this instanceof TowerGuardianEntity) {
             this.getDamageTracker().update();
         }
     }

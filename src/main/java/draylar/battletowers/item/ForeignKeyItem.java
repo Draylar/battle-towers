@@ -38,13 +38,12 @@ public class ForeignKeyItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if(!world.isClient && user.hasPermissionLevel(2)) {
+        if (!world.isClient && user.hasPermissionLevel(2)) {
             HitResult raycast = user.raycast(100, 0, true);
-            if(raycast instanceof BlockHitResult) {
-                BlockHitResult bhr = (BlockHitResult) raycast;
+            if (raycast instanceof BlockHitResult bhr) {
 
                 // Ensure we found a non-air block
-                if(!world.getBlockState(bhr.getBlockPos()).isAir()) {
+                if (!world.getBlockState(bhr.getBlockPos()).isAir()) {
                     BlockPos up = bhr.getBlockPos().up();
 
                     generate(up, (ServerWorld) world, 12, false);
@@ -64,14 +63,14 @@ public class ForeignKeyItem extends Item {
 
         Tower tower = Towers.getTowerFor(world.getBiome(pos));
         StructurePoolElement randomElement = tower.getStartPool().getRandomElement(random);
-        PoolStructurePiece poolStructurePiece = new PoolStructurePiece(structureManager, randomElement, pos.add(-8, -1, -8), 0, BlockRotation.NONE, new BlockBox(pos, pos));
+        PoolStructurePiece poolStructurePiece = new PoolStructurePiece(structureManager, randomElement, pos.add(-8, -1, -8), 0, BlockRotation.NONE, BlockBox.create(pos, pos));
 
         list.add(poolStructurePiece);
-        StructurePoolBasedGenerator.method_27230(world.getRegistryManager(), poolStructurePiece, maxDepth, PoolStructurePiece::new, chunkGenerator, structureManager, list, random);
+        StructurePoolBasedGenerator.method_27230(world.getRegistryManager(), poolStructurePiece, maxDepth, PoolStructurePiece::new, chunkGenerator, structureManager, list, random, world);
 
 
         for (PoolStructurePiece poolStructurePiece2 : list) {
-            poolStructurePiece2.method_27236(world, structureAccessor, chunkGenerator, random, BlockBox.infinite(), pos, keepJigsaws);
+            poolStructurePiece2.generate(world, structureAccessor, chunkGenerator, random, BlockBox.infinite(), pos, keepJigsaws);
         }
     }
 
