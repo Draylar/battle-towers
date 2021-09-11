@@ -17,19 +17,19 @@
       "conditions": {
         "items": [
           {
-            "item": "battletowers:key_sword"
+            "items": ["battletowers:key_sword"]
           },
           {
-            "item": "battletowers:key_pickaxe"
+            "items": ["battletowers:key_pickaxe"]
           },
           {
-            "item": "battletowers:key_hoe"
+            "items": ["battletowers:key_hoe"]
           },
           {
-            "item": "battletowers:key_axe"
+            "items": ["battletowers:key_axe"]
           },
           {
-            "item": "battletowers:key_shovel"
+            "items": ["battletowers:key_shovel"]
           }
         ]
       }

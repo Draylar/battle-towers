@@ -17,16 +17,24 @@
       "conditions": {
         "items": [
           {
-            "item": "battletowers:key_helmet"
+            "items": [
+              "battletowers:key_helmet"
+            ]
           },
           {
-            "item": "battletowers:key_chestplate"
+            "items": [
+              "battletowers:key_chestplate"
+            ]
           },
           {
-            "item": "battletowers:key_leggings"
+            "items": [
+              "battletowers:key_leggings"
+            ]
           },
           {
-            "item": "battletowers:key_boots"
+            "items": [
+              "battletowers:key_boots"
+            ]
           }
         ]
       }

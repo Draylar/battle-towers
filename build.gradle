@@ -33,7 +33,7 @@ dependencies {
     include "com.github.kvverti:structure-helpers:${project.structure_helpers_version}"
 
     // GeckoLib for boss animations
-    modImplementation 'software.bernie.geckolib:geckolib-fabric-1.17:3.0.13:dev'
+    modImplementation 'software.bernie.geckolib:geckolib-fabric-1.17:3.0.13'
 
     // building assistance
     //modImplementation 'com.github.Draylar:staff-of-building:1.2.3-1.16.2'
