@@ -12,6 +12,7 @@ version = project.mod_version + "-" + project.minecraft_version
 repositories {
     maven { url 'https://jitpack.io' }
     maven { url = "https://minecraft.curseforge.com/api/maven" }
+    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven {
         name = "CottonMC"
         url = "https://server.bbkr.space/artifactory/libs-release"
@@ -30,6 +31,9 @@ dependencies {
     // Jigsaw Utilities: Structure Helpers (https://github.com/kvverti/structure-helpers)
     modImplementation "com.github.kvverti:structure-helpers:${project.structure_helpers_version}"
     include "com.github.kvverti:structure-helpers:${project.structure_helpers_version}"
+
+    // GeckoLib for boss animations
+    modImplementation 'software.bernie.geckolib:geckolib-fabric-1.17:3.0.13:dev'
 
     // building assistance
     //modImplementation 'com.github.Draylar:staff-of-building:1.2.3-1.16.2'

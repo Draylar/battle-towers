@@ -17,7 +17,7 @@ import net.minecraft.util.registry.Registry;
 
 public class BattleTowerEntities {
 
-    public static final EntityType<TowerGuardianEntity> TOWER_GUARD = register("tower_guard", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TowerGuardianEntity::new).dimensions(EntityDimensions.fixed(2.5f, 4)).trackRangeBlocks(65).trackedUpdateRate(4).build());
+    public static final EntityType<TowerGuardianEntity> TOWER_GUARD = register("tower_guard", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TowerGuardianEntity::new).dimensions(EntityDimensions.fixed(0.9f, 4)).trackRangeBlocks(65).trackedUpdateRate(4).build());
 
     public static final BlockEntityType<LadderDeployerBlockEntity> LADDER_DEPLOYER = register(
             "ladder_deployer",

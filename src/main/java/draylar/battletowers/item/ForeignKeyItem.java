@@ -70,7 +70,7 @@ public class ForeignKeyItem extends Item {
 
 
         for (PoolStructurePiece poolStructurePiece2 : list) {
-            poolStructurePiece2.generate(world, structureAccessor, chunkGenerator, random, BlockBox.empty(), pos, keepJigsaws);
+            poolStructurePiece2.generate(world, structureAccessor, chunkGenerator, random, BlockBox.infinite(), pos, keepJigsaws);
         }
     }
 

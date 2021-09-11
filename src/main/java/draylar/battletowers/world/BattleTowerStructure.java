@@ -48,7 +48,7 @@ public class BattleTowerStructure extends StructureFeature<DefaultFeatureConfig>
             Tower tower = Towers.getTowerFor(biome);
 
             if (tower != null) {
-                StructurePoolBasedGenerator.method_30419(
+                StructurePoolBasedGenerator.generate(
                         registryManager,
                         new ExtendedStructurePoolFeatureConfig(tower.getLimits(), 0, 150, tower::getStartPool, 8),
                         BattleTowerPiece::new,

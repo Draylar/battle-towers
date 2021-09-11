@@ -38,6 +38,7 @@ public class BattleTowerWorld {
                 .step(GenerationStep.Feature.SURFACE_STRUCTURES)
                 .defaultConfig(BattleTowers.CONFIG.towerSpacing, BattleTowers.CONFIG.towerSeparation, 32132815)
                 .adjustsSurface() // might need to remove
+                .superflatFeature(CONFIGURED_BATTLE_TOWER)
                 .register();
 
         // Add BT Structure to biomes

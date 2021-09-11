@@ -5,18 +5,15 @@
   "mixins": [
     "DamageTrackerAccessor",
     "ExtendedSinglePoolElementMixin",
-    "GenerationSettingsAccessor",
     "LivingEntityMixin",
     "MobSpawnerBlockEntityMixin",
     "PlayerEntitySetBonusMixin",
-    "SinglePoolElementAccessor",
     "SpawnerBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
-    "CreativeInventoryScreenMixin",
     "BossBarHudMixin"
   ]
 }

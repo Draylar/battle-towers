@@ -1,4 +1,4 @@
-package draylar.battletowers.entity.goal;
+package draylar.battletowers.entity.ai;
 
 import draylar.battletowers.entity.TowerGuardianEntity;
 import net.minecraft.entity.LivingEntity;
@@ -6,13 +6,15 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.util.Hand;
+import net.minecraft.server.world.ServerWorld;
 
 import java.util.EnumSet;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class TowerGuardianMeleeAttackGoal extends Goal {
+public class GuardianAttackGoal extends Goal {
 
-    protected final TowerGuardianEntity mob;
+    protected final TowerGuardianEntity guardian;
     private final double speed;
     private final boolean pauseWhenMobIdle;
     private Path path;
@@ -22,35 +24,38 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
     private int updateCountdownTicks;
     private int field_24667;
     private long lastUpdateTime;
+    private ServerWorld world;
 
-    public TowerGuardianMeleeAttackGoal(TowerGuardianEntity towerGuardian, double speed, boolean pauseWhenMobIdle) {
-        this.mob = towerGuardian;
+    public GuardianAttackGoal(TowerGuardianEntity guardian, double speed, boolean pauseWhenMobIdle) {
+        this.guardian = guardian;
         this.speed = speed;
         this.pauseWhenMobIdle = pauseWhenMobIdle;
+        this.world = (ServerWorld) guardian.getEntityWorld();
         this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
     }
 
     @Override
     public boolean canStart() {
-        long worldTime = this.mob.world.getTime();
+        long worldTime = this.guardian.world.getTime();
 
-        if (worldTime - this.lastUpdateTime < 20L) {
+        // Entity can't attack within 1 second of the world loading.
+        if (worldTime - lastUpdateTime < 20L) {
             return false;
         } else {
-            this.lastUpdateTime = worldTime;
-            LivingEntity target = this.mob.getTarget();
+            lastUpdateTime = worldTime;
+            LivingEntity target = guardian.getTarget();
 
+            // This attack goal can start if the Tower Guardian has a target within distance (or if the player is within the attack range of the target)..
             if (target == null) {
                 return false;
             } else if (!target.isAlive()) {
                 return false;
             } else {
-                this.path = this.mob.getNavigation().findPathTo(target, 0);
-
-                if (this.path != null) {
+                path = guardian.getNavigation().findPathTo(target, 0);
+                if (path != null) {
                     return true;
                 } else {
-                    return this.getSquaredMaxAttackDistance() >= this.mob.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
+                    return getSquaredMaxAttackDistance() >= guardian.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
                 }
             }
         }
@@ -58,15 +63,16 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
 
     @Override
     public boolean shouldContinue() {
-        LivingEntity target = this.mob.getTarget();
+        LivingEntity target = this.guardian.getTarget();
 
+        // This task can continue if the target is valid/alive and within a reasonable distance.
         if (target == null) {
             return false;
         } else if (!target.isAlive()) {
             return false;
-        } else if (!this.pauseWhenMobIdle) {
-            return !this.mob.getNavigation().isIdle();
-        } else if (!this.mob.isInWalkTargetRange(target.getBlockPos())) {
+        } else if (!pauseWhenMobIdle) {
+            return !guardian.getNavigation().isIdle();
+        } else if (!guardian.isInWalkTargetRange(target.getBlockPos())) {
             return false;
         } else {
             return !(target instanceof PlayerEntity) || !target.isSpectator() && !((PlayerEntity) target).isCreative();
@@ -75,36 +81,36 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
 
     @Override
     public void start() {
-        this.mob.getNavigation().startMovingAlong(this.path, this.speed);
-        this.mob.setAttacking(true);
-        this.updateCountdownTicks = 0;
-        this.field_24667 = 0;
+        guardian.getNavigation().startMovingAlong(this.path, this.speed);
+        guardian.setAttacking(true);
+        updateCountdownTicks = 0;
+        field_24667 = 0;
     }
 
     @Override
     public void stop() {
-        LivingEntity target = this.mob.getTarget();
+        LivingEntity target = this.guardian.getTarget();
 
         if (!EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(target)) {
-            this.mob.setTarget(null);
+            this.guardian.setTarget(null);
         }
 
-        this.mob.setAttacking(false);
-        this.mob.getNavigation().stop();
+        this.guardian.setAttacking(false);
+        this.guardian.getNavigation().stop();
     }
 
     @Override
     public void tick() {
-        LivingEntity target = this.mob.getTarget();
-        this.mob.getLookControl().lookAt(target, 30.0F, 30.0F);
-        double distanceToTarget = this.mob.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
+        LivingEntity target = this.guardian.getTarget();
+        this.guardian.getLookControl().lookAt(target, 30.0F, 30.0F);
+        double distanceToTarget = this.guardian.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
         this.updateCountdownTicks = Math.max(this.updateCountdownTicks - 1, 0);
 
-        if ((this.pauseWhenMobIdle || this.mob.getVisibilityCache().canSee(target)) && this.updateCountdownTicks <= 0 && (this.targetX == 0.0D && this.targetY == 0.0D && this.targetZ == 0.0D || target.squaredDistanceTo(this.targetX, this.targetY, this.targetZ) >= 1.0D || this.mob.getRandom().nextFloat() < 0.05F)) {
+        if ((this.pauseWhenMobIdle || this.guardian.getVisibilityCache().canSee(target)) && this.updateCountdownTicks <= 0 && (this.targetX == 0.0D && this.targetY == 0.0D && this.targetZ == 0.0D || target.squaredDistanceTo(this.targetX, this.targetY, this.targetZ) >= 1.0D || this.guardian.getRandom().nextFloat() < 0.05F)) {
             this.targetX = target.getX();
             this.targetY = target.getY();
             this.targetZ = target.getZ();
-            this.updateCountdownTicks = 4 + this.mob.getRandom().nextInt(7);
+            this.updateCountdownTicks = 4 + this.guardian.getRandom().nextInt(7);
 
             if (distanceToTarget > 1024.0D) {
                 this.updateCountdownTicks += 10;
@@ -112,7 +118,7 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
                 this.updateCountdownTicks += 5;
             }
 
-            if (!this.mob.getNavigation().startMovingTo(target, this.speed)) {
+            if (!this.guardian.getNavigation().startMovingTo(target, this.speed)) {
                 this.updateCountdownTicks += 15;
             }
         }
@@ -125,9 +131,8 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
         double maxAttackDistance = this.getSquaredMaxAttackDistance();
 
         if (squaredDistance <= maxAttackDistance && this.field_24667 <= 0) {
-            this.method_28346();
-            this.mob.swingHand(Hand.MAIN_HAND);
-            this.mob.tryAttack(target);
+            method_28346();
+            guardian.tryAttack(target);
         }
     }
 
@@ -136,7 +141,7 @@ public class TowerGuardianMeleeAttackGoal extends Goal {
     }
 
     private double getSquaredMaxAttackDistance() {
-        return this.mob.getWidth() * this.mob.getWidth();
+        return guardian.getWidth() * guardian.getWidth() * 4;
     }
 }
 

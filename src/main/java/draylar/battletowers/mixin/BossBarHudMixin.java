@@ -1,5 +1,6 @@
 package draylar.battletowers.mixin;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import draylar.battletowers.BattleTowers;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
@@ -39,7 +40,7 @@ public abstract class BossBarHudMixin extends DrawableHelper {
         }
 
         if (bossBar instanceof ClientBossBar && ((TranslatableText) bossBar.getName()).getKey().contains("tower_guard")) {
-            this.client.getTextureManager().bindTexture(CUSTOM_BAR_TEX);
+            RenderSystem.setShaderTexture(0, CUSTOM_BAR_TEX);
 
             // draw empty background bar
             this.drawTexture(matrixStack, i, j, 0, 2, 185, 9);
