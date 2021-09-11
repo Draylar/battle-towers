@@ -2,6 +2,7 @@ package draylar.battletowers.api.data;
 
 import net.minecraft.util.Identifier;
 
+// Do not convert this into a record; needs to be serialized.
 public class WeightedIdentifier {
 
     private final Identifier id;

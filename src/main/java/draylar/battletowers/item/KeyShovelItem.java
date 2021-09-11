@@ -3,7 +3,6 @@ package draylar.battletowers.item;
 import draylar.battletowers.material.KeyToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
-import net.minecraft.item.ToolMaterials;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;

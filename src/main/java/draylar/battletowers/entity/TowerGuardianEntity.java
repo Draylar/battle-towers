@@ -1,7 +1,11 @@
 package draylar.battletowers.entity;
 
 import draylar.battletowers.BattleTowers;
-import draylar.battletowers.entity.goal.TowerGuardianMeleeAttackGoal;
+import draylar.battletowers.api.AnimationQueue;
+import draylar.battletowers.entity.ai.GuardianAttackGoal;
+import draylar.battletowers.entity.ai.GuardianLeapGoal;
+import draylar.battletowers.entity.ai.GuardianSlamGoal;
+import draylar.battletowers.entity.ai.GuardianSpinGoal;
 import draylar.battletowers.mixin.DamageTrackerAccessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -21,30 +25,39 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class TowerGuardianEntity extends HostileEntity {
+public class TowerGuardianEntity extends HostileEntity implements IAnimatable {
+
+    public static final String ANIMATION_IDLE = "animation.tower_guardian.idle";
+    public static final String ANIMATION_LEAP = "animation.tower_guardian.leap";
+    public static final String ANIMATION_SLAM = "animation.tower_guardian.slam";
+    public static final String ANIMATION_SLAP = "animation.tower_guardian.slap";
+    public static final String ANIMATION_SPIN = "animation.tower_guardian.spin";
+    public static final String ANIMATION_WALK = "animation.tower_guardian.walk";
 
     private final ServerBossBar bossBar;
+    private final AnimationFactory factory = new AnimationFactory(this);
+    private final AnimationQueue queue = new AnimationQueue(this);
 
     public TowerGuardianEntity(EntityType<TowerGuardianEntity> entityType, World world) {
         super(entityType, world);
-        this.bossBar = (ServerBossBar)(new ServerBossBar(this.getDisplayName(), BossBar.Color.PURPLE, BossBar.Style.PROGRESS)).setDarkenSky(true);
-    }
-
-    @Override
-    public void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new TowerGuardianMeleeAttackGoal(this, 1.0D, false));
-        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 32.0F));
-        this.goalSelector.add(2, new WanderNearTargetGoal(this, 0.09D, 32.0F));
-        this.goalSelector.add(3, new WanderAroundGoal(this, 0.6D));
-        this.goalSelector.add(4, new LookAroundGoal(this));
-        this.targetSelector.add(1, new RevengeGoal(this));
-        this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, false));
+        this.bossBar = (ServerBossBar) (new ServerBossBar(this.getDisplayName(), BossBar.Color.PURPLE, BossBar.Style.PROGRESS)).setDarkenSky(true);
+        queue.registerAnimation(ANIMATION_LEAP, 0);
+        queue.registerAnimation(ANIMATION_SLAM, 1);
+        queue.registerAnimation(ANIMATION_SLAP, 2);
+        queue.registerAnimation(ANIMATION_SPIN, 2);
     }
 
     public static DefaultAttributeContainer.Builder createGuardianAttributes() {
@@ -59,11 +72,37 @@ public class TowerGuardianEntity extends HostileEntity {
                 .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 2);
     }
 
-//    @Override
-//    public void onPlayerCollision(PlayerEntity player) {
-//        this.playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-//        player.damage(DamageSource.mob(this), (float) this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).getValue());
-//    }
+    @Override
+    public void initGoals() {
+        goalSelector.add(0, new SwimGoal(this));
+
+        // Attacking Goals
+        goalSelector.add(1, new GuardianLeapGoal(this));
+        goalSelector.add(2, new GuardianAttackGoal(this, 1.0D, false));
+        goalSelector.add(2, new GuardianSlamGoal(this));
+        goalSelector.add(3, new GuardianSpinGoal(this));
+
+        // Misc Goals
+        goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 32.0F));
+        goalSelector.add(4, new WanderNearTargetGoal(this, 0.09D, 32.0F));
+        goalSelector.add(5, new WanderAroundGoal(this, 0.6D));
+        goalSelector.add(6, new LookAroundGoal(this));
+
+        // Targeting
+        targetSelector.add(1, new RevengeGoal(this));
+        targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, false));
+    }
+
+    @Override
+    public boolean tryAttack(Entity target) {
+        boolean success = super.tryAttack(target);
+
+        if(success) {
+            queue.queueAnimation(ANIMATION_SLAP);
+        }
+
+        return success;
+    }
 
     @Override
     public void mobTick() {
@@ -77,7 +116,7 @@ public class TowerGuardianEntity extends HostileEntity {
         ((DamageTrackerAccessor) this.getDamageTracker()).getRecentDamage().forEach(damageSource -> {
             Entity attacker = damageSource.getDamageSource().getAttacker();
 
-            if(attacker instanceof PlayerEntity) {
+            if (attacker instanceof PlayerEntity) {
                 players.add((PlayerEntity) attacker);
             }
         });
@@ -92,7 +131,7 @@ public class TowerGuardianEntity extends HostileEntity {
     }
 
     public void dropPrivateStack(ItemStack stack, PlayerEntity player) {
-        if(!world.isClient) {
+        if (!world.isClient) {
             ItemEntity itemEntity = new ItemEntity(this.world, this.getX(), this.getY(), this.getZ(), stack);
             itemEntity.setToDefaultPickupDelay();
             itemEntity.setOwner(player.getUuid());
@@ -111,7 +150,6 @@ public class TowerGuardianEntity extends HostileEntity {
     }
 
 
-
     @Override
     public void onStartedTrackingBy(ServerPlayerEntity player) {
         super.onStartedTrackingBy(player);
@@ -122,5 +160,35 @@ public class TowerGuardianEntity extends HostileEntity {
     public void onStoppedTrackingBy(ServerPlayerEntity player) {
         super.onStoppedTrackingBy(player);
         this.bossBar.removePlayer(player);
+    }
+
+    @Override
+    public void handleStatus(byte status) {
+        super.handleStatus(status);
+        queue.handleStatus(status);
+    }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "queue", 5, event -> queue.tick(event, this::processAnimations)));
+    }
+
+    private PlayState processAnimations(AnimationEvent<TowerGuardianEntity> event) {
+        if(event.isMoving() || new Vec3d(getVelocity().getX(), 0, getVelocity().getZ()).length() > 0) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tower_guardian.walk"));
+        } else {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tower_guardian.idle"));
+        }
+
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return factory;
+    }
+
+    public AnimationQueue getQueue() {
+        return queue;
     }
 }

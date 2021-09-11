@@ -1,8 +1,8 @@
 package draylar.battletowers.entity.block;
 
 import draylar.battletowers.api.Towers;
-import draylar.battletowers.api.spawner.SpawnerManipulator;
 import draylar.battletowers.api.spawner.MobSpawnerEntryBuilder;
+import draylar.battletowers.api.spawner.SpawnerManipulator;
 import draylar.battletowers.api.tower.Floor;
 import draylar.battletowers.registry.BattleTowerBlocks;
 import draylar.battletowers.registry.BattleTowerEntities;
@@ -11,11 +11,11 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ContentDeployerBlockEntity extends BlockEntity implements Tickable {
+public class ContentDeployerBlockEntity extends BlockEntity {
 
     private final static int RADIUS = 8;
     private final static int MAX_CHESTS = 2;
@@ -38,7 +38,7 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
                 double distance = Math.sqrt(Math.pow(x, 2) + Math.pow(z, 2));
 
                 // check that block is within radius
-                if(distance <= RADIUS) {
+                if (distance <= RADIUS) {
 
                     // don't allow chests at 0,0 (results in chest floating above deployer)
                     if (x != 0 || z != 0) {
@@ -57,8 +57,37 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
 
     private int delay = 0;
 
-    public ContentDeployerBlockEntity() {
-        super(BattleTowerEntities.CONTENT_DEPLOYER);
+    public ContentDeployerBlockEntity(BlockPos pos, BlockState state) {
+        super(BattleTowerEntities.CONTENT_DEPLOYER, pos, state);
+    }
+
+    public static void tick(World world, BlockPos pos, BlockState state, ContentDeployerBlockEntity blockEntity) {
+        if (world != null && !world.isClient) {
+            // wait 1 second before placing to try to fix issue where content doesn't appear
+            if (blockEntity.delay <= 20) {
+                blockEntity.delay++;
+            } else {
+                if (blockEntity.placeChests) {
+                    blockEntity.placeChests();
+                }
+
+                if (blockEntity.placeSpawners) {
+                    blockEntity.placeSpawners();
+                }
+
+                if (blockEntity.placeLadders) {
+                    blockEntity.placeLadders();
+                }
+
+                // replace this content deployer with a boss lock or air
+                if (blockEntity.placeBossLock) {
+                    blockEntity.placeBossLock();
+                } else {
+                    world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    blockEntity.markRemoved();
+                }
+            }
+        }
     }
 
     public void apply(Floor floor) {
@@ -67,36 +96,6 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
         this.placeChests = floor.placeChests();
         this.placeSpawners = floor.placeSpawners();
         this.placeBossLock = floor.placeBossLock();
-    }
-
-    @Override
-    public void tick() {
-         if(world != null && !world.isClient) {
-             // wait 1 second before placing to try to fix issue where content doesn't appear
-             if(delay <= 20) {
-                 delay++;
-             } else {
-                 if (placeChests) {
-                     placeChests();
-                 }
-
-                 if (placeSpawners) {
-                     placeSpawners();
-                 }
-
-                 if (placeLadders) {
-                     placeLadders();
-                 }
-
-                 // replace this content deployer with a boss lock or air
-                 if (placeBossLock) {
-                     placeBossLock();
-                 } else {
-                     world.setBlockState(pos, Blocks.AIR.getDefaultState());
-                     this.markRemoved();
-                 }
-             }
-        }
     }
 
     private void placeBossLock() {
@@ -110,7 +109,7 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
         BlockPos originPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ());
 
         // check y0 and y1 in case we're in a pool or something
-        for(int y = 0; y <= 1; y++) {
+        for (int y = 0; y <= 1; y++) {
 
             // check from 8 out (wall) to 2 in (to avoid content deployer)
             for (int i = 8; i >= 2; i--) {
@@ -136,9 +135,9 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
         int placedChests = 0;
 
         // go over each position to find chest spot
-        for(BlockPos clonedPos : clonedPositions) {
+        for (BlockPos clonedPos : clonedPositions) {
 
-            if(placedChests >= MAX_CHESTS) {
+            if (placedChests >= MAX_CHESTS) {
                 return;
             }
 
@@ -148,10 +147,10 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
                 BlockState checkState = world.getBlockState(checkPos);
                 BlockState underState = world.getBlockState(checkPos.down());
 
-                if(checkState.isAir() && underState.isSolidBlock(world, checkPos.down())) {
+                if (checkState.isAir() && underState.isSolidBlock(world, checkPos.down())) {
                     boolean success = world.setBlockState(checkPos, Blocks.CHEST.getDefaultState());
 
-                    if(success) {
+                    if (success) {
                         // get chest and set loot table
                         ChestBlockEntity chestBlockEntity = (ChestBlockEntity) world.getBlockEntity(checkPos);
                         chestBlockEntity.setLootTable(Towers.getLootTableFor(floorID), world.getRandom().nextInt(1000));
@@ -174,9 +173,9 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
         int placedSpawners = 0;
 
         // go over each position to find spawner spot
-        for(BlockPos clonedPos : clonedPositions) {
+        for (BlockPos clonedPos : clonedPositions) {
 
-            if(placedSpawners >= MAX_SPAWNERS) {
+            if (placedSpawners >= MAX_SPAWNERS) {
                 return;
             }
 
@@ -186,14 +185,14 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
                 BlockState checkState = world.getBlockState(checkPos);
                 BlockState underState = world.getBlockState(checkPos.down());
 
-                if(checkState.isAir() && underState.isSolidBlock(world, checkPos.down())) {
+                if (checkState.isAir() && underState.isSolidBlock(world, checkPos.down())) {
                     boolean success = world.setBlockState(checkPos, Blocks.SPAWNER.getDefaultState());
 
-                    if(success) {
+                    if (success) {
                         // get spawner and set spawn entry
                         MobSpawnerBlockEntity mobSpawner = (MobSpawnerBlockEntity) world.getBlockEntity(checkPos);
                         ((SpawnerManipulator) mobSpawner).setTowerSpawner(true);
-                        mobSpawner.getLogic().setSpawnEntry(new MobSpawnerEntryBuilder(Towers.getSpawnerEntryFor(floorID)).build());
+                        mobSpawner.getLogic().setSpawnEntry(this.world, this.pos, new MobSpawnerEntryBuilder(Towers.getSpawnerEntryFor(floorID)).build());
                     }
 
                     placedSpawners++;
@@ -207,22 +206,22 @@ public class ContentDeployerBlockEntity extends BlockEntity implements Tickable 
     }
 
     @Override
-    public CompoundTag toTag(CompoundTag tag) {
+    public NbtCompound writeNbt(NbtCompound tag) {
         tag.putString("FloorID", floorID.toString());
         tag.putBoolean("PlaceChests", placeChests);
         tag.putBoolean("PlaceSpawners", placeSpawners);
         tag.putBoolean("PlaceLadders", placeLadders);
         tag.putInt("Delay", delay);
-        return super.toTag(tag);
+        return super.writeNbt(tag);
     }
 
     @Override
-    public void fromTag(BlockState state, CompoundTag tag) {
+    public void readNbt(NbtCompound tag) {
         this.floorID = new Identifier(tag.getString("FloorID"));
         this.placeChests = tag.getBoolean("PlaceChests");
         this.placeSpawners = tag.getBoolean("PlaceSpawners");
         this.placeLadders = tag.getBoolean("PlaceLadders");
         this.delay = tag.getInt("Delay");
-        super.fromTag(state, tag);
+        super.readNbt(tag);
     }
 }

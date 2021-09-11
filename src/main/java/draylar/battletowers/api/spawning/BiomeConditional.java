@@ -11,8 +11,9 @@ import java.util.List;
  *
  * <p>A Battle Tower can spawn based on biome IDs, biome categories ({@link Biome.Category}, or a collection of both.
  * Note that biome IDs take priority over categories.
- * If a biome ID is valid but not attached to a registered biome, only {@link net.minecraft.world.biome.Biomes.OCEAN} will accept the conditional.
+ * If a biome ID is valid but not attached to a registered biome, only ??? will accept the conditional.
  */
+// Do not convert this into a record; needs to be serialized.
 public class BiomeConditional {
 
     private final List<Identifier> biomeIDs;
@@ -24,7 +25,7 @@ public class BiomeConditional {
     }
 
     public boolean isValid(Biome biome) {
-        if(biomeIDs != null) {
+        if (biomeIDs != null) {
             Identifier testBiomeID = BuiltinRegistries.BIOME.getId(biome);
 
             for (Identifier biomeID : biomeIDs) {

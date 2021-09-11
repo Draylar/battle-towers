@@ -25,14 +25,14 @@ public abstract class SpawnerBlockMixin extends Block {
      * <p>
      * Spawner BEs store information on whether they should drop keys through {@link SpawnerManipulator}.
      *
-     * @param world   world the break is occurring inside
-     * @param pos     position the break is occurring at
-     * @param state   state being broken
-     * @param player  player doing the break
+     * @param world  world the break is occurring inside
+     * @param pos    position the break is occurring at
+     * @param state  state being broken
+     * @param player player doing the break
      */
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if(!world.isClient()) {
+        if (!world.isClient()) {
             MobSpawnerBlockEntity be = (MobSpawnerBlockEntity) world.getBlockEntity(pos);
             assert be != null;
 

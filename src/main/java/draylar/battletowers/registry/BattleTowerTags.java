@@ -9,11 +9,11 @@ public class BattleTowerTags {
 
     public static final Tag<Item> DEVELOPER_ITEMS = TagRegistry.item(BattleTowers.id("developer_items"));
 
-    public static void init() {
+    private BattleTowerTags() {
         // NO-OP
     }
 
-    private BattleTowerTags() {
+    public static void init() {
         // NO-OP
     }
 }

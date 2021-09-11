@@ -28,7 +28,7 @@ public class KeyArmorItem extends ArmorItem {
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
 
-        if(world != null && world.isClient) {
+        if (world != null && world.isClient) {
             SetBonusTooltipAppender.appendKeyTooltip(stack, world, tooltip, context);
         }
     }
