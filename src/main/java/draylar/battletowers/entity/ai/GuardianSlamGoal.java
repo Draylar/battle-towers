@@ -29,7 +29,10 @@ public class GuardianSlamGoal extends BaseGuardianGoal {
     public void tick() {
         super.tick();
 
-        guardian.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, guardian.getTarget().getPos());
+        // Look at the target if it exists.
+        if(guardian.getTarget() != null) {
+            guardian.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, guardian.getTarget().getPos());
+        }
 
         if(ticks == 40) {
             Vec3d outPos = guardian.getPos().add(guardian.getRotationVector().multiply(5, 0, 5));
